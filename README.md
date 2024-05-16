@@ -9,4 +9,4 @@ Before you continue, ensure you meet the following requirements:
 * You are using a Window.
 * It uses Java Swing for the front-end, Microsoft SQL Server for the back-end, Git for version control, and Trello for project management.
 
-<img src = "https://imgur.com/PVSc2U5">
+![jpg](https://imgur.com/a/KAyUBf8)
