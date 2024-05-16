@@ -9,4 +9,4 @@ Before you continue, ensure you meet the following requirements:
 * You are using a Window.
 * It uses Java Swing for the front-end, Microsoft SQL Server for the back-end, Git for version control, and Trello for project management.
 
-![MyDieuApp.img](https://imgur.com/gallery/animated-heavy-breathing-cat-NUyttbn)
+![MyDieuApp.img]([https://imgur.com/gallery/animated-heavy-breathing-cat-NUyttbn](https://imgur.com/NUyttbn))
