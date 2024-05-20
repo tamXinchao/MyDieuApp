@@ -31,7 +31,7 @@ public class homePage {
 
 	@RequestMapping("/shop")
 	public String Shop(Model model) {
-		model.addAttribute("view", "shop");
+		model.addAttribute("view", "shop.jsp");
 		return "layout";
 	}
 

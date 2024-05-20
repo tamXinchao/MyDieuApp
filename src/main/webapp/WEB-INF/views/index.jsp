@@ -102,7 +102,7 @@
 								<a href="#" class="nav-link dropdown-toggle"
 									data-toggle="dropdown">Pages</a>
 								<div class="dropdown-menu rounded-0 m-0">
-									<a href="checkout.html" class="dropdown-item">Checkout</a>
+									<a href="/admin/trang-chu" class="dropdown-item">Admin pages</a>
 								</div>
 							</div>
 							<a href="contact.html" class="nav-item nav-link">Contact</a>
