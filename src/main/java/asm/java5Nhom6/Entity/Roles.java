@@ -18,11 +18,11 @@ import lombok.Setter;
 @Entity // This marks the class as an entity to be managed by JPA
 @Table(name = "Roles")
 public class Roles {
-@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "role_id")
 	Integer Role_Id;
-  @Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false)
 	String Name;
-	
+
 }

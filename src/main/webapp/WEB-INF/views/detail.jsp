@@ -7,12 +7,14 @@
 			<div id="product-carousel" class="carousel slide"
 				data-ride="carousel">
 				<div class="carousel-inner border">
-					<c:forEach var="nameImg" items="${detail}">
-						<div class="carousel-item ">
+					<c:forEach var="nameImg" items="${image}" varStatus="loop">
+						<div
+							class="carousel-item<c:if test="${loop.index == 0}"> active</c:if>">
 							<img class="w-100 h-100" src="/user/img/${nameImg[0]}"
 								alt="Image">
 						</div>
 					</c:forEach>
+
 				</div>
 				<a class="carousel-control-prev" href="#product-carousel"
 					data-slide="prev"> <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -23,26 +25,15 @@
 		</div>
 
 		<div class="col-lg-7 pb-5">
-			<c:forEach var="nameProduct" items="${detail }">
-				<h3 class="font-weight-semi-bold">${nameProduct[1] }</h3>
-			</c:forEach>
-
-			<div class="d-flex mb-3">
-				<div class="text-primary mr-2">
-					<small class="fas fa-star"></small> <small class="fas fa-star"></small>
-					<small class="fas fa-star"></small> <small
-						class="fas fa-star-half-alt"></small> <small class="far fa-star"></small>
-				</div>
-				<small class="pt-1">(50 Reviews)</small>
-			</div>
-			<c:forEach var="nameProduct" items="${detail}">
+			<c:forEach var="detail" items="${detail }">
+				<h3 class="font-weight-semi-bold">${detail[0] }</h3>
+				<br>
 				<h3 class="font-weight-semi-bold">
-					<fmt:formatNumber value="${nameProduct[3]}" type="currency"
+					<fmt:formatNumber value="${detail[2]}" type="currency"
 						currencyCode="VND" />
 				</h3>
-
-
-				<p class="mb-4">${nameProduct[2]}</p>
+				<br>
+				<p class="mb-4">${detail[1]}</p>
 			</c:forEach>
 			<div class="d-flex mb-3">
 				<p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>

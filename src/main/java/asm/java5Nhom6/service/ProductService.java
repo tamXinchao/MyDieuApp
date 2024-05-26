@@ -20,6 +20,10 @@ public class ProductService {
 	@Autowired
 	private Product_Size_ColorDAO productSizeColor;
 
+	public List<Object[]> getImageProductById(Integer productId) {
+		return productImage.findImagebyProdouct(productId);
+	}
+
 	public List<Object[]> getProductInfo() {
 		return productSizeColor.findProductInfo();
 	}

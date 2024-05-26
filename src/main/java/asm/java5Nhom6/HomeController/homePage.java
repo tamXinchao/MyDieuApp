@@ -64,11 +64,11 @@ public class homePage {
 
 	@RequestMapping("/detail/{productId}")
 	public String detail(Model model, @PathVariable("productId") Integer productId) {
-	    List<Object[]> listDetail = productService.findDetailProductByProductId(productId);
-	    model.addAttribute("detail", listDetail);
-	    model.addAttribute("view", "detail.jsp");
-	    return "layout";
+		List<Object[]> listDetail = productService.findDetailProductByProductId(productId);
+		List<Object[]> listImage = productService.getImageProductById(productId);
+		model.addAttribute("image", listImage);
+		model.addAttribute("detail", listDetail);
+		model.addAttribute("view", "detail.jsp");
+		return "layout";
 	}
-
-
 }
