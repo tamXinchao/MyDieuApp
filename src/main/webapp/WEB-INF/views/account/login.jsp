@@ -34,15 +34,15 @@
 									<div class="text-center">
 										<h1 class="h4 text-gray-900 mb-4">Đăng Nhập</h1>
 									</div>
-									<form action="/login" method="post" class="user">
+									<form action="/login" method="POST" class="user">
 										<div class="form-group">
 											<input type="text" name="username"
 												class="form-control form-control-user"
-												id="exampleInputEmail" aria-describedby="emailHelp"
-												placeholder="Nhập địa chỉ email...">
+												id="exampleInputUsername"
+												placeholder="Tài khoản">
 											<!-- Error messages will be handled by the server and can be displayed here if needed -->
 											<div class="invalid-feedback text-center">Vui lòng nhập
-												email!</div>
+												tài khoản!</div>
 										</div>
 										<div class="form-group">
 											<input type="password" name="password"
