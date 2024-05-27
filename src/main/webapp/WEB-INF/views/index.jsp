@@ -1,12 +1,13 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <jsp:include page="head.jsp"></jsp:include>
-<title>Insert title here</title>
+<title>Home</title>
 </head>
 <body>
 	<!-- Topbar Start -->
@@ -95,22 +96,46 @@
 					</button>
 					<div class="collapse navbar-collapse justify-content-between"
 						id="navbarCollapse">
-						<div class="navbar-nav mr-auto py-0">
-							<a href="/trang-chu" class="nav-item nav-link active">Home</a> <a
-								href="/shop" class="nav-item nav-link">Shop</a>
-							<div class="nav-item dropdown">
-								<a href="#" class="nav-link dropdown-toggle"
-									data-toggle="dropdown">Pages</a>
-								<div class="dropdown-menu rounded-0 m-0">
-									<a href="/admin/trang-chu" class="dropdown-item">Admin pages</a>
+						<c:choose>
+								<c:when test="${sessionScope.roleSession eq 1 }">
+								<div class="navbar-nav mr-auto py-0">
+									<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
+									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
+									<a href="/shop" class="nav-item nav-link">Shop</a>
+									<a href="contact.html" class="nav-item nav-link">Contact</a>
+									<div class="nav-item dropdown"></div>
+										<a href="#" class="nav-link dropdown-toggle"
+											data-toggle="dropdown">Pages</a>
+										<div class="dropdown-menu rounded-0 m-0">
+											<a href="/admin/trang-chu" class="dropdown-item">Admin
+												pages</a>
+										</div>
+										</div>
+										</c:when>
+								<c:otherwise>
+								<div class="navbar-nav mr-auto py-0">
+									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
+									<a href="/shop" class="nav-item nav-link">Shop</a>
+									<a href="contact.html" class="nav-item nav-link">Contact</a>
+									</div>
+								</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${not empty sessionScope.userSession}">
+								<!-- Hiển thị khi cho người dùng đã đăng nhập thành công -->
+								<div class="navbar-nav ml-auto py-0">
+									<a href="" class="nav-item nav-link">${sessionScope.userSession}</a>
+									<a href="/logout" class="nav-item nav-link">Logout</a>
 								</div>
-							</div>
-							<a href="contact.html" class="nav-item nav-link">Contact</a>
-						</div>
-						<div class="navbar-nav ml-auto py-0">
-							<a href="/login" class="nav-item nav-link">Login</a> <a
-								href="/register" class="nav-item nav-link">Register</a>
-						</div>
+							</c:when>
+							<c:otherwise>
+								<!-- Hiển thị khi người dùng chưa đăng nhập -->
+								<div class="navbar-nav ml-auto py-0">
+									<a href="/login" class="nav-item nav-link">Login</a> <a
+										href="/register" class="nav-item nav-link">Register</a>
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</nav>
 				<div id="header-carousel" class="carousel slide"

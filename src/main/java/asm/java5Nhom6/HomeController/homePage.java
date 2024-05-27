@@ -13,15 +13,6 @@ public class homePage {
 		return "index";
 	}
 
-	@GetMapping("/register")
-	public String Register() {
-		return "account/register";
-	}
-
-	@GetMapping("/login")
-	public String Login() {
-		return "account/login";
-	}
 
 	@RequestMapping("/gio-hang")
 	public String Cart(Model model) {
