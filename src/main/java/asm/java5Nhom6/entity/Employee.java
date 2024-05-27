@@ -1,11 +1,11 @@
-package asm.java5Nhom6.Entity;
+package asm.java5Nhom6.entity;
+
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,17 +20,19 @@ import jakarta.persistence.Table;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity // This marks the class as an entity to be managed by JPA
-@Component
-@Table(name = "product_image")
-public class Product_Image {
+@Entity
+@Table(name = "employees")
+public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id")
-	Integer Id;
-	@Column(name = "Name_Img", nullable = false)
-	String nameImg;
+	@Column(name = "em_id")
+	Integer emId;
+	
+	String position;
+	@Column(name = "Start_Day")
+	Date startDay;
+	
 	@ManyToOne
-	@JoinColumn(name = "product_id", nullable = false)
-	private Product product;
+	@JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

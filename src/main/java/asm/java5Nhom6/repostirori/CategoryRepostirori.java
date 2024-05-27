@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import asm.java5Nhom6.Entity.Category;
+import asm.java5Nhom6.entity.Category;
 import asm.java5Nhom6.model.dto.dtoCategory;
 @Repository
 public interface CategoryRepostirori extends JpaRepository<Category, Integer>{

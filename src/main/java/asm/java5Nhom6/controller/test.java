@@ -8,11 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import asm.java5Nhom6.Entity.Product;
-import asm.java5Nhom6.Entity.Product_Image;
-import asm.java5Nhom6.Entity.Product_Size_Color;
 import asm.java5Nhom6.dao.ProductDAO;
 import asm.java5Nhom6.dao.Product_ImageDAO;
+import asm.java5Nhom6.entity.Product;
+import asm.java5Nhom6.entity.Product_Image;
+import asm.java5Nhom6.entity.Product_Size_Color;
 
 @Controller
 public class test {

@@ -1,34 +1,31 @@
-package asm.java5Nhom6.Entity;
+package asm.java5Nhom6.entity;
 
-import asm.java5Nhom6.Entity.Address;
 import jakarta.persistence.Column;
+
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "Address_User")
-public class Address_User {
-	@Id
+@Entity // This marks the class as an entity to be managed by JPA
+@Table(name = "Roles")
+public class Roles {
+@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer Id;
-	
-	@ManyToOne
-    @JoinColumn(name = "user_id")
-    private Users user;
+    @Column(name = "role_id")
+	Integer Role_Id;
+  @Column(name = "name", nullable = false)
+	String Name;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
 }
