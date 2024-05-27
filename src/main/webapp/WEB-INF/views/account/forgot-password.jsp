@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Register Page</title>
+<title>Quên mật khẩu</title>
 <!-- Custom fonts for this template-->
 <link href="/manager/vendor/fontawesome-free/css/all.min.css"
 	rel="stylesheet" type="text/css">
@@ -27,24 +27,17 @@
 					<div class="col-lg-7">
 						<div class="p-5">
 							<div class="text-center">
-								<h1 class="h4 text-gray-900 mb-4">Đăng Ký</h1>
+								<h1 class="h4 text-gray-900 mb-4">Quên mật khẩu</h1>
 							</div>
-							<form action="/register" method="POST" class="user">
+							<form action="/register/check" method="post" class="user">
 								<div class="form-group row">
 									<div class="col-sm-6 mb-3 mb-sm-0">
-										<input type="text" name="fullname"
+										<input type="text" name="username"
 											class="form-control form-control-user" id="exampleFirstName"
-											placeholder="Họ tên">
+											placeholder="Tài khoản">
 										<!-- Error messages will be handled by the server and can be displayed here if needed -->
 										<div class="invalid-feedback text-center">Vui lòng nhập
-											họ tên!</div>
-									</div>
-									<div class="col-sm-6">
-										<input type="text" name="username"
-											class="form-control form-control-user" id="exampleLastName"
-											placeholder="Tài khoản">
-										<div class="invalid-feedback text-center">Vui lòng nhập
-											mã xác thực!</div>
+											tài khoản!</div>
 									</div>
 								</div>
 								<div class="form-group">
@@ -84,35 +77,10 @@
 										</div>
 									</div>
 								</div>
-
-								<div class="form-group row">
-									<div class="col-sm-6 mb-3 mb-sm-0">
-										<input type="password" name="password"
-											class="form-control form-control-user"
-											id="exampleInputPassword" placeholder="Mật khẩu">
-										<div class="invalid-feedback text-center">Vui lòng nhập
-											mật khẩu!</div>
-									</div>
-									<div class="col-sm-6">
-										<input type="password" name="rePassword"
-											class="form-control form-control-user"
-											id="exampleRepeatPassword" placeholder="Xác nhận mật khẩu">
-										<div class="invalid-feedback text-center">Vui lòng xác
-											nhận mật khẩu!</div>
-									</div>
-								</div>
-								<button type="submit" class="btn btn-primary btn-user btn-block">Đăng
-									ký</button>
-								<hr>
-								<a href="" class="btn btn-google btn-user btn-block"> <i
-									class="fab fa-google fa-fw"></i> Đăng ký với Google
-								</a> <a href="" class="btn btn-facebook btn-user btn-block"> <i
-									class="fab fa-facebook-f fa-fw"></i> Đăng ký với Facebook
-								</a>
 							</form>
 							<hr>
 							<div class="text-center">
-								<a class="small" href="/forgot-password">Quên mật khẩu?</a>
+								<a class="small" href="/register">Đăng ký tài khoản mới</a>
 							</div>
 							<div class="text-center">
 								<a class="small" href="/login">Bạn đã có tài khoản? Đăng
