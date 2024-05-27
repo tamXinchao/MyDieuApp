@@ -1,4 +1,4 @@
-package asm.java5Nhom6.HomeController;
+package asm.java5Nhom6.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
