@@ -49,4 +49,6 @@ public class Product implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "Cate_Id")
 	Category category;
+
+	private String image;
 }

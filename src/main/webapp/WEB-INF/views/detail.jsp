@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page pageEncoding="UTF-8"%>
 <!-- Shop Detail Start -->
 <div class="container-fluid py-5">
 	<div class="row px-xl-5">
@@ -38,62 +39,45 @@
 			<div class="d-flex mb-3">
 				<p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
 				<form>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="size-1"
-							name="size"> <label class="custom-control-label"
-							for="size-1">XS</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="size-2"
-							name="size"> <label class="custom-control-label"
-							for="size-2">S</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="size-3"
-							name="size"> <label class="custom-control-label"
-							for="size-3">M</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="size-4"
-							name="size"> <label class="custom-control-label"
-							for="size-4">L</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="size-5"
-							name="size"> <label class="custom-control-label"
-							for="size-5">XL</label>
-					</div>
+					<c:forEach var="size" items="${listSize}" varStatus="status">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input"
+								id="size-${status.index}" name="size"> <label
+								class="custom-control-label" for="size-${status.index}">${size[1]}</label>
+						</div>
+					</c:forEach>
 				</form>
 			</div>
-			<div class="d-flex mb-4">
+			<div class="d-flex mb-3">
 				<p class="text-dark font-weight-medium mb-0 mr-3">Colors:</p>
 				<form>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="color-1"
-							name="color"> <label class="custom-control-label"
-							for="color-1">Black</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="color-2"
-							name="color"> <label class="custom-control-label"
-							for="color-2">White</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="color-3"
-							name="color"> <label class="custom-control-label"
-							for="color-3">Red</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="color-4"
-							name="color"> <label class="custom-control-label"
-							for="color-4">Blue</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="color-5"
-							name="color"> <label class="custom-control-label"
-							for="color-5">Green</label>
-					</div>
+					<c:forEach var="color" items="${listColor}" varStatus="status">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input"
+								id="color-${status.index}" name="color"> <label
+								class="custom-control-label" for="color-${status.index}">${color[1]}</label>
+						</div>
+					</c:forEach>
+
+
 				</form>
+			</div>
+			<div class="d-flex">
+				<p class="text-dark font-weight-medium mb-0 mr-3">Chất Liệu:</p>
+				<c:choose>
+					<c:when test="${not empty productById}">
+						<p class="">${productById.material}</p>
+					</c:when>
+					<c:otherwise>
+						<p class="">Product not found</p>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="d-flex">
+				<p class="text-dark font-weight-medium mb-0 mr-3">Manufacturer:</p>
+				<c:forEach var="manu" items="${listManu}">
+					<p class="">${manu[1]}</p>
+				</c:forEach>
 			</div>
 			<div class="d-flex align-items-center mb-4 pt-2">
 				<div class="input-group quantity mr-3" style="width: 130px;">

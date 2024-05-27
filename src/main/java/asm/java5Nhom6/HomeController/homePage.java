@@ -1,6 +1,7 @@
 package asm.java5Nhom6.HomeController;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import asm.java5Nhom6.Entity.Manufacturer;
 import asm.java5Nhom6.Entity.Product;
 import asm.java5Nhom6.Entity.Product_Image;
 import asm.java5Nhom6.Entity.Product_Size_Color;
@@ -26,6 +28,7 @@ public class homePage {
 
 	@GetMapping
 	public String index(Model model) {
+		// lấy thông tin product
 		List<Object[]> productInfo = productService.getProductInfo();
 		model.addAttribute("productInfo", productInfo);
 		model.addAttribute("view", "index.jsp");
@@ -34,6 +37,7 @@ public class homePage {
 
 	@RequestMapping("/trang-chu")
 	public String trangChu(Model model, @ModelAttribute("product") Product product) {
+		// lấy thông tin product
 		List<Object[]> productInfo = productService.getProductInfo();
 		model.addAttribute("productInfo", productInfo);
 		model.addAttribute("view", "index.jsp");
@@ -64,8 +68,30 @@ public class homePage {
 
 	@RequestMapping("/detail/{productId}")
 	public String detail(Model model, @PathVariable("productId") Integer productId) {
+		// product detail by productId
 		List<Object[]> listDetail = productService.findDetailProductByProductId(productId);
+
+		// find image by productId
 		List<Object[]> listImage = productService.getImageProductById(productId);
+
+		// find color by productId
+		List<String[]> listColor = productService.getColorById(productId);
+
+		// find size by productId
+		List<Integer[]> listSize = productService.getSizeById(productId);
+
+		Optional<Product> productById = productService.getProduct(productId);//thử cách mới
+		// Optional không phải là một tập hợp các phần tử. cần kiểm tra
+		// nếu giá trị bên trong Optional tồn tại và sau đó trích xuất giá trị đó trước
+		// khi chuyển sang JSP.
+		if (productById.isPresent()) {
+			model.addAttribute("productById", productById.get());
+		}
+		// find manufacture by id
+		List<Object[]> listManu = productService.getManuById(productId);
+		model.addAttribute("listManu", listManu);
+		model.addAttribute("listColor", listColor);
+		model.addAttribute("listSize", listSize);
 		model.addAttribute("image", listImage);
 		model.addAttribute("detail", listDetail);
 		model.addAttribute("view", "detail.jsp");

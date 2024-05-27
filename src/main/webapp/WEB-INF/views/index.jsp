@@ -332,9 +332,6 @@
 									<fmt:formatNumber value="${info[2]}" type="currency"
 										currencyCode="VND" />
 								</h6>
-								<h6 class="text-muted ml-2">
-									<del>$123.00</del>
-								</h6>
 							</div>
 						</div>
 						<div
