@@ -1,14 +1,13 @@
-package asm.java5Nhom6.entity;
+package asm.java5Nhom6.Entity;
 
+import java.util.List;
 import jakarta.persistence.Column;
-
-import org.springframework.stereotype.Component;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,14 +17,19 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity // This marks the class as an entity to be managed by JPA
-@Table(name = "Roles")
-public class Roles {
-@Id
+@Entity
+@Table(name = "categories")
+public class Category {
+	  @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
-	Integer Role_Id;
-  @Column(name = "name", nullable = false)
-	String Name;
+    @Column(name = "cate_id")
+    private Long cateId;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "image")
+    private String image;
+	@OneToMany(mappedBy = "category")
+	List<Product> products;
 }

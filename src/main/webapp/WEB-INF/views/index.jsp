@@ -1,14 +1,8 @@
-
-
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -88,6 +82,7 @@
 					</button>
 					<div class="collapse navbar-collapse justify-content-between"
 						id="navbarCollapse">
+
 						<c:choose>
 								<c:when test="${sessionScope.roleSession eq 1 }">
 								<div class="navbar-nav mr-auto py-0">
@@ -282,6 +277,7 @@
 					<div class="card product-item border-0 mb-4">
 						<div
 							class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+
 							<a href="/detail/${info[3]}"><img class="img-fluid w-100"
 								src="/user/img/${info[0]}" alt=""></a>
 						</div>

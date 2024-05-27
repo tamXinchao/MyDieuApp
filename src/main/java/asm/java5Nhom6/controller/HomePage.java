@@ -1,4 +1,4 @@
-package asm.java5Nhom6.HomeController;
+package asm.java5Nhom6.controller;
 
 import java.util.List;
 
@@ -30,8 +30,6 @@ import jakarta.websocket.server.PathParam;
 
 @Controller
 public class homePage {
-
-	
 	@Autowired
 	CategoryRepostirori categoryRepo;
 	@Autowired
@@ -39,13 +37,12 @@ public class homePage {
   @Autowired
 	ProductService productService;
 	
-
-    
     @GetMapping
 	public String index(Model model) {
 		List<Object[]> productInfo = productService.getProductInfo();
 		model.addAttribute("productInfo", productInfo);
 		model.addAttribute("view", "index.jsp");
+		
 		return "index";
 	}
 
@@ -64,12 +61,24 @@ public class homePage {
 	}
 
 
+	@Autowired
+	CartDAO cartdao;
 	@RequestMapping("/gio-hang")
-	public String Cart(Model model) {
+	public String Cart(Model model ) {
+		List<Cart> listProInCart = cartdao.findByUserId(3);	
+		model.addAttribute("listProInCart", listProInCart);
+		
+		
 		model.addAttribute("view", "cart.jsp");
 		return "layout";
 	}
-
+	
+	@RequestMapping("/gio-hang/update/{id}/{pre}")
+	public String update(@PathVariable("id") Integer id,@PathVariable("pre") String pre) {
+		cartdao.update(id, pre);
+		return "redirect:/gio-hang";
+	}
+	
 	@RequestMapping("/shop")
 	public String Shop(Model model) {
 		model.addAttribute("view", "shop.jsp");
