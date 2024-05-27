@@ -1,4 +1,5 @@
-
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- Shop Detail Start -->
 <div class="container-fluid py-5">
 	<div class="row px-xl-5">
@@ -6,18 +7,14 @@
 			<div id="product-carousel" class="carousel slide"
 				data-ride="carousel">
 				<div class="carousel-inner border">
-					<div class="carousel-item active">
-						<img class="w-100 h-100" src="/template/img/product-1.jpg" alt="Image">
-					</div>
-					<div class="carousel-item">
-						<img class="w-100 h-100" src="/template/img/product-2.jpg" alt="Image">
-					</div>
-					<div class="carousel-item">
-						<img class="w-100 h-100" src="/template/img/product-3.jpg" alt="Image">
-					</div>
-					<div class="carousel-item">
-						<img class="w-100 h-100" src="/template/img/product-4.jpg" alt="Image">
-					</div>
+					<c:forEach var="nameImg" items="${image}" varStatus="loop">
+						<div
+							class="carousel-item<c:if test="${loop.index == 0}"> active</c:if>">
+							<img class="w-100 h-100" src="/user/img/${nameImg[0]}"
+								alt="Image">
+						</div>
+					</c:forEach>
+
 				</div>
 				<a class="carousel-control-prev" href="#product-carousel"
 					data-slide="prev"> <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -28,21 +25,16 @@
 		</div>
 
 		<div class="col-lg-7 pb-5">
-			<h3 class="font-weight-semi-bold">Colorful Stylish Shirt</h3>
-			<div class="d-flex mb-3">
-				<div class="text-primary mr-2">
-					<small class="fas fa-star"></small> <small class="fas fa-star"></small>
-					<small class="fas fa-star"></small> <small
-						class="fas fa-star-half-alt"></small> <small class="far fa-star"></small>
-				</div>
-				<small class="pt-1">(50 Reviews)</small>
-			</div>
-			<h3 class="font-weight-semi-bold mb-4">$150.00</h3>
-			<p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est
-				nonumy elitr erat diam stet sit clita ea. Sanc invidunt ipsum et,
-				labore clita lorem magna lorem ut. Erat lorem duo dolor no sea
-				nonumy. Accus labore stet, est lorem sit diam sea et justo, amet at
-				lorem et eirmod ipsum diam et rebum kasd rebum.</p>
+			<c:forEach var="detail" items="${detail }">
+				<h3 class="font-weight-semi-bold">${detail[0] }</h3>
+				<br>
+				<h3 class="font-weight-semi-bold">
+					<fmt:formatNumber value="${detail[2]}" type="currency"
+						currencyCode="VND" />
+				</h3>
+				<br>
+				<p class="mb-4">${detail[1]}</p>
+			</c:forEach>
 			<div class="d-flex mb-3">
 				<p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
 				<form>
