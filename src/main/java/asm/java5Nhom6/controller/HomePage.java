@@ -41,7 +41,7 @@ public class HomePage {
 	CartDAO cartdao;
 	@RequestMapping("/gio-hang")
 	public String Cart(Model model ) {
-		List<Cart> listProInCart = cartdao.findByUserId(3);
+		List<Cart> listProInCart = cartdao.findByUserId(3);	
 		model.addAttribute("listProInCart", listProInCart);
 		
 		

@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 	<!-- Page Header Start -->
 	<div class="container-fluid bg-secondary mb-5">
 		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
@@ -43,7 +44,9 @@
 							<td class="align-middle">
 								<img src="/template/Product_Images/${items.productSizeColor.product.image}" alt="" style="width: 50px;">
 								${items.productSizeColor.product.productName}</td>
-							<td class="align-middle">${items.productSizeColor.price}</td>
+							<td class="align-middle">
+							<fmt:formatNumber value="${items.productSizeColor.price}" type="currency"
+										currencyCode="VND" /></td>
 							<td class="align-middle">
 								<div class="input-group quantity mx-auto" style="width: 100px;">
 									<div class="input-group-btn">
@@ -60,7 +63,10 @@
 									</div>
 								</div>
 							</td>
-							<td class="align-middle">${items.productSizeColor.price*items.quality}</td>
+							<td class="align-middle">
+								<fmt:formatNumber value="${items.productSizeColor.price*items.quality}" type="currency"
+										currencyCode="VND" />
+										</td>
 						</tr>
 						</c:forEach>
 					</tbody>
