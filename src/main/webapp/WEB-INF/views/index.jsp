@@ -1,6 +1,8 @@
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,25 +61,9 @@
 					class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
 					id="navbar-vertical">
 					<div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-						<div class="nav-item dropdown">
-							<a href="#" class="nav-link" data-toggle="dropdown">Dresses <i
-								class="fa fa-angle-down float-right mt-1"></i></a>
-							<div
-								class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-								<a href="" class="dropdown-item">Men's Dresses</a> <a href=""
-									class="dropdown-item">Women's Dresses</a> <a href=""
-									class="dropdown-item">Baby's Dresses</a>
-							</div>
-						</div>
-						<a href="" class="nav-item nav-link">Shirts</a> <a href=""
-							class="nav-item nav-link">Jeans</a> <a href=""
-							class="nav-item nav-link">Swimwear</a> <a href=""
-							class="nav-item nav-link">Sleepwear</a> <a href=""
-							class="nav-item nav-link">Sportswear</a> <a href=""
-							class="nav-item nav-link">Jumpsuits</a> <a href=""
-							class="nav-item nav-link">Blazers</a> <a href=""
-							class="nav-item nav-link">Jackets</a> <a href=""
-							class="nav-item nav-link">Shoes</a>
+						<c:forEach var="c" items="${categories}">	
+						<a href="" class="nav-item nav-link">${c.name}</a>
+						</c:forEach>
 					</div>
 				</nav>
 			</div>
@@ -200,72 +186,19 @@
 	<!-- categories start-->
 	<div class="container-fluid pt-5">
 		<div class="row px-xl-5 pb-3">
+		<c:forEach var = "caterogyList" items="${countProductOfCate}">
 			<div class="col-lg-4 col-md-6 pb-1">
 				<div class="cat-item d-flex flex-column border mb-4"
 					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
+					<p class="text-right">Quality:${caterogyList.countProduct}</p>
+					<a href="/shop/category/${caterogyList.idCate}"
 						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src="/template/img/cat-1.jpg" alt="">
+						class="img-fluid" src="/template/img/${caterogyList.image }" alt="">
 					</a>
-					<h5 class="font-weight-semi-bold m-0">Men's dresses</h5>
+					<h5 class="font-weight-semi-bold m-0">${caterogyList.nameCate}</h5>
 				</div>
 			</div>
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src=" /template/img/cat-2.jpg" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">Women's dresses</h5>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column  border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src=" /template/img/cat-3.jpg" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">Baby's dresses</h5>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src=" /template/img/cat-4.jpg" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">Accerssories</h5>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src=" /template/img/cat-5.jpg" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">Bags</h5>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src=" /template/img/cat-6.jpg" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">Shoes</h5>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 	<!-- categories end-->
@@ -819,6 +752,9 @@
 			</div>
 		</div>
 	</div>
+	<c:forEach var="p" items="${products}">
+	${p.name}
+	</c:forEach>
 	<!-- vendor end -->
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
