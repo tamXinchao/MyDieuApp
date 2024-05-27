@@ -1,5 +1,6 @@
-package asm.java5Nhom6.Entity;
+package asm.java5Nhom6.entity;
 
+import asm.java5Nhom6.entity.Address;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

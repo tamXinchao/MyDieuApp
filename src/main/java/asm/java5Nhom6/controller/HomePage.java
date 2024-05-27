@@ -13,23 +13,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 
-import asm.java5Nhom6.model.Category;
-import asm.java5Nhom6.model.Product;
 import asm.java5Nhom6.model.dto.dtoCategory;
 import asm.java5Nhom6.repostirori.CategoryRepostirori;
 import asm.java5Nhom6.repostirori.ProductRepostirori;
-
-import asm.java5Nhom6.Entity.Product;
-import asm.java5Nhom6.Entity.Product_Image;
-import asm.java5Nhom6.Entity.Product_Size_Color;
+import asm.java5Nhom6.dao.CartDAO;
 import asm.java5Nhom6.dao.ProductDAO;
 import asm.java5Nhom6.dao.Product_ImageDAO;
 import asm.java5Nhom6.dao.Product_Size_ColorDAO;
+import asm.java5Nhom6.entity.*;
 import asm.java5Nhom6.service.ProductService;
 import jakarta.websocket.server.PathParam;
 
 @Controller
-public class homePage {
+public class HomePage {
 	@Autowired
 	CategoryRepostirori categoryRepo;
 	@Autowired
@@ -51,12 +47,12 @@ public class homePage {
 		List<Object[]> productInfo = productService.getProductInfo();
 		model.addAttribute("productInfo", productInfo);
 		model.addAttribute("view", "index.jsp");
-    List<Category> categories =categoryRepo.findAll();
-		model.addAttribute("categories",categories);
-		List<Product> products = productRepo.findAll();
-		model.addAttribute("products",products);
-		List<dtoCategory> countProductOfCate = categoryRepo.countProductofCate();
-		model.addAttribute("countProductOfCate",countProductOfCate);
+//    List<Category> categories =categoryRepo.findAll();
+//		model.addAttribute("categories",categories);
+//		List<Product> products = productRepo.findAll();
+//		model.addAttribute("products",products);
+//		List<dtoCategory> countProductOfCate = categoryRepo.countProductofCate();
+//		model.addAttribute("countProductOfCate",countProductOfCate);
 		return "index";
 	}
 

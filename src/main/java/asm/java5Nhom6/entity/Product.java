@@ -1,5 +1,4 @@
-
-package asm.java5Nhom6.Entity;
+package asm.java5Nhom6.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -35,7 +34,8 @@ public class Product implements Serializable {
 	private String origin;
 
 	private String describe;
-
+	
+	private String image;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "NgayNhap") // Đảm bảo tên cột khớp với tên trong cơ sở dữ liệu
 	private Date ngayNhap;

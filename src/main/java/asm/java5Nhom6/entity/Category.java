@@ -1,4 +1,4 @@
-package asm.java5Nhom6.Entity;
+package asm.java5Nhom6.entity;
 
 import java.util.List;
 import jakarta.persistence.Column;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "categories")
+@Table(name = "Categories")
 public class Category {
 	  @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

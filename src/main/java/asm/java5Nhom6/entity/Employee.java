@@ -29,7 +29,7 @@ public class Employee {
 	Integer emId;
 	
 	String position;
-	
+	@Column(name = "Start_Day")
 	Date startDay;
 	
 	@ManyToOne

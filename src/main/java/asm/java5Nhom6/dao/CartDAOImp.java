@@ -1,4 +1,4 @@
-package asm.java5Nhom6.DAO;
+package asm.java5Nhom6.dao;
 
 import java.util.ArrayList;
 import java.util.List;
