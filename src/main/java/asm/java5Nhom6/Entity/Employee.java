@@ -1,4 +1,4 @@
-package asm.java5Nhom6.entity;
+package asm.java5Nhom6.Entity;
 
 import java.util.Date;
 
@@ -29,7 +29,7 @@ public class Employee {
 	Integer emId;
 	
 	String position;
-	
+	@Column(name = "Start_Day")
 	Date startDay;
 	
 	@ManyToOne

@@ -1,4 +1,4 @@
-package asm.java5Nhom6.entity;
+package asm.java5Nhom6.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

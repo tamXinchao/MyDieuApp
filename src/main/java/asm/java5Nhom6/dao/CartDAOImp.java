@@ -1,4 +1,4 @@
-package asm.java5Nhom6.DAO;
+package asm.java5Nhom6.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
-import asm.java5Nhom6.entity.Cart;
+import asm.java5Nhom6.Entity.Cart;
 
 public class CartDAOImp implements CartDAO{
 	List<Cart> listCart = new ArrayList<Cart>();

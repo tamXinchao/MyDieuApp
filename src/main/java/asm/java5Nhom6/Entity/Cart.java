@@ -29,10 +29,16 @@ public class Cart {
     @Column(name = "date", nullable = false)
     private Date date;
 
+    @Column(name = "quality", nullable = false)
+    private Integer quality;
+
+    
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;
 
-    @Column(name = "pro_size_color_id")
-    private Integer proSizeColorId;
+    @ManyToOne
+    @JoinColumn(name = "pro_size_color_id")
+    private Product_Size_Color productSizeColor;
+
 }

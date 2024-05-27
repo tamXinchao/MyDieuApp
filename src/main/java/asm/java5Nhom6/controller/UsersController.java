@@ -1,4 +1,4 @@
-package asm.java5Nhom6.HomeController;
+package asm.java5Nhom6.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import asm.java5Nhom6.Entity.Roles;
+import asm.java5Nhom6.Entity.Users;
 import asm.java5Nhom6.dao.RolesDao;
 import asm.java5Nhom6.dao.UsersDao;
-import asm.java5Nhom6.entity.Roles;
-import asm.java5Nhom6.entity.Users;
 import asm.java5Nhom6.service.CookieService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
