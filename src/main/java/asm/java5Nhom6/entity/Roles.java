@@ -1,6 +1,9 @@
 package asm.java5Nhom6.entity;
 
 import jakarta.persistence.Column;
+
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,5 +27,5 @@ public class Roles {
 	Integer Role_Id;
   @Column(name = "name", nullable = false)
 	String Name;
-	
+
 }
