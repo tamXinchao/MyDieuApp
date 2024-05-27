@@ -1,4 +1,4 @@
-package asm.java5Nhom6.Entity;
+package asm.java5Nhom6.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,17 +20,35 @@ import jakarta.persistence.Table;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity // This marks the class as an entity to be managed by JPA
+@Entity
 @Component
-@Table(name = "product_image")
-public class Product_Image {
+@Table(name = "Product_Size_Color")
+public class Product_Size_Color {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id")
-	Integer Id;
-	@Column(name = "Name_Img", nullable = false)
-	String nameImg;
+	@Column(name = "pro_size_color_id")
+	private int proSizeColorId;
+
+	@Column(name = "status", nullable = false)
+	private String status;
+
+	@Column(name = "quality", nullable = false)
+	private int quality;
+
+	@Column(name = "price", nullable = false)
+	private double price;
+
+	@ManyToOne
+	@JoinColumn(name = "color_id", nullable = false)
+	private Color color;
+
+	@ManyToOne
+	@JoinColumn(name = "size_id", nullable = false)
+	private Size size;
+
 	@ManyToOne
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
+
+
 }

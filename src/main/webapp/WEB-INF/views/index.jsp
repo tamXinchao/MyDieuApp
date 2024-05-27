@@ -2,11 +2,9 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
-<%@ page pageEncoding="UTF-8"%>
-
 
 <!DOCTYPE html>
 <html>
@@ -103,7 +101,7 @@
 					<div class="collapse navbar-collapse justify-content-between"
 						id="navbarCollapse">
 						<c:choose>
-								<c:when test="${sessionScope.roleSession eq 1 }">
+								<c:when test="${sessionScope.roleSession eq 2 }">
 								<div class="navbar-nav mr-auto py-0">
 									<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
 									<a href="/trang-chu" class="nav-item nav-link active">Home</a>

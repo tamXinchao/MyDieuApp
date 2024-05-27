@@ -1,7 +1,6 @@
 package asm.java5Nhom6.entity;
 
-import org.springframework.stereotype.Component;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,22 +11,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-@Entity
 @Getter
 @Setter
-@Table(name = "Roles")
-@NoArgsConstructor
 @AllArgsConstructor
-@Component
+@NoArgsConstructor
+@Entity // This marks the class as an entity to be managed by JPA
+@Table(name = "Roles")
 public class Roles {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "role_id")
 	private Integer Role_Id;
+	@Column(name = "name", nullable = false)
 	private String Name;
-	
-	
-	public int getRole_Id() {
+	public Integer getRole_Id() {
 		return Role_Id;
 	}
 	public void setRole_Id(Integer role_Id) {
@@ -39,6 +36,10 @@ public class Roles {
 	public void setName(String name) {
 		Name = name;
 	}
+	
+	
+	
+	
 	
 	
 }

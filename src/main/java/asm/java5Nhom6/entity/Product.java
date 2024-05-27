@@ -1,5 +1,5 @@
 
-package asm.java5Nhom6.Entity;
+package asm.java5Nhom6.entity;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package asm.java5Nhom6.Entity;
+package asm.java5Nhom6.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,12 +15,13 @@ import jakarta.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Sizes")
-public class Size {
+@Table(name = "colors")
+public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
-    private Integer sizeId;
+    @Column(name = "color_id")
+    private Long colorId;
 
+    @Column(name = "name", nullable = false)
     private String name;
 }

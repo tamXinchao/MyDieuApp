@@ -47,7 +47,7 @@ public class UsersController {
     	String password = req.getParameter("password");
     	String rePassword = req.getParameter("rePassword");
     	if(password.equals(rePassword)) {
-    		Roles role = rolesDao.findById(2);
+    		Roles role = rolesDao.findById(1);
         	user.setFullname(fullname);
         	user.setUsername(username);
         	user.setPassword(password);
