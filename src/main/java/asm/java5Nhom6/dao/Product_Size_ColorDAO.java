@@ -9,13 +9,11 @@ import org.springframework.data.repository.query.Param;
 import asm.java5Nhom6.entity.Product_Size_Color;
 
 public interface Product_Size_ColorDAO extends JpaRepository<Product_Size_Color, Integer> {
-	@Query("SELECT DISTINCT pi.nameImg, p.productName, MIN(psc.price), p.productId " 
+	@Query("SELECT  p.image, p.productName, MIN(psc.price), p.productId " 
 			+ "FROM Product_Size_Color psc "
 			+ "JOIN psc.product p " 
-			+ "JOIN psc.color c " 
-			+ "JOIN psc.size s "
 			+ "JOIN Product_Image pi ON psc.product = pi.product " 
-			+ "GROUP BY pi.nameImg, p.productName, p.productId")
+			+ "GROUP BY p.image, p.productName, p.productId")
 	List<Object[]> findProductInfo();
 
 	@Query("SELECT DISTINCT p.productName,p.describe, MIN(psc.price), p.productId "
