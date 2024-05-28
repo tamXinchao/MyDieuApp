@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Register Page</title>
+<title>Đăng ký thành viên</title>
 <!-- Custom fonts for this template-->
 <link href="/manager/vendor/fontawesome-free/css/all.min.css"
 	rel="stylesheet" type="text/css">
@@ -44,26 +44,26 @@
 											class="form-control form-control-user" id="exampleLastName"
 											placeholder="Tài khoản">
 										<div class="invalid-feedback text-center">Vui lòng nhập
-											mã xác thực!</div>
+											tài khoản!</div>
 									</div>
 								</div>
-								<div class="form-group">
-									<div class="input-group is-invalid mb-3">
-										<input type="email" name="email"
-											class="form-control form-control-user"
-											placeholder="Nhập địa chỉ email"
-											aria-label="Recipient's username"
-											aria-describedby="button-addon2">
-										<div class="input-group-append">
-											<button type="button" data-toggle="modal"
-												data-target="#exampleModal"
-												class="btn btn-outline-secondary btn-user"
-												id="button-addon2">Gửi</button>
+								<div class="form-group row">
+									<div class="col-sm-6">
+										<div class="custom-control custom-radio custom-control-inline">
+											<input type="radio" id="genderMale" name="gender"
+												class="custom-control-input" value="male"> <label
+												class="custom-control-label" for="genderMale">Nam</label>
 										</div>
 									</div>
-									<div class="invalid-feedback text-center">Vui lòng nhập
-										địa chỉ email!</div>
+									<div class="col-sm-6">
+										<div class="custom-control custom-radio custom-control-inline">
+											<input type="radio" id="genderFemale" name="gender"
+												class="custom-control-input" value="female"> <label
+												class="custom-control-label" for="genderFemale">Nữ</label>
+										</div>
+									</div>
 								</div>
+
 
 								<div class="modal fade" id="exampleModal" tabindex="-1"
 									aria-labelledby="exampleModalLabel" aria-hidden="true"
