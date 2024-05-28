@@ -1,4 +1,5 @@
-package asm.java5Nhom6.model;
+package asm.java5Nhom6.entity;
+
 
 import java.util.List;
 

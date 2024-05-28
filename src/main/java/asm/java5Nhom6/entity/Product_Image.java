@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
@@ -23,7 +25,7 @@ import jakarta.persistence.Table;
 @Entity // This marks the class as an entity to be managed by JPA
 @Component
 @Table(name = "product_image")
-public class Product_Image {
+public class Product_Image  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
