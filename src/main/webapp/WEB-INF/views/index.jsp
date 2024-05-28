@@ -336,8 +336,8 @@
 						</div>
 						<div
 							class="card-footer d-flex justify-content-between bg-light border">
-							<a href="" class="btn btn-sm text-dark p-0"><i
-								class="fas fa-eye text-primary mr-1"></i>View Detail</a> <a href=""
+							<a href="/detail/${info[3]}" class="btn btn-sm text-dark p-0"><i
+								class="fas fa-eye text-primary mr-1"></i>View Detail</a> <a href="/gio-hang"
 								class="btn btn-sm text-dark p-0"><i
 								class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
 						</div>

@@ -74,7 +74,7 @@
 				</c:choose>
 			</div>
 			<div class="d-flex">
-				<p class="text-dark font-weight-medium mb-0 mr-3">Manufacturer:</p>
+				<p class="text-dark font-weight-medium mb-0 mr-3">Thương Hiệu:</p>
 				<c:forEach var="manu" items="${listManu}">
 					<p class="">${manu[1]}</p>
 				</c:forEach>
@@ -95,7 +95,9 @@
 					</div>
 				</div>
 				<button class="btn btn-primary px-3">
-					<i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+					<a href="/gio-hang"><i class="fa fa-shopping-cart mr-1"></i>
+						Add To Cart</a>
+
 				</button>
 			</div>
 			<div class="d-flex pt-2">
