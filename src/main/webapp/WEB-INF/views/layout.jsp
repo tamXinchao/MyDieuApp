@@ -1,4 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -6,6 +8,7 @@
 <meta charset="ISO-8859-1">
 <meta content="Free HTML Templates" name="keywords">
 <meta content="Free HTML Templates" name="description">
+
 
 <!-- Favicon -->
 <link href="/template/img/favicon.ico" rel="icon">
@@ -27,11 +30,11 @@
 
 <!-- Customized Bootstrap Stylesheet -->
 <link href="/template/css/style.css" rel="stylesheet">
-<title>Insert title here</title>
+<title>Layout</title>
 </head>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
-	<jsp:include page="${view }"></jsp:include>
+	<jsp:include page="${view}"></jsp:include>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
