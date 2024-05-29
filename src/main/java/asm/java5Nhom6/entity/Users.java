@@ -16,6 +16,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,70 +25,86 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "users")
 public class Users {
- @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")
 	Integer User_Id;
-@Column(name = "fullname", nullable = false)
+	
+	@NotBlank(message = "Fullname is required")
+	@Column(name = "fullname", nullable = false)
 	String Fullname;
-  @Column(name = "username", nullable = false)
+	
+	@NotBlank(message = "Username is required")
+	@Column(name = "username", nullable = false)
 	String Username;
- @Column(name = "password", nullable = false)
+	
+	@NotBlank(message = "Password is required")
+	@Column(name = "password", nullable = false)
 	String Password;
-@Column(name = "gender", nullable = false)
+	
+	@Column(name = "gender", nullable = false)
 	Boolean Gender;
-@ManyToOne
-@JoinColumn(name = "Role_id") // Tên cột trong bảng users
-private Roles roles;
-	
-	
-	
-   @OneToMany(mappedBy = "user")
-    private List<Order> orders;
-public Integer getUser_Id() {
-	return User_Id;
-}
-public void setUser_Id(Integer user_Id) {
-	User_Id = user_Id;
-}
-public String getFullname() {
-	return Fullname;
-}
-public void setFullname(String fullname) {
-	Fullname = fullname;
-}
-public String getUsername() {
-	return Username;
-}
-public void setUsername(String username) {
-	Username = username;
-}
-public String getPassword() {
-	return Password;
-}
-public void setPassword(String password) {
-	Password = password;
-}
-public Boolean getGender() {
-	return Gender;
-}
-public void setGender(Boolean gender) {
-	Gender = gender;
-}
+	@ManyToOne
+	@JoinColumn(name = "Role_id") // Tên cột trong bảng users
+	private Roles roles;
 
+	@OneToMany(mappedBy = "user")
+	private List<Order> orders;
 
-public Roles getRoles() {
-	return roles;
-}
-public void setRoles(Roles roles) {
-	this.roles = roles;
-}
-public List<Order> getOrders() {
-	return orders;
-}
-public void setOrders(List<Order> orders) {
-	this.orders = orders;
-}
-   
-   
+	public Integer getUser_Id() {
+		return User_Id;
+	}
+
+	public void setUser_Id(Integer user_Id) {
+		User_Id = user_Id;
+	}
+
+	public String getFullname() {
+		return Fullname;
+	}
+
+	public void setFullname(String fullname) {
+		Fullname = fullname;
+	}
+
+	public String getUsername() {
+		return Username;
+	}
+
+	public void setUsername(String username) {
+		Username = username;
+	}
+
+	public String getPassword() {
+		return Password;
+	}
+
+	public void setPassword(String password) {
+		Password = password;
+	}
+
+	public Boolean getGender() {
+		return Gender;
+	}
+
+	public void setGender(Boolean gender) {
+		Gender = gender;
+	}
+
+	public Roles getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Roles roles) {
+		this.roles = roles;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
 }
