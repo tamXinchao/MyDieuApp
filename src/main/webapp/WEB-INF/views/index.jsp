@@ -111,7 +111,7 @@
 							<c:when test="${not empty sessionScope.userSession}">
 								<!-- Hiển thị khi cho người dùng đã đăng nhập thành công -->
 								<div class="navbar-nav ml-auto py-0">
-									<a href="" class="nav-item nav-link">${sessionScope.userSession}</a>
+									<a href="/information" class="nav-item nav-link">${sessionScope.userSession.fullname}</a>
 									<a href="/logout" class="nav-item nav-link">Logout</a>
 								</div>
 							</c:when>

@@ -47,6 +47,24 @@
 											tài khoản!</div>
 									</div>
 								</div>
+
+								<div class="form-group row">
+									<div class="col-sm-6 mb-3 mb-sm-0">
+										<input type="password" name="password"
+											class="form-control form-control-user"
+											id="exampleInputPassword" placeholder="Mật khẩu">
+										<div class="invalid-feedback text-center">Vui lòng nhập
+											mật khẩu!</div>
+									</div>
+									<div class="col-sm-6">
+										<input type="password" name="rePassword"
+											class="form-control form-control-user"
+											id="exampleRepeatPassword" placeholder="Xác nhận mật khẩu">
+										<div class="invalid-feedback text-center">Vui lòng xác
+											nhận mật khẩu!</div>
+									</div>
+								</div>
+								
 								<div class="form-group row">
 									<div class="col-sm-6">
 										<div class="custom-control custom-radio custom-control-inline">
@@ -63,42 +81,39 @@
 										</div>
 									</div>
 								</div>
-
-
-								<div class="modal fade" id="exampleModal" tabindex="-1"
-									aria-labelledby="exampleModalLabel" aria-hidden="true"
-									style="border-radius: 0;">
-									<div class="modal-dialog" style="border-radius: 0;">
-										<div class="modal-content" style="border-radius: 0;">
-											<div class="modal-header">
-												<h5 class="modal-title text-danger" id="exampleModalLabel">Thông
-													báo</h5>
-											</div>
-											<div class="modal-body">Đường dẫn làm mới mật khẩu đã
-												được gửi qua email của bạn. Vui lòng check email!</div>
-											<div class="modal-footer">
-												<button type="submit" formaction="/register/mailSender"
-													class="btn btn-primary" style="border-radius: 0;">Xác
-													nhận</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
+								<!-- Địa chỉ -->
 								<div class="form-group row">
 									<div class="col-sm-6 mb-3 mb-sm-0">
-										<input type="password" name="password"
+										<input type="text" name="PhoneNumber"
+											class="form-control form-control-user" id="exampleFirstName"
+											placeholder="Số điện thoại...">
+										<!-- Error messages will be handled by the server and can be displayed here if needed -->
+										<div class="invalid-feedback text-center">Vui lòng nhập đúng số điện thoai</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="input-group is-invalid mb-3">
+										<input type="email" name="Email"
 											class="form-control form-control-user"
-											id="exampleInputPassword" placeholder="Mật khẩu">
+											placeholder="Nhập địa chỉ email"
+											aria-label="Recipient's username"
+											aria-describedby="button-addon2">
+									</div>
+									<div class="invalid-feedback text-center">Vui lòng nhập địa chỉ email!</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-sm-6 mb-3 mb-sm-0">
+										<input type="text" name="Address"
+											class="form-control form-control-user"
+											id="exampleInputPassword" placeholder="Địa chỉ. VD: số nhà, tên đường, phường...">
 										<div class="invalid-feedback text-center">Vui lòng nhập
-											mật khẩu!</div>
+											địa chỉ!</div>
 									</div>
 									<div class="col-sm-6">
-										<input type="password" name="rePassword"
+										<input type="text" name="Provincial"
 											class="form-control form-control-user"
-											id="exampleRepeatPassword" placeholder="Xác nhận mật khẩu">
-										<div class="invalid-feedback text-center">Vui lòng xác
-											nhận mật khẩu!</div>
+											id="exampleRepeatPassword" placeholder="Tỉnh">
+										<div class="invalid-feedback text-center">Chọn tỉnh của bạn</div>
 									</div>
 								</div>
 								<button type="submit" class="btn btn-primary btn-user btn-block">Đăng

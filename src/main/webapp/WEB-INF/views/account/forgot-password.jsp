@@ -29,9 +29,9 @@
 							<div class="text-center">
 								<h1 class="h4 text-gray-900 mb-4">Quên mật khẩu</h1>
 							</div>
-							<form action="/register/check" method="post" class="user">
+							<form action="/forgot-password" method="post" class="user">
 								<div class="form-group row">
-									<div class="col-sm-6 mb-3 mb-sm-0">
+									<div class="col-sm-12 mb-3 mb-sm-0">
 										<input type="text" name="username"
 											class="form-control form-control-user" id="exampleFirstName"
 											placeholder="Tài khoản">
@@ -47,17 +47,11 @@
 											placeholder="Nhập địa chỉ email"
 											aria-label="Recipient's username"
 											aria-describedby="button-addon2">
-										<div class="input-group-append">
-											<button type="button" data-toggle="modal"
-												data-target="#exampleModal"
-												class="btn btn-outline-secondary btn-user"
-												id="button-addon2">Gửi</button>
-										</div>
 									</div>
 									<div class="invalid-feedback text-center">Vui lòng nhập
 										địa chỉ email!</div>
 								</div>
-
+								<button type="submit" class="btn btn-primary btn-user btn-block">Xác nhận</button>
 								<div class="modal fade" id="exampleModal" tabindex="-1"
 									aria-labelledby="exampleModalLabel" aria-hidden="true"
 									style="border-radius: 0;">
@@ -71,8 +65,7 @@
 												được gửi qua email của bạn. Vui lòng check email!</div>
 											<div class="modal-footer">
 												<button type="submit" formaction="/register/mailSender"
-													class="btn btn-primary" style="border-radius: 0;">Xác
-													nhận</button>
+													class="btn btn-primary" style="border-radius: 0;">Gửi mật khẩu</button>
 											</div>
 										</div>
 									</div>
