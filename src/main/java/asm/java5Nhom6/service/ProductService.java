@@ -1,6 +1,9 @@
 package asm.java5Nhom6.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import asm.java5Nhom6.Entity.Manufacturer;
@@ -37,11 +40,11 @@ public class ProductService {
 		return dao.findById(productId);
 	}
 
-	public List<Integer[]> getSizeById(Integer productId) { // lấy size theo id
+	public List<Object[]> getSizeById(Integer productId) { // lấy size theo id
 		return productSizeColor.findSizeById(productId);
 	}
 
-	public List<String[]> getColorById(Integer productId) {// lấy color theo id
+	public List<Object[]> getColorById(Integer productId) {// lấy color theo id
 		return productSizeColor.findColorById(productId);
 	}
 
@@ -49,8 +52,14 @@ public class ProductService {
 		return productImage.findImagebyProdouct(productId);
 	}
 
-	public List<Object[]> getProductInfo() { // lấy name, price, tất cả image của product để hiện lên trang chủ
-		return productSizeColor.findProductInfo();
+	 public Page<Object[]> getProductPage(int page, int size) {
+	        Pageable pageable = PageRequest.of(page, size);
+			return productSizeColor.findProductInfo(pageable);
+	    }
+
+	public Page<Object[]> getTop10Product() {
+		Pageable pageable = PageRequest.of(0, 10);
+		return productSizeColor.findTop10CheapestProducts(pageable);
 	}
 
 	public List<Object[]> findDetailProductByProductId(Integer productId) {// lấy name, price, tất cả image của product

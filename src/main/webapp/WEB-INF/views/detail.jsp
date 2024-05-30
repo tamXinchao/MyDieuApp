@@ -4,7 +4,7 @@
 <!-- Shop Detail Start -->
 <div class="container-fluid py-5">
 	<div class="row px-xl-5">
-		<div class="col-lg-5 pb-5">
+		<div class="col-lg-4 pb-5">
 			<div id="product-carousel" class="carousel slide"
 				data-ride="carousel">
 				<div class="carousel-inner border">
@@ -37,7 +37,7 @@
 				<p class="mb-4">${detail[1]}</p>
 			</c:forEach>
 			<div class="d-flex mb-3">
-				<p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
+				<p class="text-dark font-weight-medium mb-0 mr-3">Kích Cỡ:</p>
 				<form>
 					<c:forEach var="size" items="${listSize}" varStatus="status">
 						<div class="custom-control custom-radio custom-control-inline">
@@ -49,7 +49,7 @@
 				</form>
 			</div>
 			<div class="d-flex mb-3">
-				<p class="text-dark font-weight-medium mb-0 mr-3">Colors:</p>
+				<p class="text-dark font-weight-medium mb-0 mr-3">Màu:</p>
 				<form>
 					<c:forEach var="color" items="${listColor}" varStatus="status">
 						<div class="custom-control custom-radio custom-control-inline">
@@ -58,8 +58,6 @@
 								class="custom-control-label" for="color-${status.index}">${color[1]}</label>
 						</div>
 					</c:forEach>
-
-
 				</form>
 			</div>
 			<div class="d-flex">

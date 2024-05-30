@@ -4,12 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import asm.java5Nhom6.Entity.Manufacturer;
 import asm.java5Nhom6.Entity.Product;
@@ -28,18 +32,20 @@ public class homePage {
 
 	@GetMapping
 	public String index(Model model) {
-		// lấy thông tin product
-		List<Object[]> productInfo = productService.getProductInfo();
-		model.addAttribute("productInfo", productInfo);
+		// Lấy thông tin product
+		Page<Object[]> top10ProductPage = productService.getTop10Product();
+		List<Object[]> top10Product = top10ProductPage.getContent();
+		model.addAttribute("top10Product", top10Product);
 		model.addAttribute("view", "index.jsp");
 		return "index";
 	}
 
 	@RequestMapping("/trang-chu")
 	public String trangChu(Model model, @ModelAttribute("product") Product product) {
-		// lấy thông tin product
-		List<Object[]> productInfo = productService.getProductInfo();
-		model.addAttribute("productInfo", productInfo);
+		// Lấy thông tin product
+		Page<Object[]> top10ProductPage = productService.getTop10Product();
+		List<Object[]> top10Product = top10ProductPage.getContent();
+		model.addAttribute("top10Product", top10Product);
 		model.addAttribute("view", "index.jsp");
 		return "index";
 	}
@@ -66,7 +72,19 @@ public class homePage {
 		return "layout";
 	}
 
-	@RequestMapping("/detail/{productId}")
+	@GetMapping("/shop/danh-sach-san-pham")
+	public String danhSachSP(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+		int pageSize = 6;
+		Page<Object[]> dsSpPage = productService.getProductPage(page -1, pageSize);
+		List<Object[]> dsSp = dsSpPage.getContent();
+
+		model.addAttribute("dsSp", dsSp);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", dsSpPage.getTotalPages());
+		return "forward:/shop"; 
+	}
+
+	@RequestMapping("/product/detail/{productId}")
 	public String detail(Model model, @PathVariable("productId") Integer productId) {
 		// product detail by productId
 		List<Object[]> listDetail = productService.findDetailProductByProductId(productId);
@@ -75,12 +93,12 @@ public class homePage {
 		List<Object[]> listImage = productService.getImageProductById(productId);
 
 		// find color by productId
-		List<String[]> listColor = productService.getColorById(productId);
+		List<Object[]> listColor = productService.getColorById(productId);
 
 		// find size by productId
-		List<Integer[]> listSize = productService.getSizeById(productId);
+		List<Object[]> listSize = productService.getSizeById(productId);
 
-		Optional<Product> productById = productService.getProduct(productId);//thử cách mới
+		Optional<Product> productById = productService.getProduct(productId);// thử cách mới
 		// Optional không phải là một tập hợp các phần tử. cần kiểm tra
 		// nếu giá trị bên trong Optional tồn tại và sau đó trích xuất giá trị đó trước
 		// khi chuyển sang JSP.
