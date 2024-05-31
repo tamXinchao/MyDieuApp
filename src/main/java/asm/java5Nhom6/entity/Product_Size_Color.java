@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
@@ -16,7 +14,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Getter
@@ -29,7 +26,9 @@ import jakarta.persistence.Table;
 public class Product_Size_Color {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+	@Column(name = "pro_size_color_id")
+	private int productSizeColorId;
+
 	@Column(name = "status", nullable = false)
 	private String status;
 
@@ -51,6 +50,5 @@ public class Product_Size_Color {
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 
-	@OneToMany(mappedBy = "productSizeColor")
-    private List<Cart> cart;
+
 }

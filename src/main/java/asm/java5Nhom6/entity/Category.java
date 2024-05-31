@@ -18,9 +18,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Categories")
+@Table(name = "categories")
 public class Category {
-	  @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cate_id")
     private Long cateId;
@@ -30,6 +30,7 @@ public class Category {
 
     @Column(name = "image")
     private String image;
-	@OneToMany(mappedBy = "category")
-	List<Product> products;
+
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
 }

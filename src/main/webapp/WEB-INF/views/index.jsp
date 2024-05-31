@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
@@ -62,8 +61,8 @@
 					class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
 					id="navbar-vertical">
 					<div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-						<c:forEach var="c" items="${categories}">	
-						<a href="" class="nav-item nav-link">${c.name}</a>
+						<c:forEach var="c" items="${categories}">
+							<a href="/shop/category/${c.cateId}" class="nav-item nav-link">${c.name}</a>
 						</c:forEach>
 					</div>
 				</nav>
@@ -84,28 +83,28 @@
 						id="navbarCollapse">
 
 						<c:choose>
-								<c:when test="${sessionScope.roleSession eq 1 }">
+							<c:when test="${sessionScope.roleSession eq 1 }">
 								<div class="navbar-nav mr-auto py-0">
 									<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
 									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
-									<a href="/shop" class="nav-item nav-link">Shop</a>
-									<a href="contact.html" class="nav-item nav-link">Contact</a>
+									<a href="/shop" class="nav-item nav-link">Shop</a> <a
+										href="contact.html" class="nav-item nav-link">Contact</a>
 									<div class="nav-item dropdown"></div>
-										<a href="#" class="nav-link dropdown-toggle"
-											data-toggle="dropdown">Pages</a>
-										<div class="dropdown-menu rounded-0 m-0">
-											<a href="/admin/trang-chu" class="dropdown-item">Admin
-												pages</a>
-										</div>
-										</div>
-										</c:when>
-								<c:otherwise>
+									<a href="#" class="nav-link dropdown-toggle"
+										data-toggle="dropdown">Pages</a>
+									<div class="dropdown-menu rounded-0 m-0">
+										<a href="/admin/trang-chu" class="dropdown-item">Admin
+											pages</a>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
 								<div class="navbar-nav mr-auto py-0">
 									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
-									<a href="/shop" class="nav-item nav-link">Shop</a>
-									<a href="contact.html" class="nav-item nav-link">Contact</a>
-									</div>
-								</c:otherwise>
+									<a href="/shop" class="nav-item nav-link">Shop</a> <a
+										href="contact.html" class="nav-item nav-link">Contact</a>
+								</div>
+							</c:otherwise>
 						</c:choose>
 						<c:choose>
 							<c:when test="${not empty sessionScope.userSession}">
@@ -173,6 +172,7 @@
 		</div>
 	</div>
 	<!-- Navbar End -->
+
 	<!-- faetured start-->
 	<div class="container-fluid pt-5">
 		<div class="row px-xl-5 pb-3">
@@ -208,26 +208,73 @@
 	</div>
 	<!-- faetured end-->
 
-
-	<!-- categories start-->
+	<!-- categories start -->
 	<div class="container-fluid pt-5">
+	<div class="text-center mb-4">
+			<h2 class="section-title px-5">
+				<span class="px-2"> Products Categories </span>
+			</h2>
+		</div>
 		<div class="row px-xl-5 pb-3">
-		<c:forEach var = "caterogyList" items="${countProductOfCate}">
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">Quality:${caterogyList.countProduct}</p>
-					<a href="/shop/category/${caterogyList.idCate}"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src="/template/img/${caterogyList.image }" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">${caterogyList.nameCate}</h5>
-				</div>
-			</div>
+			<c:forEach var="caterogyList" items="${countProductOfCate}"
+				varStatus="status">
+				<c:choose>
+					<c:when test="${status.index < 3}">
+						<div class="col-lg-4 col-md-6 pb-1">
+							<div class="cat-item d-flex flex-column border mb-4"
+								style="padding: 30px;">
+								<p class="text-right">Quality: ${caterogyList.countProduct}</p>
+								<a href="/shop/category/${caterogyList.idCate}"
+									class="cat-img position-relative overflow-hidden mb-3"> <img
+									class="img-fluid" src="/user/img/${caterogyList.image}" alt="">
+								</a>
+								<h5 class="font-weight-semi-bold m-0">${caterogyList.nameCate}</h5>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="col-lg-4 col-md-6 pb-1 extra-item"
+							style="display: none;">
+							<div class="cat-item d-flex flex-column border mb-4"
+								style="padding: 30px;">
+								<p class="text-right">Quality: ${caterogyList.countProduct}</p>
+								<a href="/shop/category/${caterogyList.idCate}"
+									class="cat-img position-relative overflow-hidden mb-3"> <img
+									class="img-fluid" src="/user/img/${caterogyList.image}" alt="">
+								</a>
+								<h5 class="font-weight-semi-bold m-0">${caterogyList.nameCate}</h5>
+							</div>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</c:forEach>
+			<div class="col-12 pb-1">
+				<nav aria-label="Page navigation">
+					<ul class="pagination justify-content-center mb-3">
+						<li class="page-item active"><a class="page-link" href="#"
+							id="toggle-items">Xem thêm</a></li>
+					</ul>
+				</nav>
+			</div>
 		</div>
 	</div>
-	<!-- categories end-->
+	<!-- categories end -->
+
+	<!-- JavaScript -->
+	<script>
+		document.getElementById('toggle-items').addEventListener('click',
+				function(event) {
+					event.preventDefault();
+					var hiddenItems = document.querySelectorAll('.extra-item');
+					var isHidden = hiddenItems[0].style.display === 'none';
+
+					hiddenItems.forEach(function(item) {
+						item.style.display = isHidden ? 'block' : 'none';
+					});
+
+					this.textContent = isHidden ? 'Ẩn' : 'Xem thêm';
+				});
+	</script>
 
 	<!-- offer start-->
 
