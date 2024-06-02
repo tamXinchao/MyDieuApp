@@ -12,27 +12,23 @@ import asm.java5Nhom6.Entity.Product_Size_Color;
 
 public interface Product_Size_ColorDAO extends JpaRepository<Product_Size_Color, Integer> {
 	//trang chủ
-	@Query("SELECT DISTINCT p.image, p.productName, psc.price, p.productId " 
-			+ "FROM Product_Size_Color psc "
-			+ "JOIN psc.product p " 
-			+ "JOIN psc.color c " 
-			+ "JOIN psc.size s "
-			+ "JOIN Product_Image pi ON psc.product = pi.product " 
-			+ "GROUP BY p.image, p.productName, p.productId, psc.price")
-		 Page<Object[]> findProductInfo(Pageable pageable);
+
+    @Query("SELECT DISTINCT p.image, p.productName, psc.price, p.productId, cate.cateId " +
+            "FROM Product_Size_Color psc " +
+            "JOIN psc.product p " +
+            "JOIN p.category cate " +
+            "GROUP BY p.image, p.productName, p.productId, psc.price, cate.cateId")
+     Page<Object[]> findProductInfo(Pageable pageable);
 		 
 		 //top 10 product
-		 @Query("SELECT DISTINCT p.image, p.productName, psc.price, p.productId " 
-			        + "FROM Product_Size_Color psc "
-			        + "JOIN psc.product p " 
-			        + "JOIN psc.color c " 
-			        + "JOIN psc.size s "
-			        + "JOIN Product_Image pi ON psc.product = pi.product " 
-			        + "GROUP BY p.image, p.productName, p.productId, psc.price "
-			        + "ORDER BY psc.price ASC")
-			Page<Object[]> findTop10CheapestProducts(Pageable pageable);
+     @Query("SELECT DISTINCT p.image, p.productName, psc.price, p.productId, cate.cateId " +
+    	       "FROM Product_Size_Color psc " +
+    	       "JOIN psc.product p " +
+    	       "JOIN p.category cate " +
+    	       "GROUP BY p.image, p.productName, p.productId, psc.price, cate.cateId " +
+    	       "ORDER BY psc.price ASC")
+    	Page<Object[]> findTop10CheapestProducts(Pageable pageable);
 
-	
 	//detail
 	@Query("SELECT DISTINCT p.productName,p.describe, MIN(psc.price), p.productId "
 		     + "FROM Product_Size_Color psc " 
@@ -58,5 +54,14 @@ public interface Product_Size_ColorDAO extends JpaRepository<Product_Size_Color,
 				    + "WHERE p.productId = :productId "
 				    + "GROUP BY p.productId, c.name")
 			List<Object[]> findColorById(@Param("productId") Integer productId);
+			
+			// san pham lien quan
+			  @Query("SELECT p.productId, p.image, p.productName, psc.price, cate.cateId " +
+			           "FROM Product_Size_Color psc " +
+			           "JOIN psc.product p " +
+			           "JOIN p.category cate " +
+			           "WHERE cate.cateId = :categoryId " +
+			           "GROUP BY p.productId, p.image, p.productName, psc.price, cate.cateId")
+			  Page<Object[]> findProductsByCategoryId(@Param("categoryId") Integer categoryId, Pageable pageable);
 		
 }

@@ -28,6 +28,12 @@ public class ProductService {
 	@Autowired
 	private ManufacturesDAO manuDAO;
 
+	public List<Object[]> getRelatedProductsByCategoryId(Integer categoryId, int limit) {
+		Pageable pageable = PageRequest.of(0, limit);
+		Page<Object[]> page = productSizeColor.findProductsByCategoryId(categoryId, pageable);
+		return page.getContent();
+	}
+
 	public List<Object[]> getManuById(Integer productId) {
 		return manuDAO.findManufacturerById(productId);
 	}
@@ -52,10 +58,10 @@ public class ProductService {
 		return productImage.findImagebyProdouct(productId);
 	}
 
-	 public Page<Object[]> getProductPage(int page, int size) {
-	        Pageable pageable = PageRequest.of(page, size);
-			return productSizeColor.findProductInfo(pageable);
-	    }
+	public Page<Object[]> getProductPage(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		return productSizeColor.findProductInfo(pageable);
+	}
 
 	public Page<Object[]> getTop10Product() {
 		Pageable pageable = PageRequest.of(0, 10);

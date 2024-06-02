@@ -1,5 +1,6 @@
 package asm.java5Nhom6.HomeController;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,20 +16,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import asm.java5Nhom6.Entity.Category;
 import asm.java5Nhom6.Entity.Manufacturer;
 import asm.java5Nhom6.Entity.Product;
 import asm.java5Nhom6.Entity.Product_Image;
 import asm.java5Nhom6.Entity.Product_Size_Color;
-import asm.java5Nhom6.dao.ProductDAO;
-import asm.java5Nhom6.dao.Product_ImageDAO;
-import asm.java5Nhom6.dao.Product_Size_ColorDAO;
+import asm.java5Nhom6.dao.CategoryDAO;
 import asm.java5Nhom6.service.ProductService;
-import jakarta.websocket.server.PathParam;
 
 @Controller
 public class homePage {
 	@Autowired
 	ProductService productService;
+
+	@Autowired
+	CategoryDAO cateDAO;
 
 	@GetMapping
 	public String index(Model model) {
@@ -36,38 +38,39 @@ public class homePage {
 		Page<Object[]> top10ProductPage = productService.getTop10Product();
 		List<Object[]> top10Product = top10ProductPage.getContent();
 		model.addAttribute("top10Product", top10Product);
+		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("view", "index.jsp");
 		return "index";
 	}
 
 	@RequestMapping("/trang-chu")
 	public String trangChu(Model model, @ModelAttribute("product") Product product) {
-		// Lấy thông tin product
 		Page<Object[]> top10ProductPage = productService.getTop10Product();
 		List<Object[]> top10Product = top10ProductPage.getContent();
+		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("top10Product", top10Product);
 		model.addAttribute("view", "index.jsp");
 		return "index";
 	}
 
 	@GetMapping("/register")
-	public String Register() {
+	public String register() {
 		return "account/register";
 	}
 
 	@GetMapping("/login")
-	public String Login() {
+	public String login() {
 		return "account/login";
 	}
 
 	@RequestMapping("/gio-hang")
-	public String Cart(Model model) {
+	public String cart(Model model) {
 		model.addAttribute("view", "cart.jsp");
 		return "layout";
 	}
 
 	@RequestMapping("/shop")
-	public String Shop(Model model) {
+	public String shop(Model model) {
 		model.addAttribute("view", "shop.jsp");
 		return "layout";
 	}
@@ -75,44 +78,52 @@ public class homePage {
 	@GetMapping("/shop/danh-sach-san-pham")
 	public String danhSachSP(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
 		int pageSize = 6;
-		Page<Object[]> dsSpPage = productService.getProductPage(page -1, pageSize);
+		Page<Object[]> dsSpPage = productService.getProductPage(page - 1, pageSize);
 		List<Object[]> dsSp = dsSpPage.getContent();
 
 		model.addAttribute("dsSp", dsSp);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", dsSpPage.getTotalPages());
-		return "forward:/shop"; 
+		return "forward:/shop";
 	}
 
-	@RequestMapping("/product/detail/{productId}")
-	public String detail(Model model, @PathVariable("productId") Integer productId) {
-		// product detail by productId
+	@RequestMapping("/product/detail/{productId}/{cateId}")
+	public String detail(Model model, @PathVariable("productId") Integer productId,
+			@PathVariable("cateId") Integer cateId) {
+		// Product detail by productId
 		List<Object[]> listDetail = productService.findDetailProductByProductId(productId);
 
-		// find image by productId
+		// Find image by productId
 		List<Object[]> listImage = productService.getImageProductById(productId);
 
-		// find color by productId
+		// Find color by productId
 		List<Object[]> listColor = productService.getColorById(productId);
 
-		// find size by productId
+		// Find size by productId
 		List<Object[]> listSize = productService.getSizeById(productId);
 
-		Optional<Product> productById = productService.getProduct(productId);// thử cách mới
-		// Optional không phải là một tập hợp các phần tử. cần kiểm tra
-		// nếu giá trị bên trong Optional tồn tại và sau đó trích xuất giá trị đó trước
-		// khi chuyển sang JSP.
+		Optional<Product> productById = productService.getProduct(productId);
 		if (productById.isPresent()) {
 			model.addAttribute("productById", productById.get());
+		} else {
+			// Handle the case where the product is not found
+			model.addAttribute("error", "Product not found");
+			return "error"; // Redirect to an error page or show an error message
 		}
-		// find manufacture by id
+
+		// Find manufacture by id
 		List<Object[]> listManu = productService.getManuById(productId);
+
+		// Lấy các sản phẩm cùng thể loại
+		List<Object[]> relatedProducts = productService.getRelatedProductsByCategoryId(cateId, 4);
+		model.addAttribute("relatedProducts", relatedProducts);
 		model.addAttribute("listManu", listManu);
 		model.addAttribute("listColor", listColor);
 		model.addAttribute("listSize", listSize);
 		model.addAttribute("image", listImage);
 		model.addAttribute("detail", listDetail);
 		model.addAttribute("view", "detail.jsp");
+
 		return "layout";
 	}
 }
