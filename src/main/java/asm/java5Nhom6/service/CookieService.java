@@ -34,5 +34,14 @@ public class CookieService {
         }
         return null;
     }
+     public void clearCookies(HttpServletRequest req,HttpServletResponse resp) {
+    	 Cookie[] cookies = req.getCookies();
+    	 if(cookies != null) {
+    		 for(Cookie cookie : cookies) {
+    			 cookie.setMaxAge(0);
+    			 resp.addCookie(cookie);
+    		 }
+    	 }
+     }
 	
 }
