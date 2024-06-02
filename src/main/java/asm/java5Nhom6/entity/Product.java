@@ -24,7 +24,7 @@ import jakarta.persistence.TemporalType;
 @NoArgsConstructor
 @Entity
 @Table(name = "Products")
-public class Product implements Serializable {
+public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer productId;
@@ -36,6 +36,7 @@ public class Product implements Serializable {
 	private String describe;
 	
 	private String image;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "NgayNhap") // Đảm bảo tên cột khớp với tên trong cơ sở dữ liệu
 	private Date ngayNhap;

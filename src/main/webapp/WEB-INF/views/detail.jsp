@@ -1,7 +1,9 @@
 
+
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page pageEncoding="UTF-8"%>
+
 <!-- Shop Detail Start -->
 <div class="container-fluid py-5">
 	<div class="row px-xl-5">

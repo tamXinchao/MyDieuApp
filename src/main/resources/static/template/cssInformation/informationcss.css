@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.rounded-input {
+            border-radius: 15px; /* Bo tròn các cạnh */
+            background-color: #f8f9fa; /* Màu nền để biểu thị trạng thái không thể nhập */
+            color: #6c757d; /* Màu chữ */
+}
