@@ -1,11 +1,11 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-	
-<!DOCTYPE html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html> 
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <meta content="Free HTML Templates" name="keywords">
 <meta content="Free HTML Templates" name="description">
 

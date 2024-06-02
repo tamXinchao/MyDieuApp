@@ -1,22 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Mã xác nhận</title>
-<!-- Custom fonts for this template-->
-<link href="/manager/vendor/fontawesome-free/css/all.min.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
-
-<!-- Custom styles for this template-->
-<link href="/manager/css/sb-admin-2.min.css" rel="stylesheet">
-</head>
-<body class="bg-gradient-primary">
 	<div class="container">
 
 		<div class="card o-hidden border-0 shadow-lg my-5">
@@ -50,40 +35,4 @@
 			</div>
 		</div>
 	</div>
-</body>
-<!-- Bootstrap core JavaScript-->
-<script src="/manager/vendor/jquery/jquery.min.js"></script>
-<script src="/manager/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="/manager/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="/manager/js/sb-admin-2.min.js"></script>
-
-<!-- Đoạn js này lấy đọc mail và gửi về server bằng HTTP -->
-<script>
-    // Xử lý sự kiện khi nhấn nút "Gửi"
-    document.getElementById("sendEmail").addEventListener("click", function() {
-        // Lấy trường email và giá trị của nó
-        var emailField = document.getElementById("Email");
-        var emailValue = emailField.value;
-
-        // Gửi giá trị email đến code Java thông qua yêu cầu HTTP
-        fetch('/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: emailValue }),
-        })
-        .then(response => {
-            // Xử lý phản hồi từ server nếu cần
-            console.log(response);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    });
-</script>
-</html>
