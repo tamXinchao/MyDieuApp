@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import asm.java5Nhom6.Entity.Product_Size_Color;
+import asm.java5Nhom6.entity.Product_Size_Color;
 
 public interface Product_Size_ColorDAO extends JpaRepository<Product_Size_Color, Integer> {
 	//trang chủ

@@ -6,13 +6,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import asm.java5Nhom6.Entity.Manufacturer;
-import asm.java5Nhom6.Entity.Product;
-import asm.java5Nhom6.Entity.Product_Image;
+
+import asm.java5Nhom6.entity.*;
 import asm.java5Nhom6.dao.ManufacturesDAO;
+
 import asm.java5Nhom6.dao.ProductDAO;
 import asm.java5Nhom6.dao.Product_ImageDAO;
 import asm.java5Nhom6.dao.Product_Size_ColorDAO;
+import asm.java5Nhom6.entity.Product;
+import asm.java5Nhom6.entity.Product_Image;
 
 import java.util.List;
 import java.util.Optional;

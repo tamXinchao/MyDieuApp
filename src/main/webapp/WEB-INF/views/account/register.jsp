@@ -29,7 +29,7 @@
 							<div class="text-center">
 								<h1 class="h4 text-gray-900 mb-4">Đăng Ký</h1>
 							</div>
-							<form action="/register/check" method="post" class="user">
+							<form action="/register" method="POST" class="user">
 								<div class="form-group row">
 									<div class="col-sm-6 mb-3 mb-sm-0">
 										<input type="text" name="fullname"
@@ -40,9 +40,9 @@
 											họ tên!</div>
 									</div>
 									<div class="col-sm-6">
-										<input type="text" name="code"
+										<input type="text" name="username"
 											class="form-control form-control-user" id="exampleLastName"
-											placeholder="Mã xác thực">
+											placeholder="Tài khoản">
 										<div class="invalid-feedback text-center">Vui lòng nhập
 											mã xác thực!</div>
 									</div>
@@ -94,7 +94,7 @@
 											mật khẩu!</div>
 									</div>
 									<div class="col-sm-6">
-										<input type="password" name="confirm"
+										<input type="password" name="rePassword"
 											class="form-control form-control-user"
 											id="exampleRepeatPassword" placeholder="Xác nhận mật khẩu">
 										<div class="invalid-feedback text-center">Vui lòng xác

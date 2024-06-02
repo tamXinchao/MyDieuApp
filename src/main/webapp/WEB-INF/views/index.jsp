@@ -1,14 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
-<%@ page pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <jsp:include page="head.jsp"></jsp:include>
-<title>Insert title here</title>
+<title>Home</title>
 </head>
 <body>
 	<!-- Topbar Start -->
@@ -61,25 +62,9 @@
 					class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
 					id="navbar-vertical">
 					<div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-						<div class="nav-item dropdown">
-							<a href="#" class="nav-link" data-toggle="dropdown">Dresses <i
-								class="fa fa-angle-down float-right mt-1"></i></a>
-							<div
-								class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-								<a href="" class="dropdown-item">Men's Dresses</a> <a href=""
-									class="dropdown-item">Women's Dresses</a> <a href=""
-									class="dropdown-item">Baby's Dresses</a>
-							</div>
-						</div>
-						<a href="" class="nav-item nav-link">Shirts</a> <a href=""
-							class="nav-item nav-link">Jeans</a> <a href=""
-							class="nav-item nav-link">Swimwear</a> <a href=""
-							class="nav-item nav-link">Sleepwear</a> <a href=""
-							class="nav-item nav-link">Sportswear</a> <a href=""
-							class="nav-item nav-link">Jumpsuits</a> <a href=""
-							class="nav-item nav-link">Blazers</a> <a href=""
-							class="nav-item nav-link">Jackets</a> <a href=""
-							class="nav-item nav-link">Shoes</a>
+						<c:forEach var="c" items="${categories}">	
+						<a href="" class="nav-item nav-link">${c.name}</a>
+						</c:forEach>
 					</div>
 				</nav>
 			</div>
@@ -97,23 +82,47 @@
 					</button>
 					<div class="collapse navbar-collapse justify-content-between"
 						id="navbarCollapse">
-						<div class="navbar-nav mr-auto py-0">
-							<a href="/trang-chu" class="nav-item nav-link active">Home</a> <a
-								href="/shop" class="nav-item nav-link">Shop</a>
-							<div class="nav-item dropdown">
-								<a href="#" class="nav-link dropdown-toggle"
-									data-toggle="dropdown">Pages</a>
-								<div class="dropdown-menu rounded-0 m-0">
-									<a href="/admin/trang-chu" class="dropdown-item">Admin
-										pages</a>
+
+						<c:choose>
+								<c:when test="${sessionScope.roleSession eq 1 }">
+								<div class="navbar-nav mr-auto py-0">
+									<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
+									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
+									<a href="/shop" class="nav-item nav-link">Shop</a>
+									<a href="contact.html" class="nav-item nav-link">Contact</a>
+									<div class="nav-item dropdown"></div>
+										<a href="#" class="nav-link dropdown-toggle"
+											data-toggle="dropdown">Pages</a>
+										<div class="dropdown-menu rounded-0 m-0">
+											<a href="/admin/trang-chu" class="dropdown-item">Admin
+												pages</a>
+										</div>
+										</div>
+										</c:when>
+								<c:otherwise>
+								<div class="navbar-nav mr-auto py-0">
+									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
+									<a href="/shop" class="nav-item nav-link">Shop</a>
+									<a href="contact.html" class="nav-item nav-link">Contact</a>
+									</div>
+								</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${not empty sessionScope.userSession}">
+								<!-- Hiển thị khi cho người dùng đã đăng nhập thành công -->
+								<div class="navbar-nav ml-auto py-0">
+									<a href="" class="nav-item nav-link">${sessionScope.userSession}</a>
+									<a href="/logout" class="nav-item nav-link">Logout</a>
 								</div>
-							</div>
-							<a href="contact.html" class="nav-item nav-link">Contact</a>
-						</div>
-						<div class="navbar-nav ml-auto py-0">
-							<a href="/login" class="nav-item nav-link">Login</a> <a
-								href="/register" class="nav-item nav-link">Register</a>
-						</div>
+							</c:when>
+							<c:otherwise>
+								<!-- Hiển thị khi người dùng chưa đăng nhập -->
+								<div class="navbar-nav ml-auto py-0">
+									<a href="/login" class="nav-item nav-link">Login</a> <a
+										href="/register" class="nav-item nav-link">Register</a>
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</nav>
 				<div id="header-carousel" class="carousel slide"
@@ -203,72 +212,19 @@
 	<!-- categories start-->
 	<div class="container-fluid pt-5">
 		<div class="row px-xl-5 pb-3">
+		<c:forEach var = "caterogyList" items="${countProductOfCate}">
 			<div class="col-lg-4 col-md-6 pb-1">
 				<div class="cat-item d-flex flex-column border mb-4"
 					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
+					<p class="text-right">Quality:${caterogyList.countProduct}</p>
+					<a href="/shop/category/${caterogyList.idCate}"
 						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src="/template/img/cat-1.jpg" alt="">
+						class="img-fluid" src="/template/img/${caterogyList.image }" alt="">
 					</a>
-					<h5 class="font-weight-semi-bold m-0">Men's dresses</h5>
+					<h5 class="font-weight-semi-bold m-0">${caterogyList.nameCate}</h5>
 				</div>
 			</div>
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src=" /template/img/cat-2.jpg" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">Women's dresses</h5>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column  border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src=" /template/img/cat-3.jpg" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">Baby's dresses</h5>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src=" /template/img/cat-4.jpg" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">Accerssories</h5>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src=" /template/img/cat-5.jpg" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">Bags</h5>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">15 Products</p>
-					<a href="/detail"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src=" /template/img/cat-6.jpg" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">Shoes</h5>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 	<!-- categories end-->
@@ -321,8 +277,10 @@
 					<div class="card product-item border-0 mb-4">
 						<div
 							class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+
 							<a href="/product/detail/${info[3]}/${info[4]}"><img
 								class="img-fluid w-100" src="/user/img/${info[0]}" alt=""></a>
+
 						</div>
 						<div
 							class="card-body border-left border-right text-center p-0 pt-4 pb-3">
@@ -389,6 +347,9 @@
 			</div>
 		</div>
 	</div>
+	<c:forEach var="p" items="${products}">
+	${p.name}
+	</c:forEach>
 	<!-- vendor end -->
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

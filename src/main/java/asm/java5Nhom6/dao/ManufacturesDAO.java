@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import asm.java5Nhom6.Entity.Manufacturer;
+import asm.java5Nhom6.entity.Manufacturer;
 
 public interface ManufacturesDAO extends JpaRepository<Manufacturer, Integer> {
 
