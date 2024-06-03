@@ -41,4 +41,6 @@ public class Cart {
     @JoinColumn(name = "pro_size_color_id")
     private Product_Size_Color productSizeColor;
 
+    
+    
 }

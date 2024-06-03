@@ -132,6 +132,7 @@
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
 
+
 <script>
   var checkedIds = [];
 
@@ -171,3 +172,31 @@
 
 
 </script>
+
+<!-- Xử lí gửi mã xác nhận qua mail -->
+<script>
+    // Xử lý sự kiện khi nhấn nút "Gửi"
+    document.getElementById("sendEmail").addEventListener("click", function() {
+        // Lấy trường email và giá trị của nó
+        var emailField = document.getElementById("Email");
+        var emailValue = emailField.value;
+
+        // Gửi giá trị email đến code Java thông qua yêu cầu HTTP
+        fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: emailValue }),
+        })
+        .then(response => {
+            // Xử lý phản hồi từ server nếu cần
+            console.log(response);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+

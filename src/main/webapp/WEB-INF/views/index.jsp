@@ -1,13 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="UTF-8"%>
 
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <jsp:include page="head.jsp"></jsp:include>
 <title>Home</title>
 </head>
@@ -62,8 +61,8 @@
 					class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
 					id="navbar-vertical">
 					<div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-						<c:forEach var="c" items="${categories}">	
-						<a href="" class="nav-item nav-link">${c.name}</a>
+						<c:forEach var="c" items="${categories}">
+							<a href="" class="nav-item nav-link">${c.name}</a>
 						</c:forEach>
 					</div>
 				</nav>
@@ -84,34 +83,35 @@
 						id="navbarCollapse">
 
 						<c:choose>
-								<c:when test="${sessionScope.roleSession eq 1 }">
+							<c:when test="${sessionScope.roleSession eq 2 }">
 								<div class="navbar-nav mr-auto py-0">
 									<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
 									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
-									<a href="/shop" class="nav-item nav-link">Shop</a>
-									<a href="contact.html" class="nav-item nav-link">Contact</a>
-									<div class="nav-item dropdown"></div>
+									<a href="/shop" class="nav-item nav-link">Shop</a> <a
+										href="contact.html" class="nav-item nav-link">Contact</a>
+									<div class="nav-item dropdown">
 										<a href="#" class="nav-link dropdown-toggle"
 											data-toggle="dropdown">Pages</a>
 										<div class="dropdown-menu rounded-0 m-0">
 											<a href="/admin/trang-chu" class="dropdown-item">Admin
 												pages</a>
 										</div>
-										</div>
-										</c:when>
-								<c:otherwise>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
 								<div class="navbar-nav mr-auto py-0">
 									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
-									<a href="/shop" class="nav-item nav-link">Shop</a>
-									<a href="contact.html" class="nav-item nav-link">Contact</a>
-									</div>
-								</c:otherwise>
+									<a href="/shop" class="nav-item nav-link">Shop</a> <a
+										href="contact.html" class="nav-item nav-link">Contact</a>
+								</div>
+							</c:otherwise>
 						</c:choose>
 						<c:choose>
 							<c:when test="${not empty sessionScope.userSession}">
 								<!-- Hiển thị khi cho người dùng đã đăng nhập thành công -->
 								<div class="navbar-nav ml-auto py-0">
-									<a href="" class="nav-item nav-link">${sessionScope.userSession}</a>
+									<a href="/information" class="nav-item nav-link">${sessionScope.userSession.fullname}</a>
 									<a href="/logout" class="nav-item nav-link">Logout</a>
 								</div>
 							</c:when>
@@ -212,18 +212,19 @@
 	<!-- categories start-->
 	<div class="container-fluid pt-5">
 		<div class="row px-xl-5 pb-3">
-		<c:forEach var = "caterogyList" items="${countProductOfCate}">
-			<div class="col-lg-4 col-md-6 pb-1">
-				<div class="cat-item d-flex flex-column border mb-4"
-					style="padding: 30px;">
-					<p class="text-right">Quality:${caterogyList.countProduct}</p>
-					<a href="/shop/category/${caterogyList.idCate}"
-						class="cat-img position-relative overflow-hidden mb-3"> <img
-						class="img-fluid" src="/template/img/${caterogyList.image }" alt="">
-					</a>
-					<h5 class="font-weight-semi-bold m-0">${caterogyList.nameCate}</h5>
+			<c:forEach var="caterogyList" items="${countProductOfCate}">
+				<div class="col-lg-4 col-md-6 pb-1">
+					<div class="cat-item d-flex flex-column border mb-4"
+						style="padding: 30px;">
+						<p class="text-right">Quality:${caterogyList.countProduct}</p>
+						<a href="/shop/category/${caterogyList.idCate}"
+							class="cat-img position-relative overflow-hidden mb-3"> <img
+							class="img-fluid" src="/template/img/${caterogyList.image }"
+							alt="">
+						</a>
+						<h5 class="font-weight-semi-bold m-0">${caterogyList.nameCate}</h5>
+					</div>
 				</div>
-			</div>
 			</c:forEach>
 		</div>
 	</div>
@@ -272,14 +273,15 @@
 			</h2>
 		</div>
 		<div class="row px-xl-5 pb-3">
-			<c:forEach items="${productInfo}" var="info">
+			<c:forEach items="${top10Product}" var="info">
 				<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
 					<div class="card product-item border-0 mb-4">
 						<div
 							class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
 
-							<a href="/detail/${info[3]}"><img class="img-fluid w-100"
-								src="/user/img/${info[0]}" alt=""></a>
+							<a href="/product/detail/${info[3]}/${info[4]}"><img
+								class="img-fluid w-100" src="/user/img/${info[0]}" alt=""></a>
+
 						</div>
 						<div
 							class="card-body border-left border-right text-center p-0 pt-4 pb-3">
@@ -289,16 +291,14 @@
 									<fmt:formatNumber value="${info[2]}" type="currency"
 										currencyCode="VND" />
 								</h6>
-								<h6 class="text-muted ml-2">
-									<del>$123.00</del>
-								</h6>
 							</div>
 						</div>
 						<div
 							class="card-footer d-flex justify-content-between bg-light border">
-							<a href="" class="btn btn-sm text-dark p-0"><i
-								class="fas fa-eye text-primary mr-1"></i>View Detail</a> <a href=""
+							<a href="/product/detail/${info[3]}/${info[4]}"
 								class="btn btn-sm text-dark p-0"><i
+								class="fas fa-eye text-primary mr-1"></i>View Detail</a> <a
+								href="/gio-hang" class="btn btn-sm text-dark p-0"><i
 								class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
 						</div>
 					</div>
@@ -308,6 +308,12 @@
 		</div>
 	</div>
 	<!-- product end -->
+	<div class="d-flex justify-content-center align-items-center">
+		<button class="btn btn-primary px-3">
+			<a href="/shop/danh-sach-san-pham">Xem Thêm</a>
+		</button>
+	</div>
+
 	<!-- vendor start -->
 
 	<div class="container-fluid py-5">
