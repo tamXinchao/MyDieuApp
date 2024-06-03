@@ -35,50 +35,5 @@ public class Address {
 	@Column(name = "Provincial", nullable = false)
 	String provincial;
 	
-	public Address() {
-		
-	}
 	
-	
-	
-	
-	public Address(Integer addressId, String phoneNumber, String email, String address, String provincial) {
-		super();
-		this.addressId = addressId;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.address = address;
-		this.provincial = provincial;
-	}
-	public Integer getAddressId() {
-		return addressId;
-	}
-	public void setAddressId(Integer addressId) {
-		this.addressId = addressId;
-	}
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getProvincial() {
-		return provincial;
-	}
-	public void setProvincial(String provincial) {
-		this.provincial = provincial;
-	}
-
 }
