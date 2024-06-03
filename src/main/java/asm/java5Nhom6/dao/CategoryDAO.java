@@ -1,4 +1,4 @@
-package asm.java5Nhom6.repostirori;
+package asm.java5Nhom6.dao;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import asm.java5Nhom6.entity.Category;
 import asm.java5Nhom6.model.dto.dtoCategory;
 @Repository
-public interface CategoryRepostirori extends JpaRepository<Category, Integer>{
+public interface CategoryDAO extends JpaRepository<Category, Integer>{
 	 @Query("select new asm.java5Nhom6.model.dto.dtoCategory(c.image,c.name, c.id, COUNT(p.id)) " +
 	           "from Category c " +
 	           "left join c.products p " +

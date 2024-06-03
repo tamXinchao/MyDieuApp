@@ -45,29 +45,10 @@
 	</div>
 	<!-- Topbar End -->
 
-
-	<!-- Navbar Start -->
+<!-- Navbar Start -->
 	<div class="container-fluid mb-5">
 		<div class="row border-top px-xl-5">
-			<div class="col-lg-3 d-none d-lg-block">
-				<a
-					class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
-					data-toggle="collapse" href="#navbar-vertical"
-					style="height: 65px; margin-top: -1px; padding: 0 30px;">
-					<h6 class="m-0">Categories</h6> <i
-					class="fa fa-angle-down text-dark"></i>
-				</a>
-				<nav
-					class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
-					id="navbar-vertical">
-					<div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-						<c:forEach var="c" items="${categories}">
-							<a href="/shop/category/${c.cateId}" class="nav-item nav-link">${c.name}</a>
-						</c:forEach>
-					</div>
-				</nav>
-			</div>
-			<div class="col-lg-9">
+			<div class="col-lg-12">
 				<nav
 					class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
 					<a href="" class="text-decoration-none d-block d-lg-none">
@@ -81,30 +62,29 @@
 					</button>
 					<div class="collapse navbar-collapse justify-content-between"
 						id="navbarCollapse">
-
 						<c:choose>
-							<c:when test="${sessionScope.roleSession eq 1 }">
+								<c:when test="${sessionScope.roleSession eq 1 }">
 								<div class="navbar-nav mr-auto py-0">
 									<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
 									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
-									<a href="/shop" class="nav-item nav-link">Shop</a> <a
-										href="contact.html" class="nav-item nav-link">Contact</a>
+									<a href="/shop" class="nav-item nav-link">Shop</a>
+									<a href="contact.html" class="nav-item nav-link">Contact</a>
 									<div class="nav-item dropdown"></div>
-									<a href="#" class="nav-link dropdown-toggle"
-										data-toggle="dropdown">Pages</a>
-									<div class="dropdown-menu rounded-0 m-0">
-										<a href="/admin/trang-chu" class="dropdown-item">Admin
-											pages</a>
-									</div>
-								</div>
-							</c:when>
-							<c:otherwise>
+										<a href="#" class="nav-link dropdown-toggle"
+											data-toggle="dropdown">Pages</a>
+										<div class="dropdown-menu rounded-0 m-0">
+											<a href="/admin/trang-chu" class="dropdown-item">Admin
+												pages</a>
+										</div>
+										</div>
+										</c:when>
+								<c:otherwise>
 								<div class="navbar-nav mr-auto py-0">
 									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
-									<a href="/shop" class="nav-item nav-link">Shop</a> <a
-										href="contact.html" class="nav-item nav-link">Contact</a>
-								</div>
-							</c:otherwise>
+									<a href="/shop" class="nav-item nav-link">Shop</a>
+									<a href="contact.html" class="nav-item nav-link">Contact</a>
+									</div>
+								</c:otherwise>
 						</c:choose>
 						<c:choose>
 							<c:when test="${not empty sessionScope.userSession}">
@@ -172,6 +152,7 @@
 		</div>
 	</div>
 	<!-- Navbar End -->
+	
 
 	<!-- faetured start-->
 	<div class="container-fluid pt-5">
@@ -389,9 +370,6 @@
 			</div>
 		</div>
 	</div>
-	<c:forEach var="p" items="${products}">
-	${p.name}
-	</c:forEach>
 	<!-- vendor end -->
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

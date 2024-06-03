@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//Class hứng dữ liệu từ truy vấn
 public class dtoProduct {
     String image;
     String productName;

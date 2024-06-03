@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 
 import asm.java5Nhom6.model.dto.dtoCategory;
 import asm.java5Nhom6.model.dto.dtoProduct;
-import asm.java5Nhom6.repostirori.CategoryRepostirori;
-import asm.java5Nhom6.repostirori.ProductRepostirori;
 import asm.java5Nhom6.dao.CartDAO;
+import asm.java5Nhom6.dao.CategoryDAO;
 import asm.java5Nhom6.dao.ProductDAO;
 import asm.java5Nhom6.dao.Product_ImageDAO;
 import asm.java5Nhom6.dao.Product_Size_ColorDAO;
@@ -28,9 +27,9 @@ import jakarta.websocket.server.PathParam;
 @Controller
 public class HomePage {
 	@Autowired
-	CategoryRepostirori categoryRepo;
+	CategoryDAO categoryRepo;
 	@Autowired
-	ProductRepostirori productRepo;
+	ProductDAO productRepo;
   @Autowired
 	ProductService productService;
 	
