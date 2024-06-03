@@ -29,9 +29,10 @@ import jakarta.persistence.Table;
 public class Product_Size_Color {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pro_size_color_id")
-	private int productSizeColorId;
 
+//	@Column(name = "Product_Size_Color_Id", nullable = false)
+	Integer proSizeColorId;
+	
 
 	@Column(name = "status", nullable = false)
 	private String status;

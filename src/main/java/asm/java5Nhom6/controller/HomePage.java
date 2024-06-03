@@ -75,22 +75,6 @@ public class HomePage {
 		return "index";
 	}
 
-	@Autowired
-	CartDAO cartdao;
-	@RequestMapping("/gio-hang")
-	public String Cart(Model model ) {
-		List<Cart> listProInCart = cartdao.findByUserId(3);	
-		model.addAttribute("listProInCart", listProInCart);
-		model.addAttribute("view", "cart.jsp");
-		return "layout";
-	}
-	
-	@RequestMapping("/gio-hang/update/{id}/{pre}")
-	public String update(@PathVariable("id") Integer id,@PathVariable("pre") String pre) {
-		cartdao.update(id, pre);
-		return "redirect:/gio-hang";
-	}
-	
 	@RequestMapping("/shop")
 	public String shop(Model model) {
 		model.addAttribute("view", "shop.jsp");

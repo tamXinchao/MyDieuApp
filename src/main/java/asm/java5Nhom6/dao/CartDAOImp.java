@@ -15,25 +15,14 @@ import asm.java5Nhom6.entity.Cart;
 
 public class CartDAOImp implements CartDAO{
 	List<Cart> listCart = new ArrayList<Cart>();
-	@Override
-	public List<Cart> findByUserId(Integer userId) {
-		
-		return null;
-	}
 	
 	@Override
-	public Cart update(Integer id, String qty) {
-		Cart item = this.getById(id);
-		if(qty.equals("minus") && item.getQuality()>0) {
-			item.setQuality(item.getQuality()-1);
-			if(item.getQuality() == 0)
-				this.deleteById(id); 
-		}else if(qty.equals("plus") &&item.getQuality()<100) {
-			item.setQuality(item.getQuality()+1);
-		}
-		
-		return item;
+	public List<Cart> findByUserId(Integer userId, Sort sort) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	
 
 	@Override
 	public void flush() {
@@ -215,6 +204,14 @@ public class CartDAOImp implements CartDAO{
 		return null;
 	}
 
-	
+
+
+	@Override
+	public double getAmount(Integer Id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 
 }
