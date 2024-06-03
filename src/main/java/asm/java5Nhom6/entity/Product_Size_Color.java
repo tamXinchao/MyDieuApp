@@ -30,7 +30,7 @@ public class Product_Size_Color {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-//	@Column(name = "Product_Size_Color_Id", nullable = false)
+	@Column(name = "Pro_Size_Color_Id", nullable = false)
 	Integer proSizeColorId;
 	
 
