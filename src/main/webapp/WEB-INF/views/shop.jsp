@@ -196,7 +196,10 @@
 								class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
 								<a href="/product/detail/${dsSp[3]}/${dsSp[4]}"><img
 									class="img-fluid w-100" src="/user/img/${dsSp[0]}" alt=""></a>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0e01b0b7cd608b7434b4559a7a4c306590955112
 							</div>
 							<div
 								class="card-body border-left border-right text-center p-0 pt-4 pb-3">

@@ -6,9 +6,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import asm.java5Nhom6.entity.*;
 import asm.java5Nhom6.dao.ManufacturesDAO;
 
+=======
+import asm.java5Nhom6.Entity.Manufacturer;
+import asm.java5Nhom6.Entity.Product;
+import asm.java5Nhom6.Entity.Product_Image;
+import asm.java5Nhom6.dao.ManufacturesDAO;
+>>>>>>> 0e01b0b7cd608b7434b4559a7a4c306590955112
 import asm.java5Nhom6.dao.ProductDAO;
 import asm.java5Nhom6.dao.Product_ImageDAO;
 import asm.java5Nhom6.dao.Product_Size_ColorDAO;
@@ -33,6 +40,7 @@ public class ProductService {
 		Pageable pageable = PageRequest.of(0, limit);
 		Page<Object[]> page = productSizeColor.findProductsByCategoryId(categoryId, pageable);
 		return page.getContent();
+<<<<<<< HEAD
 	}
 	
 	public List<Object[]> getProduct(){
@@ -68,6 +76,39 @@ public class ProductService {
 		return productSizeColor.findProductInfo(pageable);
 	}
 
+=======
+	}
+
+	public List<Object[]> getManuById(Integer productId) {
+		return manuDAO.findManufacturerById(productId);
+	}
+
+	public Optional<Manufacturer> getManuFacturesByid(Integer productId) {
+		return manuDAO.findById(productId);
+	}
+
+	public Optional<Product> getProduct(Integer productId) {// lấy tất cả sp
+		return dao.findById(productId);
+	}
+
+	public List<Object[]> getSizeById(Integer productId) { // lấy size theo id
+		return productSizeColor.findSizeById(productId);
+	}
+
+	public List<Object[]> getColorById(Integer productId) {// lấy color theo id
+		return productSizeColor.findColorById(productId);
+	}
+
+	public List<Object[]> getImageProductById(Integer productId) {// lấy image theo id
+		return productImage.findImagebyProdouct(productId);
+	}
+
+	public Page<Object[]> getProductPage(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		return productSizeColor.findProductInfo(pageable);
+	}
+
+>>>>>>> 0e01b0b7cd608b7434b4559a7a4c306590955112
 	public Page<Object[]> getTop10Product() {
 		Pageable pageable = PageRequest.of(0, 10);
 		return productSizeColor.findTop10CheapestProducts(pageable);

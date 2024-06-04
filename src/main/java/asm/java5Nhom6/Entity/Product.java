@@ -51,4 +51,8 @@ public class Product {
 	@JoinColumn(name = "Cate_Id")
 	Category category;
 
+<<<<<<< HEAD
+=======
+	private String image;
+>>>>>>> 0e01b0b7cd608b7434b4559a7a4c306590955112
 }

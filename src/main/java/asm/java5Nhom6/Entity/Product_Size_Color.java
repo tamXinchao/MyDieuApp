@@ -31,7 +31,10 @@ public class Product_Size_Color {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "pro_size_color_id")
 	private int productSizeColorId;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0e01b0b7cd608b7434b4559a7a4c306590955112
 
 	@Column(name = "status", nullable = false)
 	private String status;

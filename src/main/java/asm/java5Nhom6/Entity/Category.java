@@ -26,6 +26,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cate_id")
     private int cateId;
+<<<<<<< HEAD
+=======
+
+    @Column(name = "name", nullable = false)
+>>>>>>> 0e01b0b7cd608b7434b4559a7a4c306590955112
     private String name;
     private String image;
 	@OneToMany(mappedBy = "category")
