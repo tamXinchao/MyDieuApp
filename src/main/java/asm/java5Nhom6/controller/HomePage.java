@@ -31,7 +31,6 @@ import asm.java5Nhom6.dao.ProductDAO;
 import asm.java5Nhom6.dao.Product_ImageDAO;
 import asm.java5Nhom6.dao.Product_Size_ColorDAO;
 import asm.java5Nhom6.entity.*;
-
 import asm.java5Nhom6.service.ProductService;
 
 @Controller
