@@ -1,15 +1,8 @@
 
-<<<<<<< HEAD
-
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page pageEncoding="UTF-8"%>
 
-=======
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page pageEncoding="UTF-8"%>
->>>>>>> 0e01b0b7cd608b7434b4559a7a4c306590955112
 <!-- Shop Detail Start -->
 <div class="container-fluid py-5">
 	<div class="row px-xl-5">
