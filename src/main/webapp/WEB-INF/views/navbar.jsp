@@ -1,11 +1,15 @@
 
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+<!DOCTYPE html>
 <!-- Topbar Start -->
 <div class="container-fluid">
 	<div class="row align-items-center py-3 px-xl-5">
 		<div class="col-lg-3 d-none d-lg-block">
 			<a href="/trang-chu" class="text-decoration-none">
 				<h1 class="m-0 display-5 font-weight-semi-bold">
-					<span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper
+					<span class="text-primary font-weight-bold border px-3 mr-1">M</span>Mỹ Diệu
 				</h1>
 			</a>
 		</div>
@@ -74,7 +78,7 @@
 		<div class="col-lg-9">
 			<nav
 				class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-				<a href="/trang-chu" class="text-decoration-none d-block d-lg-none">
+				<a href="" class="text-decoration-none d-block d-lg-none">
 					<h1 class="m-0 display-5 font-weight-semi-bold">
 						<span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper
 					</h1>
@@ -85,22 +89,47 @@
 				</button>
 				<div class="collapse navbar-collapse justify-content-between"
 					id="navbarCollapse">
-					<div class="navbar-nav mr-auto py-0">
-						<a href="/trang-chu" class="nav-item nav-link">Home</a> <a
-							href="/shop" class="nav-item nav-link">Shop</a>
-						<div class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle active"
-								data-toggle="dropdown">Pages</a>
-							<div class="dropdown-menu rounded-0 m-0">
-								<a href="/admin/trang-chu" class="dropdown-item">Admin pages</a>
+					<c:choose>
+						<c:when test="${sessionScope.roleSession eq 2 }">
+							<div class="navbar-nav mr-auto py-0">
+								<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
+								<a href="/trang-chu" class="nav-item nav-link active">Home</a> <a
+									href="/shop" class="nav-item nav-link">Shop</a> <a
+									href="contact.html" class="nav-item nav-link">Contact</a>
+								<div class="nav-item dropdown">
+									<a href="#" class="nav-link dropdown-toggle"
+										data-toggle="dropdown">Pages</a>
+									<div class="dropdown-menu rounded-0 m-0">
+										<a href="/admin/trang-chu" class="dropdown-item">Admin
+											pages</a>
+									</div>
+								</div>
 							</div>
-						</div>
-						<a href="contact.html" class="nav-item nav-link">Contact</a>
-					</div>
-					<div class="navbar-nav ml-auto py-0">
-						<a href="/login" class="nav-item nav-link">Login</a> <a
-							href="/register" class="nav-item nav-link">Register</a>
-					</div>
+						</c:when>
+						<c:otherwise>
+							<div class="navbar-nav mr-auto py-0">
+								<a href="/trang-chu" class="nav-item nav-link active">Home</a> <a
+									href="/shop" class="nav-item nav-link">Shop</a> <a
+									href="contact.html" class="nav-item nav-link">Contact</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${not empty sessionScope.userSession}">
+							<!-- Hiển thị khi cho người dùng đã đăng nhập thành công -->
+							<div class="navbar-nav ml-auto py-0">
+								<a href="/information" class="nav-item nav-link">${sessionScope.userSession.fullname}</a>
+								<a href="/logout" class="nav-item nav-link">Logout</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<!-- Hiển thị khi người dùng chưa đăng nhập -->
+							<div class="navbar-nav ml-auto py-0">
+								<a href="/login" class="nav-item nav-link">Login</a> <a
+									href="/register" class="nav-item nav-link">Register</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</nav>
 		</div>

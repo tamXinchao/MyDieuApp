@@ -1,5 +1,6 @@
-package asm.java5Nhom6.Entity;
+package asm.java5Nhom6.entity;
 
+import asm.java5Nhom6.entity.Address;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,4 +31,34 @@ public class Address_User {
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
+    
+    
+
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+    
+    
+    
+    
 }

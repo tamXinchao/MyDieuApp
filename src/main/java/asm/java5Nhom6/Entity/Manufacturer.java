@@ -1,4 +1,4 @@
-package asm.java5Nhom6.Entity;
+package asm.java5Nhom6.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +20,7 @@ public class Manufacturer {
 	 @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "manu_id")
-    private Long manuId;
+    private int manuId;
 
     @Column(name = "manu_name", nullable = false)
     private String manuName;

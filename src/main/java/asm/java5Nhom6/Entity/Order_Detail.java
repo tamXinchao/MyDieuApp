@@ -1,4 +1,4 @@
-package asm.java5Nhom6.Entity;
+package asm.java5Nhom6.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
