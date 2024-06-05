@@ -20,8 +20,6 @@ public interface Product_Size_ColorDAO extends JpaRepository<Product_Size_Color,
 		       "GROUP BY p.productId, p.image, p.productName, psc.price, cate.cateId")
 		List<Object[]> findProductInfo();
 
-	//trang chủ
-
     @Query("SELECT DISTINCT p.image, p.productName, psc.price, p.productId, cate.cateId " +
             "FROM Product_Size_Color psc " +
             "JOIN psc.product p " +

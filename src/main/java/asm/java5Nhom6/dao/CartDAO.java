@@ -2,6 +2,9 @@ package asm.java5Nhom6.dao;
 
 import java.util.List;
 
+
+import org.springframework.data.domain.Sort;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -12,14 +15,14 @@ public interface CartDAO extends JpaRepository<Cart, Integer> {
 	 * lấy danh sách sản phẩm trong giỏ hàng theo user
 	 */
 	@Query("SELECT c FROM Cart c WHERE c.user.id = ?1")
-	List<Cart> findByUserId(Integer userId);
+	 List<Cart> findByUserId(Integer userId, Sort sort);
 	
 	/**
-	* Thay đổi số lượng lên của mặt hàng trong giỏ
-	* @param id mã mặt hàng
-	* @param qty số lượng mới
-	* @return mặt hàng đã được thay đổi số lượng
+	* Lấy tổng số tiền các mặt hàng được chọn trong giỏ
 	*/
-	@Query("SELECT c FROM Cart c WHERE c.id = ?1")
-	Cart update(Integer id, String qty);
+	@Query(value = "select SUM( c.Quality*psc.Price)  \r\n"
+			+ "from Cart c join Product_Size_Color psc on c.Pro_Size_Color_Id = psc.Pro_Size_Color_Id\r\n"
+			+ "where c.Pro_Size_Color_Id=?1", nativeQuery = true)
+	double getAmount(Integer Id);
+
 }

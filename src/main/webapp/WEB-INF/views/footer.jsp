@@ -132,6 +132,47 @@
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
 
+
+<script>
+  var checkedIds = [];
+
+  $("input[type='checkbox']").change(function() {
+    var id = $(this).val();
+    if (this.checked) {
+      checkedIds.push(id);
+    } else {
+      var index = checkedIds.indexOf(id);
+      if (index !== -1) {
+        checkedIds.splice(index, 1);
+      }
+    }
+    sendCheckedIds(); // Tự động gửi checkedIds mỗi khi có sự thay đổi
+  });
+
+  function sendCheckedIds() {
+		// Chuyển danh sách số nguyên thành chuỗi JSON
+		var jsonData = JSON.stringify(checkedIds);
+
+		// Gửi yêu cầu AJAX với dữ liệu JSON
+		$.ajax({
+		    type: "GET", // hoặc GET tùy thuộc vào cách bạn cấu hình Controller của mình
+		    contentType: "application/json",
+		    url: "/gio-hang",
+		    data: jsonData,
+		    success: function(response) {
+		        console.log("Successfully sent checked IDs");
+		        // Xử lý phản hồi từ server nếu cần
+		    },
+		    error: function(xhr, status, error) {
+		        console.error("Failed to send checked IDs");
+		        // Xử lý lỗi nếu cần
+		    }
+		});
+	}
+
+
+</script>
+
 <!-- Xử lí gửi mã xác nhận qua mail -->
 <script>
     // Xử lý sự kiện khi nhấn nút "Gửi"
@@ -157,4 +198,7 @@
         });
     });
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+

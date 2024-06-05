@@ -21,13 +21,16 @@ import lombok.Setter;
 @Entity
 @Table(name = "Categories")
 
+
+
 public class Category {
-	  @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cate_id")
     private int cateId;
     private String name;
     private String image;
-	@OneToMany(mappedBy = "category")
-	List<Product> products;
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
+
 }
