@@ -30,10 +30,6 @@ public class Product_Size_Color {
 	@Column(name = "Pro_Size_Color_Id", nullable = false)
 	Integer proSizeColorId;
 	
-//=======
-//	@Column(name = "pro_size_color_id")
-//	private int productSizeColorId;
-//>>>>>>> huuthanh
 
 	@Column(name = "status", nullable = false)
 	private String status;

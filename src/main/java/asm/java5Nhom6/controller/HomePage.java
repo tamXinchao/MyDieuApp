@@ -100,6 +100,7 @@ public class HomePage {
 		// Product detail by productId
 		List<Object[]> listDetail = productService.findDetailProductByProductId(productId);
 
+		
 		// Find image by productId
 		List<Object[]> listImage = productService.getImageProductById(productId);
 

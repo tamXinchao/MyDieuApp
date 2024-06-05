@@ -1,10 +1,9 @@
-
-
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page pageEncoding="UTF-8"%>
 
 <!-- Shop Detail Start -->
+<form action="/cart/add" method="post" onsubmit="return validateForm()">
 <div class="container-fluid py-5">
 	<div class="row px-xl-5">
 		<div class="col-lg-4 pb-5">
@@ -38,30 +37,27 @@
 				</h3>
 				<br>
 				<p class="mb-4">${detail[1]}</p>
+				<input name="productId" value="${detail[3]}" type="hidden">
 			</c:forEach>
 			<div class="d-flex mb-3">
 				<p class="text-dark font-weight-medium mb-0 mr-3">Kích Cỡ:</p>
-				<form>
 					<c:forEach var="size" items="${listSize}" varStatus="status">
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" class="custom-control-input"
-								id="size-${status.index}" name="size"> <label
+								id="size-${status.index}" name="size" value="${size[1]}"> <label
 								class="custom-control-label" for="size-${status.index}">${size[1]}</label>
 						</div>
 					</c:forEach>
-				</form>
 			</div>
 			<div class="d-flex mb-3">
 				<p class="text-dark font-weight-medium mb-0 mr-3">Màu:</p>
-				<form>
 					<c:forEach var="color" items="${listColor}" varStatus="status">
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" class="custom-control-input"
-								id="color-${status.index}" name="color"> <label
-								class="custom-control-label" for="color-${status.index}">${color[1]}</label>
+								id="color-${status.index}" name="color" value="${color[1]}"> 
+								<label class="custom-control-label" for="color-${status.index}">${color[1]}</label>
 						</div>
 					</c:forEach>
-				</form>
 			</div>
 			<div class="d-flex">
 				<p class="text-dark font-weight-medium mb-0 mr-3">Chất Liệu:</p>
@@ -83,22 +79,21 @@
 			<div class="d-flex align-items-center mb-4 pt-2">
 				<div class="input-group quantity mr-3" style="width: 130px;">
 					<div class="input-group-btn">
-						<button class="btn btn-primary btn-minus">
+						<button type="button" class="btn btn-primary btn-minus" id="btnMinus">
 							<i class="fa fa-minus"></i>
 						</button>
 					</div>
-					<input type="text" class="form-control bg-secondary text-center"
-						value="1">
+					<input type="text" id="qty" class="form-control bg-secondary text-center"
+						value="1" name="quality">
 					<div class="input-group-btn">
-						<button class="btn btn-primary btn-plus">
+						<button type="button" class="btn btn-primary btn-plus" id="btnPlus">
 							<i class="fa fa-plus"></i>
 						</button>
 					</div>
 				</div>
-				<button class="btn btn-primary px-3">
-					<a href="/gio-hang"><i class="fa fa-shopping-cart mr-1"></i>
-						Add To Cart</a>
-
+				<button class="btn btn-primary px-3" type="submit">
+					<i class="fa fa-shopping-cart mr-1"></i>
+						Thêm vào giỏ
 				</button>
 			</div>
 			<div class="d-flex pt-2">
@@ -115,6 +110,7 @@
 		</div>
 	</div>
 </div>
+</form>
 <!-- Shop Detail End -->
 
 <!-- category by id product-->
@@ -156,8 +152,75 @@
 				</div>
 			</div>
 		</c:forEach>
-
-
-
 	</div>
 </div>
+<!--Modal  -->
+   <div class="modal fade" id="customAlert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="customAlertLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="customAlertLabel">Thông báo</h5>
+                 </div>
+                <div class="modal-body">
+                    Vui lòng chọn kích cỡ và màu sắc trước khi thêm vào giỏ hàng.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+	function validateForm() {
+		// Get all radio buttons for size and color
+		const sizes = document.getElementsByName('size');
+		const colors = document.getElementsByName('color');
+
+		// Check if any size is selected
+		let sizeSelected = false;
+		for (let size of sizes) {
+			if (size.checked) {
+				sizeSelected = true;
+				break;
+			}
+		}
+
+		// Check if any color is selected
+		let colorSelected = false;
+		for (let color of colors) {
+			if (color.checked) {
+				colorSelected = true;
+				break;
+			}
+		}
+
+		// Show custom alert if size or color is not selected
+        if (!sizeSelected || !colorSelected) {
+            var myModal = new bootstrap.Modal(document.getElementById('customAlert'));
+            myModal.show();
+            return false;
+        }
+
+		// Allow form submission if both size and color are selected
+		return true;
+	}
+
+	document.getElementById('btnMinus').addEventListener('click', function() {
+    var quantityInput = document.getElementById('qty');
+    var currentValue = parseInt(quantityInput.value);
+    if (currentValue > 1) {
+        quantityInput.value = currentValue - 1;
+        document.getElementById('qty').value = quantityInput.value; // Update hidden input
+    }
+});
+
+document.getElementById('btnPlus').addEventListener('click', function() {
+    var quantityInput = document.getElementById('qty');
+    var currentValue = parseInt(quantityInput.value);
+    if (currentValue<10) {
+    	quantityInput.value = currentValue + 1;
+        document.getElementById('qty').value = quantityInput.value; // Update hidden input
+    		
+	}
+    });
+</script>

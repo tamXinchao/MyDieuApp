@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
 import asm.java5Nhom6.entity.Cart;
+import asm.java5Nhom6.entity.Product_Size_Color;
 
 public class CartDAOImp implements CartDAO{
 	List<Cart> listCart = new ArrayList<Cart>();
@@ -210,6 +211,14 @@ public class CartDAOImp implements CartDAO{
 	public double getAmount(Integer Id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+
+	@Override
+	public Product_Size_Color PSC(Integer productId, String color, String size) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
