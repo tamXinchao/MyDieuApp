@@ -17,25 +17,5 @@ public class AdminController {
 		model.addAttribute("view", "chart.jsp");
 		return "admin/layout";
 	}
-	@RequestMapping("/admin/tableEditProduct")
-	public String table(Model model) {
-		model.addAttribute("view", "tableEditProduct.jsp");
-		return "admin/layout";
-	}
-	@RequestMapping("/admin/form-add-product")
-	public String addProduct(Model model) {
-		model.addAttribute("view", "form-add-product.jsp");
-		return "admin/layout";
-	}
-	@RequestMapping("/admin/form-admin-checkout")
-	public String checkout(Model model) {
-		model.addAttribute("view", "admin-product-checkout.jsp");
-		return "admin/layout";
-	}
-	@RequestMapping("/admin/form-admin-order-detail")
-	public String orderDetail(Model model) {
-		model.addAttribute("view", "admin-order-detail.jsp");
-		return "admin/layout";
-	}
-	
+
 }
