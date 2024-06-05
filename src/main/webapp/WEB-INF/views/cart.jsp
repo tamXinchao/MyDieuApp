@@ -1,6 +1,7 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+
 <title>Giỏ hàng</title>
 <style>
 	.link-detail:hover{
@@ -30,6 +31,7 @@
 	<!-- Cart Start -->
 	<div class="container-fluid pt-5">
 		<div class="row px-xl-5">
+
 			<div class="col-lg-9 table-responsive mb-3">
 				<table class="table table-bordered text-center mb-0">
 					<thead class="bg-secondary text-dark">
@@ -37,6 +39,7 @@
 							<th>	
 								<input type="checkbox" > Tất cả
 							</th>
+
 							<th>Sản phẩm</th>
 							<th>Giá</th>
 							<th>Số lượng</th>
@@ -48,6 +51,7 @@
 					<c:forEach var="items" items="${listProInCart}">
 						<tr>
 							<td class="align-middle">
+
 								 <input type="checkbox" class="btn btn-sm btn-primary" value="${items.id}" checked>
 							</td>
 							
@@ -80,6 +84,7 @@
 									</div>
 								</div>
 							</td>
+
 							
 							<td class="align-middle">
 								<fmt:formatNumber value="${items.productSizeColor.price*items.quality}" type="number"/> đ
@@ -94,6 +99,7 @@
 					</tbody>
 				</table>
 			</div>
+
 			<div class="col-lg-3">
 				<form class="mb-5" action="">
 					<div class="input-group">
@@ -120,11 +126,13 @@
 						</div>
 						<div class="d-flex justify-content-between">
 							<h6 class="font-weight-medium">Phí vận chuyển</h6>
+
 							<h6 class="font-weight-medium">$10</h6>
 						</div>
 					</div>
 					<div class="card-footer border-secondary bg-transparent">
 						<div class="d-flex justify-content-between mt-2">
+
 							<h5 class="font-weight-bold">Tổng</h5>
 							<h5 class="font-weight-bold">$160</h5>
 						</div>
@@ -135,8 +143,5 @@
 			</div>
 		</div>
 	</div>
-	
-<!-- 
 
--->
 	<!-- Cart End -->

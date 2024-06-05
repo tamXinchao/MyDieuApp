@@ -34,6 +34,8 @@ public class ProductService {
 		Page<Object[]> page = productSizeColor.findProductsByCategoryId(categoryId, pageable);
 		return page.getContent();
 	}
+	
+
 
 	public List<Object[]> getManuById(Integer productId) {
 		return manuDAO.findManufacturerById(productId);

@@ -4,14 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 <!DOCTYPE html>
-
 <!-- Topbar Start -->
 <div class="container-fluid">
 	<div class="row align-items-center py-3 px-xl-5">
 		<div class="col-lg-3 d-none d-lg-block">
 			<a href="/trang-chu" class="text-decoration-none">
 				<h1 class="m-0 display-5 font-weight-semi-bold">
-					<span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper
+					<span class="text-primary font-weight-bold border px-3 mr-1">M</span>Mỹ Diệu
 				</h1>
 			</a>
 		</div>

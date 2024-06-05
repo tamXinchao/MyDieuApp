@@ -1,4 +1,6 @@
+
 package asm.java5Nhom6.controller;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,4 +19,5 @@ public class AdminController {
 		model.addAttribute("view", "chart.jsp");
 		return "admin/layout";
 	}
+
 }

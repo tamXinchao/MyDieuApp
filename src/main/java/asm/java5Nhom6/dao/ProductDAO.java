@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import asm.java5Nhom6.entity.Product;
+
 import asm.java5Nhom6.model.dto.dtoProduct;
 @Repository
 public interface ProductDAO extends JpaRepository<Product, Integer> {

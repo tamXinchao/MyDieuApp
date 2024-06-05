@@ -15,6 +15,7 @@ import asm.java5Nhom6.entity.Cart;
 
 public class CartDAOImp implements CartDAO{
 	List<Cart> listCart = new ArrayList<Cart>();
+
 	
 	@Override
 	public List<Cart> findByUserId(Integer userId, Sort sort) {
@@ -22,7 +23,6 @@ public class CartDAOImp implements CartDAO{
 		return null;
 	}
 
-	
 
 	@Override
 	public void flush() {
@@ -205,13 +205,11 @@ public class CartDAOImp implements CartDAO{
 	}
 
 
-
 	@Override
 	public double getAmount(Integer Id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 
 
 }
