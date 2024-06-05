@@ -16,8 +16,7 @@
 				<h6 class="text-truncate mb-3">${dsSp[1]}</h6>
 				<div class="d-flex justify-content-center">
 					<h6>
-						<fmt:formatNumber value="${dsSp[2]}" type="currency"
-							currencyCode="VND" />
+						<fmt:formatNumber value="${dsSp[2]}"/>
 					</h6>
 				</div>
 			</div>

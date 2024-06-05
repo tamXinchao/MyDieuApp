@@ -378,9 +378,6 @@
 			</div>
 		</div>
 	</div>
-	<c:forEach var="p" items="${products}">
-	${p.name}
-	</c:forEach>
 	<!-- vendor end -->
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

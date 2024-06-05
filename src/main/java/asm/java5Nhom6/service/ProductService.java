@@ -67,7 +67,7 @@ public class ProductService {
 	}
 
 	public Page<Object[]> getTop10Product() {
-		Pageable pageable = PageRequest.of(0, 10);
+		Pageable pageable = PageRequest.of(0, 12);
 		return productSizeColor.findTop10CheapestProducts(pageable);
 	}
 
