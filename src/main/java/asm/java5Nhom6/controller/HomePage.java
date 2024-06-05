@@ -44,14 +44,6 @@ import asm.java5Nhom6.service.SessionService;
 @Controller
 public class HomePage {
 	@Autowired
-
-	CategoryRepostirori categoryRepo;
-	@Autowired
-	ProductRepostirori productRepo;
-	@Autowired
-	ProductService productService;
-
-
 	CategoryDAO categoryRepo;
 	@Autowired
 	ProductDAO productRepo;
@@ -60,7 +52,6 @@ public class HomePage {
 
 	@Autowired
 	SessionKeyService session;
-
 
 	@Autowired
 	CategoryDAO cateDAO;
@@ -85,48 +76,10 @@ public class HomePage {
 		model.addAttribute("top10Product", top10Product);
 		model.addAttribute("view", "index.jsp");
 
+		
+
 		List<Category> categories = categoryRepo.findAll();
 		model.addAttribute("categories", categories);
-
-
-//    List<Category> categories =categoryRepo.findAll();
-//		model.addAttribute("categories",categories);
-//		List<Product> products = productRepo.findAll();
-//		model.addAttribute("products",products);
-//		List<dtoCategory> countProductOfCate = categoryRepo.countProductofCate();
-//		model.addAttribute("countProductOfCate",countProductOfCate);
-		return "index";
-	}
-
-	@Autowired
-	CartDAO cartdao;
-
-	@RequestMapping("/gio-hang")
-	public String Cart(Model model) {
-		List<Cart> listProInCart = cartdao.findByUserId(3);
-		model.addAttribute("listProInCart", listProInCart);
-		model.addAttribute("view", "cart.jsp");
-		return "layout";
-	}
-
-	@RequestMapping("/gio-hang/update/{id}/{pre}")
-	public String update(@PathVariable("id") Integer id, @PathVariable("pre") String pre) {
-		cartdao.update(id, pre);
-		return "redirect:/gio-hang";
-	}
-
-	@RequestMapping("/shop")
-	public String shop(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
-		int pageSize = 6;
-		Page<Object[]> dsSpPage = productService.getProductPage(page - 1, pageSize);
-		List<Object[]> dsSp = dsSpPage.getContent();
-
-		model.addAttribute("dsSp", dsSp);
-		model.addAttribute("currentPage", page);
-		model.addAttribute("totalPages", dsSpPage.getTotalPages());
-		List<Category> categories =categoryRepo.findAll();
-		model.addAttribute("categories",categories);
-
 		List<Product> products = productRepo.findAll();
 		model.addAttribute("products", products);
 		List<dtoCategory> countProductOfCate = categoryRepo.countProductofCate();
@@ -134,11 +87,41 @@ public class HomePage {
 		return "index";
 	}
 
+	@Autowired
+	CartDAO cartdao;
+
+//	@RequestMapping("/gio-hang")
+//	public String Cart(Model model) {
+//		List<Cart> listProInCart = cartdao.findByUserId(3);
+//		model.addAttribute("listProInCart", listProInCart);
+//		model.addAttribute("view", "cart.jsp");
+//		return "layout";
+//	}
+//
+//	@RequestMapping("/gio-hang/update/{id}/{pre}")
+//	public String update(@PathVariable("id") Integer id, @PathVariable("pre") String pre) {
+//		cartdao.update(id, pre);
+//		return "redirect:/gio-hang";
+//	}
+
 	@RequestMapping("/shop")
-	public String shop(Model model) {
+	public String shop(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+		int pageSize = 6;
+		Page<Object[]> dsSpPage = productService.getProductPage(page - 1, pageSize);
+		List<Object[]> dsSp = dsSpPage.getContent();
+
+		List<Category> categories = categoryRepo.findAll();
+		model.addAttribute("categories", categories);
+
+		model.addAttribute("dsSp", dsSp);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", dsSpPage.getTotalPages());
 		model.addAttribute("view", "shop.jsp");
+		model.addAttribute("display", "more-product.jsp");
 		return "layout";
 	}
+
+
 
 	@GetMapping("/shop/danh-sach-san-pham")
 	public String danhSachSP(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
@@ -193,7 +176,6 @@ public class HomePage {
 		model.addAttribute("image", listImage);
 		model.addAttribute("detail", listDetail);
 		model.addAttribute("view", "detail.jsp");
-
 		return "layout";
 	}
 
@@ -217,7 +199,7 @@ public class HomePage {
 		model.addAttribute("products", products);
 		List<dtoCategory> countProductOfCate = categoryRepo.countProductOfCate(categories);
 		model.addAttribute("countProductOfCate", countProductOfCate);
-		countProductOfCate.forEach(b->{
+		countProductOfCate.forEach(b -> {
 			System.out.println(b.getCountProduct());
 		});
 		return "productList";
