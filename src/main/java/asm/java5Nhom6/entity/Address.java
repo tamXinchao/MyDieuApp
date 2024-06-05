@@ -35,5 +35,4 @@ public class Address {
 	@Column(name = "Provincial", nullable = false)
 	String provincial;
 	
-	
 }

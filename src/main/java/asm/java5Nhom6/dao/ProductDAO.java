@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import asm.java5Nhom6.entity.Product;
+
 import asm.java5Nhom6.model.dto.dtoProduct;
 @Repository
 public interface ProductDAO extends JpaRepository<Product, Integer> {

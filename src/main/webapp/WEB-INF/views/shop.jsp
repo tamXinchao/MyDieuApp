@@ -6,7 +6,7 @@
 <div class="container-fluid bg-secondary mb-5">
 	<div
 		class="d-flex flex-column align-items-center justify-content-center"
-		style="min-height: 300px">
+		style="min-height: 150px">
 		<h1 class="font-weight-semi-bold text-uppercase mb-3">Our Shop</h1>
 		<div class="d-inline-flex">
 			<p class="m-0">
@@ -173,7 +173,6 @@
 								class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
 								<a href="/product/detail/${dsSp[3]}/${dsSp[4]}"><img
 									class="img-fluid w-100" src="/user/img/${dsSp[0]}" alt=""></a>
-
 							</div>
 							<div
 								class="card-body border-left border-right text-center p-0 pt-4 pb-3">

@@ -32,10 +32,4 @@ public class Address_User {
     @JoinColumn(name = "address_id")
     private Address address;
     
-    
-    
-    
-    
-    
-    
 }

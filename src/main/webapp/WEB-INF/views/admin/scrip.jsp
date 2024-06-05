@@ -29,3 +29,4 @@
 
 <!-- Main JS-->
 <script src="/adminTemplate/js/main.js"></script>
+<jsp:include page="/WEB-INF/views/admin/common/js_admin.jsp"></jsp:include>

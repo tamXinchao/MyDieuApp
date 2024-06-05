@@ -2,7 +2,9 @@ package asm.java5Nhom6.dao;
 
 import java.util.List;
 
+
 import org.springframework.data.domain.Sort;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -22,5 +24,5 @@ public interface CartDAO extends JpaRepository<Cart, Integer> {
 			+ "from Cart c join Product_Size_Color psc on c.Pro_Size_Color_Id = psc.Pro_Size_Color_Id\r\n"
 			+ "where c.Pro_Size_Color_Id=?1", nativeQuery = true)
 	double getAmount(Integer Id);
-	
+
 }
