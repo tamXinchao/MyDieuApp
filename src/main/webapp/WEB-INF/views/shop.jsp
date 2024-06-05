@@ -1,4 +1,4 @@
-
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 
@@ -26,22 +26,20 @@
 
 			<!-- Price Start -->
 			<div class="border-bottom mb-4 pb-4">
-				<h5 class="font-weight-semi-bold mb-4">Product</h5>
+				<h5 class="font-weight-semi-bold mb-4">Sản Phẩm</h5>
 				<form>
-					<c:forEach var="c" items="${categories}">
+					<c:forEach var="category" items="${categories}">
 						<div
-							class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+							class="custom-control custom-checkbox d-flex align-items-center mb-3">
 							<input type="checkbox" class="custom-control-input"
-								id="category-${c.cateId}" name="category-selection"> <label
-								class="custom-control-label" for="category-${c.cateId}">
-								<a href="/shop/category/${c.cateId}">${c.name}</a>
-							</label> <span class="badge border font-weight-normal">150</span>
+								id="category-${category.cateId}" name="category-selection"
+								value="${category.cateId}"> <label
+								class="custom-control-label" for="category-${category.cateId}">${category.name}</label>
 						</div>
 					</c:forEach>
 				</form>
 			</div>
 			<!-- Price End -->
-
 			<!-- Color Start -->
 			<div class="border-bottom mb-4 pb-4">
 				<h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
@@ -140,14 +138,14 @@
 			<div class="row pb-3">
 				<div class="col-12 pb-1">
 					<div class="d-flex align-items-center justify-content-between mb-4">
-						<form action="">
+						<form action="/shop/product/search" method="post">
 							<div class="input-group">
-								<input type="text" class="form-control"
-									placeholder="Search by name">
+								<input type="text" name="keywords" value="${keywords}"
+									class="form-control" placeholder="Search by name">
 								<div class="input-group-append">
-									<span class="input-group-text bg-transparent text-primary">
+									<button class="input-group-text bg-transparent text-primary">
 										<i class="fa fa-search"></i>
-									</span>
+									</button>
 								</div>
 							</div>
 						</form>
@@ -165,8 +163,7 @@
 					</div>
 				</div>
 
-				<c:forEach var="dsSp" items="${dsSp }">
-					<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+
 
 						<div class="card product-item border-0 mb-4">
 							<div
@@ -196,35 +193,13 @@
 					</div>
 				</c:forEach>
 
-				<c:forEach var="p" items="${products}">
-					<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-						<div class="card product-item border-0 mb-4">
-							<div
-								class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-								<img class="img-fluid w-100" src="/user/img/${p.image}" alt="">
-							</div>
-							<div
-								class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-								<h6 class="text-truncate mb-3">${p.productName}</h6>
-								<div class="d-flex justify-content-center">
-									<h6>$ ${p.price}</h6>
-									<h6 class="text-muted ml-2">
-										<del>$123.00</del>
 
-									</h6>
-								</div>
-							</div>
-							<div
-								class="card-footer d-flex justify-content-between bg-light border">
+				<div id="product-list" class="col-lg-12 col-md-12 col-sm-12 row">
+					<jsp:include page="${display}"></jsp:include>
+				</div>
 
-								<a href="" class="btn btn-sm text-dark p-0"><i
-									class="fas fa-eye text-primary mr-1"></i>View Detail</a> <a href=""
-									class="btn btn-sm text-dark p-0"><i
-									class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
+
+
 				<div class="col-12 pb-1">
 					<nav aria-label="Page navigation">
 						<ul class="pagination justify-content-center mb-3">
@@ -256,3 +231,31 @@
 	</div>
 </div>
 <!-- Shop End -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('input[name="category-selection"]').change(filterProducts);
+	});
+
+	function filterProducts() {
+		var selectedCategories = [];
+		$('input[name="category-selection"]:checked').each(function() {
+			selectedCategories.push($(this).val());
+		});
+
+		$.ajax({
+			type : 'POST',
+			contentType : 'application/json',
+			url : '${pageContext.request.contextPath}/filterProducts',
+			data : JSON.stringify(selectedCategories),
+			success : function(data) {
+				console.log(data); // Log the response data
+				$('#product-list').html(data);
+			},
+			error : function(xhr, status, error) {
+				console.error("Error occurred: " + status + " " + error);
+			}
+		});
+	}
+</script>
