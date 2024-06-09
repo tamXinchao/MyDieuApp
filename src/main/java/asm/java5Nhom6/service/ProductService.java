@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import asm.java5Nhom6.entity.*;
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 import asm.java5Nhom6.dao.ManufacturesDAO;
 
 import asm.java5Nhom6.dao.ProductDAO;
@@ -32,8 +33,10 @@ public class ProductService {
 		Page<Object[]> page = productSizeColor.findProductsByCategoryId(categoryId, pageable);
 		return page.getContent();
 	}
-	
 
+	public List<Object[]> findPriceByProductId(Integer productId) {
+		return productSizeColor.findPriceByProductId(productId);
+	}
 
 	public List<Object[]> getManuById(Integer productId) {
 		return manuDAO.findManufacturerById(productId);
@@ -65,7 +68,7 @@ public class ProductService {
 	}
 
 	public Page<Object[]> getTop10Product() {
-		Pageable pageable = PageRequest.of(0, 10);
+		Pageable pageable = PageRequest.of(0, 12);
 		return productSizeColor.findTop10CheapestProducts(pageable);
 	}
 
@@ -74,4 +77,12 @@ public class ProductService {
 		return productSizeColor.findDetailProductByProductId(productId);
 	}
 
+//admin product
+	public List<Object[]> findImg(Integer productId) {
+		return productSizeColor.findImageById(productId);
+	}
+
+//	public List<Object[]> findProductAdmin(Integer productId) {
+//		return productSizeColor.findProductAdmin(productId);
+//	}
 }

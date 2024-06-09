@@ -33,7 +33,7 @@ public class Product_Size_Color {
 	private int productSizeColorId;
 
 	@Column(name = "status", nullable = false)
-	private String status;
+	private boolean status;
 
 	@Column(name = "quality", nullable = false)
 	private int quality;

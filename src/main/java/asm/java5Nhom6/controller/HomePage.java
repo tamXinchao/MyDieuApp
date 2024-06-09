@@ -51,7 +51,7 @@ public class HomePage {
 		Page<Object[]> top10ProductPage = productService.getTop10Product();
 		List<Object[]> top10Product = top10ProductPage.getContent();
 		model.addAttribute("top10Product", top10Product);
-		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
+//		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("view", "index.jsp");
 
 		return "index";
@@ -61,7 +61,7 @@ public class HomePage {
 	public String trangChu(Model model, @ModelAttribute("product") Product product) {
 		Page<Object[]> top10ProductPage = productService.getTop10Product();
 		List<Object[]> top10Product = top10ProductPage.getContent();
-		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
+//		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("top10Product", top10Product);
 		model.addAttribute("view", "index.jsp");
 //    List<Category> categories =categoryRepo.findAll();

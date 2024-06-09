@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,11 +19,12 @@ import jakarta.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "colors")
+@Component
 public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "color_id")
-    private Long colorId;
+    private int colorId;
 
     @Column(name = "name", nullable = false)
     private String name;

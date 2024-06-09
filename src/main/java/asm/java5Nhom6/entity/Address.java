@@ -26,7 +26,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer addressId;
 
-	@Column(name = "PhoneNumber", nullable = false)
+	@Column(name = "phone_number", nullable = false)
 	String phoneNumber;
 	@Column(name = "Email", nullable = false)
 	String email;

@@ -17,7 +17,7 @@
 	<nav class="navbar-mobile">
 		<div class="container-fluid">
 			<ul class="navbar-mobile__list list-unstyled">
-				<li><a href="/trang-chu"> <i class="fas fa-chart-bar"></i>Home
+				<li><a href="/admin/trang-chu"> <i class="fas fa-chart-bar"></i>Home
 				</a></li>
 				<li><a href="/admin/chart"> <i class="fas fa-chart-bar"></i>Biểu
 						Đồ
@@ -71,9 +71,9 @@
 	<div class="menu-sidebar__content js-scrollbar1">
 		<nav class="navbar-sidebar">
 			<ul class="list-unstyled navbar__list">
-				<li class=" has-sub"><a class="js-arrow"
-					href="/admin/trang-chu"> <i class="fas fa-tachometer-alt"></i>Home
-				</a></li>
+				<li class=" has-sub">
+					<a 	href="/admin/trang-chu"> <i class="fas fa-tachometer-alt"></i>Home</a>
+				</li>
 				<li class="has-sub"><a class="js-arrow" href="#"> <i
 						class="fas fa-table"></i>Quản Lý
 				</a>

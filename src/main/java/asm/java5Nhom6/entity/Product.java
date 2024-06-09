@@ -3,6 +3,9 @@ package asm.java5Nhom6.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.annotations.Comment;
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -24,6 +27,7 @@ import jakarta.persistence.TemporalType;
 @NoArgsConstructor
 @Entity
 @Table(name = "Products")
+@Component
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

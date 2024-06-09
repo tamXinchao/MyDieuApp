@@ -2,6 +2,9 @@ package asm.java5Nhom6.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,15 +17,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
+
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "Categories")
-
+@Component
 public class Category {
-	  @Id
+	 @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cate_id")
     private int cateId;
@@ -30,4 +34,5 @@ public class Category {
     private String image;
 	@OneToMany(mappedBy = "category")
 	List<Product> products;
+
 }
