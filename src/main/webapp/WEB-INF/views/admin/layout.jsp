@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +6,15 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="au theme template">
-<meta name="author" content="Hau Nguyen">
+<meta name="author">
 <meta name="keywords" content="au theme template">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<meta name="keywords"
+	content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+<meta name="author" content="Codedthemes" />
 
 <!-- Title Page-->
 <title>Home Pages Admin</title>
@@ -16,7 +22,8 @@
 <!-- Fontfaces CSS-->
 <link href="/adminTemplate/css/font-face.css" rel="stylesheet"
 	media="all">
-<link href="vendor/font-awesome-4.7/css/font-awesome.min.css"
+<link
+	href="/adminTemplate/vendor/font-awesome-4.7/css/font-awesome.min.css"
 	rel="stylesheet" media="all">
 <link
 	href="/adminTemplate/vendor/font-awesome-5/css/fontawesome-all.min.css"
@@ -49,9 +56,13 @@
 
 <!-- Main CSS-->
 <link href="/adminTemplate/css/theme.css" rel="stylesheet" media="all">
+<jsp:include page="/WEB-INF/views/admin/common/css_admin.jsp"></jsp:include>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/admin/components/loader.jsp"></jsp:include>
 	<jsp:include page="slideBar.jsp"></jsp:include>
+	<jsp:include page="header.jsp"></jsp:include>
+
 	<jsp:include page="${view }"></jsp:include>
 	<jsp:include page="scrip.jsp"></jsp:include>
 </body>

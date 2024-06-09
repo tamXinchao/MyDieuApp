@@ -34,6 +34,8 @@ public class ProductService {
 		Page<Object[]> page = productSizeColor.findProductsByCategoryId(categoryId, pageable);
 		return page.getContent();
 	}
+	
+
 
 	public List<Object[]> getManuById(Integer productId) {
 		return manuDAO.findManufacturerById(productId);
@@ -65,7 +67,7 @@ public class ProductService {
 	}
 
 	public Page<Object[]> getTop10Product() {
-		Pageable pageable = PageRequest.of(0, 10);
+		Pageable pageable = PageRequest.of(0, 12);
 		return productSizeColor.findTop10CheapestProducts(pageable);
 	}
 

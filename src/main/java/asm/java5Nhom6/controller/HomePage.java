@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,20 +26,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import asm.java5Nhom6.dao.CategoryDAO;
 
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import asm.java5Nhom6.model.dto.dtoCategory;
+
 import asm.java5Nhom6.model.dto.dtoProduct;
 import asm.java5Nhom6.dao.CartDAO;
 import asm.java5Nhom6.dao.CartDAOImp;
 import asm.java5Nhom6.dao.CategoryDAO;
+
 import asm.java5Nhom6.dao.ProductDAO;
 import asm.java5Nhom6.dao.Product_ImageDAO;
 import asm.java5Nhom6.dao.Product_Size_ColorDAO;
 import asm.java5Nhom6.entity.*;
 
 import asm.java5Nhom6.service.ProductService;
-import asm.java5Nhom6.service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
+
+import asm.java5Nhom6.service.SessionKeyService;
+import asm.java5Nhom6.service.SessionService;
+
 
 @Controller
 public class HomePage {
@@ -47,6 +55,10 @@ public class HomePage {
 	ProductDAO productRepo;
 	@Autowired
 	ProductService productService;
+
+
+	@Autowired
+	SessionKeyService session;
 
 	@Autowired
 	CategoryDAO cateDAO;
@@ -66,7 +78,9 @@ public class HomePage {
 		model.addAttribute("top10Product", top10Product);
 		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("view", "index.jsp");
+
 		getCount(model);
+
 		return "index";
 	}
 
@@ -80,35 +94,72 @@ public class HomePage {
 		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("top10Product", top10Product);
 		model.addAttribute("view", "index.jsp");
+
 		List<Category> categories = categoryRepo.findAll();
 		model.addAttribute("categories", categories);
 		List<Product> products = productRepo.findAll();
 		model.addAttribute("products", products);
 		List<dtoCategory> countProductOfCate = categoryRepo.countProductofCate();
 		model.addAttribute("countProductOfCate", countProductOfCate);
+
 		getCount(model);
+
 		return "index";
 	}
 
+	@Autowired
+	CartDAO cartdao;
+
+//	@RequestMapping("/gio-hang")
+//	public String Cart(Model model) {
+//		List<Cart> listProInCart = cartdao.findByUserId(3);
+//		model.addAttribute("listProInCart", listProInCart);
+//		model.addAttribute("view", "cart.jsp");
+//		return "layout";
+//	}
+//
+//	@RequestMapping("/gio-hang/update/{id}/{pre}")
+//	public String update(@PathVariable("id") Integer id, @PathVariable("pre") String pre) {
+//		cartdao.update(id, pre);
+//		return "redirect:/gio-hang";
+//	}
+
 	@RequestMapping("/shop")
-	public String shop(Model model) {
-		getCount(model);
+	public String shop(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+		int pageSize = 6;
+		Page<Object[]> dsSpPage = productService.getProductPage(page - 1, pageSize);
+		List<Object[]> dsSp = dsSpPage.getContent();
+    getCount(model);
+		List<Category> categories = categoryRepo.findAll();
+		model.addAttribute("categories", categories);
+
+		model.addAttribute("dsSp", dsSp);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", dsSpPage.getTotalPages());
+  
 		model.addAttribute("view", "shop.jsp");
+		model.addAttribute("display", "more-product.jsp");
 		return "layout";
 	}
+
+
 
 	@GetMapping("/shop/danh-sach-san-pham")
 	public String danhSachSP(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
 		int pageSize = 6;
 		Page<Object[]> dsSpPage = productService.getProductPage(page - 1, pageSize);
 		List<Object[]> dsSp = dsSpPage.getContent();
+
 		List<Category> categories = categoryRepo.findAll();
 		model.addAttribute("categories", categories);
+
 		model.addAttribute("dsSp", dsSp);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", dsSpPage.getTotalPages());
-		getCount(model);
-		return "forward:/shop";
+		model.addAttribute("view", "shop.jsp");
+		model.addAttribute("display", "more-product.jsp");
+		return "layout";
+
 	}
 
 	// Mỵ threm
@@ -157,6 +208,7 @@ public class HomePage {
 		String contextPath = req.getRequestURI();
 		session.setAttribute("contextPath", contextPath);
 		getCount(model);
+
 		return "layout";
 	}
 
@@ -170,6 +222,41 @@ public class HomePage {
 		System.out.println("Products: " + products);
 		model.addAttribute("products", products);
 		model.addAttribute("view", "shop.jsp");
+
+		model.addAttribute("display", "productList.jsp");
 		return "layout";
 	}
+
+	@PostMapping("/filterProducts")
+	public String filterProducts(@RequestBody List<Integer> categories, Model model) {
+		List<dtoProduct> products = productRepo.findByCategoryIds(categories);
+		model.addAttribute("products", products);
+		List<dtoCategory> countProductOfCate = categoryRepo.countProductOfCate(categories);
+		model.addAttribute("countProductOfCate", countProductOfCate);
+		countProductOfCate.forEach(b -> {
+			System.out.println(b.getCountProduct());
+		});
+		return "productList";
+	}
+
+	@RequestMapping("/shop/product/search")
+	public String searchProduct(Model model, @RequestParam("keywords") Optional<String> kw) {
+		String keyword = kw.orElse(session.get("keywords", ""));
+		session.set("keywords", keyword);
+		List<Category> categories = categoryRepo.findAll();
+		model.addAttribute("categories", categories);
+		List<dtoProduct> products = productRepo.findByProductName("%" + keyword + "%");
+
+		// In danh sách sản phẩm ra log để kiểm tra
+		System.out.println("Products: " + products);
+		if (products.isEmpty()) {
+			System.out.println("No products found.");
+		}
+
+		model.addAttribute("products", products);
+		model.addAttribute("view", "shop.jsp");
+		model.addAttribute("display", "sortList.jsp");
+		return "layout";
+	}
+
 }

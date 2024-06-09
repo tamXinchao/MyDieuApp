@@ -4,14 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 <!DOCTYPE html>
-
 <!-- Topbar Start -->
 <div class="container-fluid">
 	<div class="row align-items-center py-3 px-xl-5">
 		<div class="col-lg-3 d-none d-lg-block">
 			<a href="/trang-chu" class="text-decoration-none">
 				<h1 class="m-0 display-5 font-weight-semi-bold">
-					<span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper
+					<span class="text-primary font-weight-bold border px-3 mr-1">M</span>Mỹ Diệu
 				</h1>
 			</a>
 		</div>
@@ -43,26 +42,7 @@
 <!-- Navbar Start -->
 <div class="container-fluid">
 	<div class="row border-top px-xl-5">
-		<div class="col-lg-3 d-none d-lg-block">
-			<a
-				class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
-				data-toggle="collapse" href="#navbar-vertical"
-				style="height: 65px; margin-top: -1px; padding: 0 30px;">
-				<h6 class="m-0">Categories</h6> <i
-				class="fa fa-angle-down text-dark"></i>
-			</a>
-			<nav
-				class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light"
-				id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
-				<div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-					
-					<c:forEach var="c" items="${categories}">	
-						<a href="/shop/category/${c.cateId}" class="nav-item nav-link">${c.name}</a>
-						</c:forEach>
-				</div>
-			</nav>
-		</div>
-		<div class="col-lg-9">
+		<div class="col-lg-12">
 			<nav
 				class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
 				<a href="" class="text-decoration-none d-block d-lg-none">

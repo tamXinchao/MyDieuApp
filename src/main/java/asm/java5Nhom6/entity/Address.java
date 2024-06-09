@@ -37,9 +37,8 @@ public class Address {
 	String address;
 	@Column(name = "Provincial", nullable = false)
 	String provincial;
-	
+	//Mỵ thêm
 	@OneToMany(mappedBy = "address")
 	private List<Order> orders;
-
 
 }

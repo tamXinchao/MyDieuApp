@@ -22,6 +22,7 @@ import lombok.Setter;
 @Table(name = "Categories")
 
 
+
 public class Category {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +30,7 @@ public class Category {
     private int cateId;
     private String name;
     private String image;
-
     @OneToMany(mappedBy = "category")
     private List<Product> products;
+
 }

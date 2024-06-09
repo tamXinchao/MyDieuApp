@@ -55,7 +55,11 @@ public class Product_Size_Color {
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 
+//Mỵ thêm
 	@OneToMany(mappedBy = "Product_Size_Color")
     private List<Order_Detail> orderDetail;;
 	
+	@OneToMany(mappedBy = "productSizeColor")
+    private List<Cart> cart;
+
 }

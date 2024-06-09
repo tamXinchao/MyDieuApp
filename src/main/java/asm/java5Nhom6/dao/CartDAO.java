@@ -2,7 +2,9 @@ package asm.java5Nhom6.dao;
 
 import java.util.List;
 
+
 import org.springframework.data.domain.Sort;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -24,7 +26,7 @@ public interface CartDAO extends JpaRepository<Cart, Integer> {
 			+ "from Cart c join Product_Size_Color psc on c.Pro_Size_Color_Id = psc.Pro_Size_Color_Id\r\n"
 			+ "where c.Pro_Size_Color_Id=?1", nativeQuery = true)
 	double getAmount(Integer Id);
-	
+
 //	@Query(value = "select psc.* from Product_Size_Color psc \r\n"
 //			+ "join Sizes s on psc.Size_Id = s.Size_Id\r\n"
 //			+ "join Colors c on psc.Color_Id = c.Color_Id\r\n"
@@ -36,4 +38,5 @@ public interface CartDAO extends JpaRepository<Cart, Integer> {
 	           "WHERE c.name LIKE ?2 AND s.name LIKE ?3 AND psc.product.id = ?1")
 	   
 	Product_Size_Color PSC(Integer productId, String color, String size);
+
 }
