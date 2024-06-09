@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
@@ -14,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Getter
@@ -52,5 +55,7 @@ public class Product_Size_Color {
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 
-
+	@OneToMany(mappedBy = "Product_Size_Color")
+    private List<Order_Detail> orderDetail;;
+	
 }

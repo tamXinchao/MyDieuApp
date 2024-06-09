@@ -1,13 +1,16 @@
 package asm.java5Nhom6.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import asm.java5Nhom6.entity.Address;
 import asm.java5Nhom6.entity.Size;
 import asm.java5Nhom6.entity.Users;
-
+@Repository
 public interface AddressDao extends JpaRepository<Address, Integer> {
 	 @Query("SELECT a.address FROM Address_User a " +
 	           "INNER JOIN a.address b " +
@@ -19,4 +22,8 @@ public interface AddressDao extends JpaRepository<Address, Integer> {
 	           "INNER JOIN a.user c " +
 	           "WHERE c.Username = :Username")
 	    Address findInformationByUserName(@Param("Username") String username);
+	 
+	 @Query(value = "select a.* from address a join Address_User au on a.Address_Id = au.Address_Id\r\n"
+	 		+ "where au.User_Id = ?1", nativeQuery = true)
+	 List<Address> findALLAddressByUserId(Integer userId);
 }

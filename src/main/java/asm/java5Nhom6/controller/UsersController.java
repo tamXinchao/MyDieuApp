@@ -302,7 +302,7 @@ public class UsersController {
 			session.setAttribute("roleSession", user.getRoles().getRole_Id());
 			return "redirect:/trang-chu";
 		} else {
-			model.addAttribute("message", user);
+			model.addAttribute("message", message);
 			model.addAttribute("view", "account/login.jsp"); 
 			return "layout";
 		}

@@ -26,50 +26,51 @@ import asm.java5Nhom6.dao.UsersDao;
 import asm.java5Nhom6.entity.Cart;
 import asm.java5Nhom6.entity.Product_Size_Color;
 import asm.java5Nhom6.entity.Users;
+import asm.java5Nhom6.service.SessionService;
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Controller
 public class CartController {
 
 	@Autowired
 	CartDAO cartdao;
+
 	List<Cart> listProInCart;
 
 	@Autowired
+	SessionService session;
+
+	@Autowired
 	UsersDao userDao;
-//	@RequestMapping("/gio-hang")
-//	public String Cart(Model model, @ResponseBody List<Integer> checkedIds) {
-//		Sort sort = Sort.by(Direction.DESC, "date");
-//		listProInCart = cartdao.findByUserId(3, sort);
-//		
-//		List<Integer> ids = new ArrayList<>();
-//		for (Cart item : listProInCart) {
-//			ids.add(item.getProductSizeColor().getProSizeColorId());
-//		}
-//     
-//
-//		double amount = 0;
-//		for (Integer id : ids) {
-//			amount += cartdao.getAmount(id);
-//		}
-//
-//		System.out.println(amount);
-//		model.addAttribute("listProInCart", listProInCart);
-//		model.addAttribute("Count", listProInCart.size());
-//		model.addAttribute("Amount", amount);
-//		model.addAttribute("view", "cart.jsp");
-//		return "layout";
-//	}
 	
+	Users user;
+	
+	//số lượng sản phẩm trong giỏ hàng
+		public void getCount(Model model) {
+				Sort sort = Sort.by(Direction.DESC, "date");
+				user = userDao.getById(3);
+				List<Cart> listProInCart = cartdao.findByUserId(user.getUser_Id(), sort);
+				model.addAttribute("Count", listProInCart.size());
+		}
+	//Giỏ hàng
 	@RequestMapping("/gio-hang")
 	public String Cart(Model model) {
 		Sort sort = Sort.by(Direction.DESC, "date");
+//		Users user = session.getAttribute("userSession");
+//		Integer userId = user.getUser_Id();
+//		if (user==null) {
+//			listProInCart = new ArrayList<Cart>();
+//		}else {
+//			listProInCart = cartdao.findByUserId(userId, sort);
+//		}
 		listProInCart = cartdao.findByUserId(3, sort);
-		
 		List<Integer> ids = new ArrayList<>();
 		for (Cart item : listProInCart) {
 			ids.add(item.getProductSizeColor().getProSizeColorId());
 		}
-     
 
 		double amount = 0;
 		for (Integer id : ids) {
@@ -84,71 +85,61 @@ public class CartController {
 		return "layout";
 	}
 
-
-	@PostMapping("/checkout")
-	public String checkout(Model model,@RequestParam(value = "selectedItems") List<Integer> selectedItems) {
-		List<Integer> ids = new ArrayList<>();
-	    if (selectedItems != null) {
-	        for (Integer l : selectedItems) {
-	            System.out.println(l);
-	            ids.add(l);
-	        }
-	    }
-
-		double amount = 0;
-		for (Integer id : ids) {
-			Cart item = cartdao.getById(id);
-			amount += cartdao.getAmount(item.getProductSizeColor().getProSizeColorId());
-		}
-
-		System.out.println(amount);
-		model.addAttribute("listProInCart", listProInCart);
-		model.addAttribute("Count", listProInCart.size());
-		model.addAttribute("Amount", amount);
-		model.addAttribute("view", "cart.jsp");
-		return "layout";
-	}
-
+	
 	// Thêm vào giỏ
 	@PostMapping("/cart/add")
-	public String addToCart(@RequestParam(value = "color") String color,
-							@RequestParam("size") String size,
-							@RequestParam("productId") Integer productId,
-							@RequestParam("quality") Integer quality) {
+	public String addToCart(@RequestParam(value = "color") String color, @RequestParam("size") String size,
+			@RequestParam("productId") Integer productId, @RequestParam("quality") Integer quality) {
 //	    System.out.println(color);
 //	    System.out.println(size);
 //	    System.out.println(productId);
 		Product_Size_Color psc = cartdao.PSC(productId, color, size);
-		
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String today = dateFormat.format(new Date());
 		Date date = null;
 		try {
 			date = dateFormat.parse(today);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		Users user = userDao.getById(3);
-		
+
+		user = userDao.getById(3);
+
 		Cart item = new Cart();
 		item.setDate(date);
 		item.setProductSizeColor(psc);
 		item.setQuality(quality);
 		item.setUser(user);
-		cartdao.save(item);
-		return "redirect:/gio-hang";
+
+		boolean itemExists = false;
+
+		for (Cart cart : listProInCart) {
+		    if (cart.getProductSizeColor().equals(item.getProductSizeColor())) {
+		        // Increase quantity by 1
+		        cart.setQuality(cart.getQuality() + 1);
+		        cartdao.save(cart);  
+		        itemExists = true;
+		    }
+		}
+		if (!itemExists) {
+		    // Add new item to the cart
+		    cartdao.save(item);
+		}
+
+		String contextPath = session.getAttribute("contextPath");
+
+        return "redirect:" + contextPath;
 	}
 
 	// thay đổi số lượng trong giỏ
 	@RequestMapping("/gio-hang/update/{id}/{pre}")
 	public String update(@PathVariable("id") Integer id, @PathVariable("pre") String pre) {
 		Cart item = cartdao.getById(id);
-		if (pre.equals("minus") && item.getQuality() > 0) {
+		if (pre.equals("minus") && item.getQuality() > 1) {
 			item.setQuality(item.getQuality() - 1);
 
-		} else if (pre.equals("plus") && item.getQuality() < 100) {
+		} else if (pre.equals("plus") && item.getQuality() < 10) {
 			item.setQuality(item.getQuality() + 1);
 		}
 		cartdao.save(item);
@@ -164,15 +155,5 @@ public class CartController {
 		return "redirect:/gio-hang";
 	}
 
-	// xem chi tiết(size, color) đã thêm vào giỏ
-//	@RequestMapping("product-detail/{id}")
-//	public String detail(@PathVariable("id") Integer id) {
-//		Cart item = cartdao.getById(id);
-//		System.out.println(item.getProductSizeColor().getPrice());
-//		System.out.println(item.getProductSizeColor().getColor());
-//		System.out.println(item.getProductSizeColor().getSize());
-//		
-//		return "redirect:/gio-hang";
-//	}
-
+	
 }

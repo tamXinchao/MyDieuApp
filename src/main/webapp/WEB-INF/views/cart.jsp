@@ -12,14 +12,13 @@
 	<!-- Page Header Start -->
 	<div class="container-fluid bg-secondary mb-3">
 		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px">
-			<h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping
-				Cart</h1>
+			<h1 class="font-weight-semi-bold text-uppercase mb-3">Giỏ hàng</h1>
 			<div class="d-inline-flex">
 				<p class="m-0">
-					<a href="">Home</a>
+					<a href="">Trang chủ</a>
 				</p>
 				<p class="m-0 px-2">-</p>
-				<p class="m-0">Shopping Cart</p>
+				<p class="m-0">Giỏ hàng</p>
 			</div>
 		</div>
 	</div>
@@ -28,7 +27,7 @@
 
 
 	<!-- Cart Start -->
-	<form action="/checkout" method="post" onsubmit="return validateForm()">
+	<form action="/checkout" method="get" onsubmit="return validateForm()">
 		<div class="container-fluid pt-2">
 			<div class="row px-xl-5">
 				<div class="col-lg-9 table-responsive mb-3">
@@ -96,6 +95,7 @@
 					</table>
 				</div>
 				<div class="col-lg-3">
+				<!--  
 					<form class="mb-5" action="">
 						<div class="input-group">
 							<input type="text" class="form-control p-4" placeholder="Mã giảm giá">
@@ -104,7 +104,8 @@
 							</div>
 						</div>
 					</form>
-					<div class="card border-secondary mb-5">
+					-->
+					<div class="card border-secondary mb-5 mt-4">
 						<div class="card-header bg-secondary border-0">
 							<h4 class="font-weight-semi-bold m-0">Tóm tắt</h4>
 						</div>
@@ -121,13 +122,15 @@
 							</div>
 							<div class="d-flex justify-content-between">
 								<h6 class="font-weight-medium">Phí vận chuyển</h6>
-								<h6 class="font-weight-medium">$10</h6>
+								<h6 class="font-weight-medium">0 đ</h6>
 							</div>
 						</div>
 						<div class="card-footer border-secondary bg-transparent">
 							<div class="d-flex justify-content-between mt-2">
 								<h5 class="font-weight-bold">Tổng</h5>
-								<h5 class="font-weight-bold">$160</h5>
+								<h5 class="font-weight-bold">
+									<fmt:formatNumber value="${Amount}" type="number"/> đ
+								</h5>
 							</div>
 							<button class="btn btn-block btn-primary my-3 py-3">Thanh toán</button>
 						</div>
