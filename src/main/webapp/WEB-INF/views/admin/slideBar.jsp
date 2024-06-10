@@ -80,7 +80,7 @@
 					<ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
 						<li><a href="/admin/tableEditProduct"> Product</a></li>
 						<li><a href="/admin/edit-category">Category</a></li>
-						<li><a href="">Thương Hiệu</a></li>
+						<li><a href="/admin/edit-manufature">Thương Hiệu</a></li>
 						<li><a href="">User</a></li>
 
 					</ul></li>

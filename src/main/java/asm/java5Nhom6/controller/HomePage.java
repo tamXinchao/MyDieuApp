@@ -1,7 +1,9 @@
 package asm.java5Nhom6.controller;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import asm.java5Nhom6.dao.CategoryDAO;
+import asm.java5Nhom6.dao.ColorDAO;
 
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,6 +38,7 @@ import asm.java5Nhom6.dao.CategoryDAO;
 import asm.java5Nhom6.dao.ProductDAO;
 import asm.java5Nhom6.dao.Product_ImageDAO;
 import asm.java5Nhom6.dao.Product_Size_ColorDAO;
+import asm.java5Nhom6.dao.SizeDAO;
 import asm.java5Nhom6.entity.*;
 
 import asm.java5Nhom6.service.ProductService;
@@ -49,12 +53,15 @@ public class HomePage {
 	ProductDAO productRepo;
 	@Autowired
 	ProductService productService;
-
+	@Autowired
+	SizeDAO sizeDao;
 	@Autowired
 	SessionKeyService session;
 
 	@Autowired
 	CategoryDAO cateDAO;
+	@Autowired
+	ColorDAO colorDao;
 
 	@GetMapping
 	public String index(Model model) {
@@ -75,8 +82,6 @@ public class HomePage {
 		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("top10Product", top10Product);
 		model.addAttribute("view", "index.jsp");
-
-		
 
 		List<Category> categories = categoryRepo.findAll();
 		model.addAttribute("categories", categories);
@@ -120,8 +125,6 @@ public class HomePage {
 		model.addAttribute("display", "more-product.jsp");
 		return "layout";
 	}
-
-
 
 	@GetMapping("/shop/danh-sach-san-pham")
 	public String danhSachSP(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
@@ -188,17 +191,41 @@ public class HomePage {
 		List<dtoProduct> products = productRepo.selectProduct(id);
 		System.out.println("Products: " + products);
 		model.addAttribute("products", products);
+		List<Color> colors = colorDao.findAll();
+		model.addAttribute("colors", colors);
+		List<Size> sizes = sizeDao.findAll();
+		model.addAttribute("sizes", sizes);
 		model.addAttribute("view", "shop.jsp");
 		model.addAttribute("display", "productList.jsp");
 		return "layout";
 	}
 
 	@PostMapping("/filterProducts")
-	public String filterProducts(@RequestBody List<Integer> categories, Model model) {
-		List<dtoProduct> products = productRepo.findByCategoryIds(categories);
+	public String filterProducts(@RequestBody Map<String, List<Integer>> filters, Model model) {
+		List<Integer> categories = filters.get("categories");
+		List<Integer> colors = filters.get("colors");
+		List<Integer> sizes = filters.get("sizes");
+
+		List<dtoProduct> products;
+
+		if ((colors == null || colors.isEmpty()) && (sizes == null || sizes.isEmpty())) {
+			products = productRepo.findByCategoryIds(categories);
+		} else if (colors == null || colors.isEmpty()) {
+			products = productRepo.findByCategoryIdsAndSizeIds(categories, sizes);
+		} else if (sizes == null || sizes.isEmpty()) {
+			products = productRepo.findByCategoryIdsAndColorIds(categories, colors);
+		} else {
+			products = productRepo.findByCategoryIdsAndColorIdsAndSizeIds(categories, colors, sizes);
+		}
+
+		for (dtoProduct dtoProduct : products) {
+			System.out.println("hiển thị:" + products);
+		}
 		model.addAttribute("products", products);
+
 		List<dtoCategory> countProductOfCate = categoryRepo.countProductOfCate(categories);
 		model.addAttribute("countProductOfCate", countProductOfCate);
+
 		countProductOfCate.forEach(b -> {
 			System.out.println(b.getCountProduct());
 		});
@@ -211,6 +238,10 @@ public class HomePage {
 		session.set("keywords", keyword);
 		List<Category> categories = categoryRepo.findAll();
 		model.addAttribute("categories", categories);
+		List<Color> colors = colorDao.findAll();
+		model.addAttribute("colors", colors);
+		List<Size> sizes = sizeDao.findAll();
+		model.addAttribute("sizes", sizes);
 		List<dtoProduct> products = productRepo.findByProductName("%" + keyword + "%");
 
 		// In danh sách sản phẩm ra log để kiểm tra
@@ -222,6 +253,26 @@ public class HomePage {
 		model.addAttribute("products", products);
 		model.addAttribute("view", "shop.jsp");
 		model.addAttribute("display", "sortList.jsp");
+		return "layout";
+	}
+
+	@RequestMapping("/shop/sort")
+	public String sortProducts(Model model, @RequestParam(value = "order", defaultValue = "asc") String order) {
+		List<dtoProduct> products;
+		if (order.equalsIgnoreCase("asc")) {
+			products = productRepo.findAllOrderByPriceAsc();
+		} else {
+			products = productRepo.findAllOrderByPriceDesc();
+		}
+		List<Category> categories = categoryRepo.findAll();
+		model.addAttribute("categories", categories);
+		List<Color> colors = colorDao.findAll();
+		model.addAttribute("colors", colors);
+		List<Size> sizes = sizeDao.findAll();
+		model.addAttribute("sizes", sizes);
+		model.addAttribute("products", products);
+		model.addAttribute("view", "shop.jsp");
+		model.addAttribute("display", "productList.jsp");
 		return "layout";
 	}
 
