@@ -18,15 +18,16 @@
 			<div class="row">
 				<div class="col-md-12">
 					<!-- DATA TABLE -->
-					<h3 class="title-5 m-b-35">data table</h3>
 					<div class="table-data__tool">
 						<div class="table-data__tool-left d-flex">
 							<form action="/admin/tableEditProduct" method="get">
 								<div class="input-group">
 									<input type="text" name="productName" class="form-control"
 										placeholder="Search by product name"> <input
-										type="date" name="ngayNhap" class="form-control"
-										placeholder="Search by entry date">
+										type="date" name="ngayNhap" class="form-control"> <input
+										type="hidden" name="field" value="${sortField}"> <input
+										type="hidden" name="sortDir" value="${sortDir}">
+
 									<div class="input-group-append">
 										<button type="submit"
 											class="input-group-text bg-transparent text-primary">
@@ -35,6 +36,7 @@
 									</div>
 								</div>
 							</form>
+
 
 
 						</div>
@@ -49,17 +51,20 @@
 							<thead>
 								<tr>
 									<th>STT</th>
-									<th>Name</th>
+									<th><a
+										href="/admin/tableEditProduct?field=productName&page=${currentPage}&sortDir=${sortField == 'productName' ? (sortDir == 'asc' ? 'desc' : 'asc') : 'asc'}">
+											Name ${sortField == 'productName' ? (sortDir == 'asc' ? '▲' : '▼') : ''}
+									</a></th>
 									<th>Xuất Xứ</th>
 									<th>Chất Liệu</th>
 									<th>Thương Hiệu</th>
 									<th>Thể Loại</th>
 									<th><a
-										href="/admin/tableEditProduct?field=ngayNhap&page=${currentPage}">Ngày
-											Nhập</a></th>
+										href="/admin/tableEditProduct?field=ngayNhap&page=${currentPage}&sortDir=${sortField == 'ngayNhap' ? (sortDir == 'asc' ? 'desc' : 'asc') : 'asc'}">
+											Ngày Nhập ${sortField == 'ngayNhap' ? (sortDir == 'asc' ? '▲' : '▼') : ''}
+									</a></th>
 									<th>Actions</th>
 								</tr>
-
 							</thead>
 							<tbody>
 								<c:forEach var="p" items="${products.content}" varStatus="loop">
@@ -127,6 +132,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
+
 
 						<div class="col-12 pb-1">
 							<nav aria-label="Page navigation">

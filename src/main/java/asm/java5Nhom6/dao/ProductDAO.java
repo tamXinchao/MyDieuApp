@@ -18,9 +18,9 @@ import asm.java5Nhom6.model.dto.dtoProduct;
 @Repository
 public interface ProductDAO extends JpaRepository<Product, Integer> {
 
+	Page<Product> findByProductNameContainingAndNgayNhapAfter(String productName, Date ngayNhap, Pageable pageable);
 
-	Page<Product> findAllByProductNameLikeOrNgayNhap(String keywords, Date ngayNhap, Pageable pageable);
-
+	Page<Product> findByProductNameContaining(String productName, Pageable pageable);
 
 	@Query("SELECT new asm.java5Nhom6.model.dto.dtoProduct(p.image, p.productName, c.price, p.id,a.cateId ) "
 			+ "FROM Product p " + "LEFT JOIN p.productSizeColors c " + "LEFT JOIN p.category a "
@@ -73,6 +73,5 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
 			+ "AND c.size.sizeId IN (:sizeIds) " + "GROUP BY p.image, p.productName, c.price, p.id, p.category.cateId")
 	List<dtoProduct> findByCategoryIdsAndColorIdsAndSizeIds(@Param("cateIds") List<Integer> cateIds,
 			@Param("colorIds") List<Integer> colorIds, @Param("sizeIds") List<Integer> sizeIds);
-
 
 }
