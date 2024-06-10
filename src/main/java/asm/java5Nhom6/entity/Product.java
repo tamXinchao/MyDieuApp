@@ -1,14 +1,17 @@
+
 package asm.java5Nhom6.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import org.hibernate.annotations.Comment;
-import org.springframework.stereotype.Component;
+import java.util.List;
+
 
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,10 +27,10 @@ import jakarta.persistence.TemporalType;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor	
 @Entity
 @Table(name = "Products")
-@Component
+
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,22 +41,26 @@ public class Product {
 	private String origin;
 
 	private String describe;
-	
+
 	private String image;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "NgayNhap") // Đảm bảo tên cột khớp với tên trong cơ sở dữ liệu
+
+	@Column(name = "NgayNhap")
 	private Date ngayNhap;
 
 	private String material;
 
-	@ManyToOne
-	@JoinColumn(name = "Manu_id")
-	Manufacturer manufacturer;
+    @ManyToOne
+    @JoinColumn(name = "Manu_id")
+    private Manufacturer manufacturer;
 
 	@ManyToOne
 	@JoinColumn(name = "Cate_Id")
 	Category category;
 
+    @OneToMany(mappedBy = "product")
+    private List<Product_Size_Color> productSizeColors;
 
 }
+

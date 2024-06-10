@@ -13,6 +13,8 @@ import asm.java5Nhom6.dao.ManufacturesDAO;
 import asm.java5Nhom6.dao.ProductDAO;
 import asm.java5Nhom6.dao.Product_ImageDAO;
 import asm.java5Nhom6.dao.Product_Size_ColorDAO;
+import asm.java5Nhom6.entity.Product;
+import asm.java5Nhom6.entity.Product_Image;
 
 import java.util.List;
 import java.util.Optional;

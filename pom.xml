@@ -43,8 +43,6 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
@@ -65,6 +63,7 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
@@ -99,6 +98,13 @@
 			<scope>runtime</scope>
 
 		</dependency>
+
+		<!-- Ajax-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>javax.servlet.jsp.jstl</artifactId>

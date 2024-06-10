@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -29,8 +30,9 @@ import jakarta.persistence.Table;
 public class Product_Size_Color {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pro_size_color_id")
-	private int productSizeColorId;
+	@Column(name = "Pro_Size_Color_Id", nullable = false)
+	Integer proSizeColorId;
+	
 
 	@Column(name = "status", nullable = false)
 	private boolean status;
@@ -55,4 +57,5 @@ public class Product_Size_Color {
 
 	@OneToMany(mappedBy = "productSizeColor")
     private List<Cart> cart;
+
 }

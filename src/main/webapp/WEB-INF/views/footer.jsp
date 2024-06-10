@@ -1,4 +1,4 @@
-
+<%@ page pageEncoding="UTF-8"%>
 <!-- Footer Start -->
 <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
 	<div class="row px-xl-5 pt-5">
@@ -6,7 +6,7 @@
 			<a href="" class="text-decoration-none">
 				<h1 class="mb-4 display-5 font-weight-semi-bold">
 					<span
-						class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>Shopper
+						class="text-primary font-weight-bold border border-white px-3 mr-1">M</span>Mỹ Diệu
 				</h1>
 			</a>
 			<p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna,
@@ -82,7 +82,7 @@
 				&copy; <a class="text-dark font-weight-semi-bold" href="#">Your
 					Site Name</a>. All Rights Reserved. Designed by <a
 					class="text-dark font-weight-semi-bold"
-					href="https://htmlcodex.com">HTML Codex</a>
+					href="">HTML Codex</a>
 			</p>
 		</div>
 		<div class="col-md-6 px-xl-0 text-center text-md-right">
@@ -132,15 +132,56 @@
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
 
-<!-- Xử lí gửi mã xác nhận qua mail -->
+
 <script>
-    // Xử lý sự kiện khi nhấn nút "Gửi"
+  var checkedIds = [];
+
+  $("input[type='checkbox']").change(function() {
+    var id = $(this).val();
+    if (this.checked) {
+      checkedIds.push(id);
+    } else {
+      var index = checkedIds.indexOf(id);
+      if (index !== -1) {
+        checkedIds.splice(index, 1);
+      }
+    }
+    sendCheckedIds(); // Tá»± Äá»ng gá»­i checkedIds má»i khi cÃ³ sá»± thay Äá»i
+  });
+
+  function sendCheckedIds() {
+		// Chuyá»n danh sÃ¡ch sá» nguyÃªn thÃ nh chuá»i JSON
+		var jsonData = JSON.stringify(checkedIds);
+
+		// Gá»­i yÃªu cáº§u AJAX vá»i dá»¯ liá»u JSON
+		$.ajax({
+		    type: "GET", // hoáº·c GET tÃ¹y thuá»c vÃ o cÃ¡ch báº¡n cáº¥u hÃ¬nh Controller cá»§a mÃ¬nh
+		    contentType: "application/json",
+		    url: "/gio-hang",
+		    data: jsonData,
+		    success: function(response) {
+		        console.log("Successfully sent checked IDs");
+		        // Xá»­ lÃ½ pháº£n há»i tá»« server náº¿u cáº§n
+		    },
+		    error: function(xhr, status, error) {
+		        console.error("Failed to send checked IDs");
+		        // Xá»­ lÃ½ lá»i náº¿u cáº§n
+		    }
+		});
+	}
+
+
+</script>
+
+<!-- Xá»­ lÃ­ gá»­i mÃ£ xÃ¡c nháº­n qua mail -->
+<script>
+    // Xá»­ lÃ½ sá»± kiá»n khi nháº¥n nÃºt "Gá»­i"
     document.getElementById("sendEmail").addEventListener("click", function() {
-        // Lấy trường email và giá trị của nó
+        // Láº¥y trÆ°á»ng email vÃ  giÃ¡ trá» cá»§a nÃ³
         var emailField = document.getElementById("Email");
         var emailValue = emailField.value;
 
-        // Gửi giá trị email đến code Java thông qua yêu cầu HTTP
+        // Gá»­i giÃ¡ trá» email Äáº¿n code Java thÃ´ng qua yÃªu cáº§u HTTP
         fetch('/register', {
             method: 'POST',
             headers: {
@@ -149,7 +190,7 @@
             body: JSON.stringify({ email: emailValue }),
         })
         .then(response => {
-            // Xử lý phản hồi từ server nếu cần
+            // Xá»­ lÃ½ pháº£n há»i tá»« server náº¿u cáº§n
             console.log(response);
         })
         .catch(error => {
@@ -157,4 +198,7 @@
         });
     });
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+

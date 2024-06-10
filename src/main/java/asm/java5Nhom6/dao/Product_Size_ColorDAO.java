@@ -22,6 +22,12 @@ public interface Product_Size_ColorDAO extends JpaRepository<Product_Size_Color,
 
 	// trang chủ
 
+	// detail
+	@Query("SELECT DISTINCT p.productName,p.describe, MIN(psc.price), p.productId " + "FROM Product_Size_Color psc "
+			+ "JOIN psc.product p " + "WHERE p.productId = :productId "
+			+ "GROUP BY p.describe, p.productName, p.productId")
+	List<Object[]> findDetailProductByProductId(@Param("productId") Integer productId);
+
 	@Query("SELECT DISTINCT p.image, p.productName, psc.price, p.productId, cate.cateId "
 			+ "FROM Product_Size_Color psc " + "JOIN psc.product p " + "JOIN p.category cate "
 			+ "GROUP BY p.image, p.productName, p.productId, psc.price, cate.cateId")
@@ -32,12 +38,6 @@ public interface Product_Size_ColorDAO extends JpaRepository<Product_Size_Color,
 			+ "FROM Product_Size_Color psc " + "JOIN psc.product p " + "JOIN p.category cate "
 			+ "GROUP BY p.image, p.productName, p.productId, psc.price, cate.cateId " + "ORDER BY psc.price ASC")
 	Page<Object[]> findTop10CheapestProducts(Pageable pageable);
-
-	// detail
-	@Query("SELECT DISTINCT p.productName,p.describe, MIN(psc.price), p.productId " + "FROM Product_Size_Color psc "
-			+ "JOIN psc.product p " + "WHERE p.productId = :productId "
-			+ "GROUP BY p.describe, p.productName, p.productId")
-	List<Object[]> findDetailProductByProductId(@Param("productId") Integer productId);
 
 	// size
 	@Query("SELECT p.productId, s.name " + "FROM Product_Size_Color psc " + "JOIN psc.product p " + "JOIN psc.size s "
@@ -76,6 +76,6 @@ public interface Product_Size_ColorDAO extends JpaRepository<Product_Size_Color,
 	@Query("DELETE FROM Product_Size_Color psc WHERE psc.product.productId = :productId")
 	void deleteByProductId(@Param("productId") Integer productId);
 
-	List<Product_Size_Color> findByProduct_ProductId( Integer productId);
+	List<Product_Size_Color> findByProduct_ProductId(Integer productId);
 
 }

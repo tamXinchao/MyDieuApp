@@ -2,7 +2,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,29 +45,10 @@
 	</div>
 	<!-- Topbar End -->
 
-
 	<!-- Navbar Start -->
 	<div class="container-fluid mb-5">
 		<div class="row border-top px-xl-5">
-			<div class="col-lg-3 d-none d-lg-block">
-				<a
-					class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
-					data-toggle="collapse" href="#navbar-vertical"
-					style="height: 65px; margin-top: -1px; padding: 0 30px;">
-					<h6 class="m-0">Categories</h6> <i
-					class="fa fa-angle-down text-dark"></i>
-				</a>
-				<nav
-					class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
-					id="navbar-vertical">
-					<div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-						<c:forEach var="c" items="${categories}">
-							<a href="" class="nav-item nav-link">${c.name}</a>
-						</c:forEach>
-					</div>
-				</nav>
-			</div>
-			<div class="col-lg-9">
+			<div class="col-lg-12">
 				<nav
 					class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
 					<a href="" class="text-decoration-none d-block d-lg-none">
@@ -82,7 +62,6 @@
 					</button>
 					<div class="collapse navbar-collapse justify-content-between"
 						id="navbarCollapse">
-
 						<c:choose>
 							<c:when test="${sessionScope.roleSession eq 2 }">
 								<div class="navbar-nav mr-auto py-0">
@@ -174,6 +153,8 @@
 		</div>
 	</div>
 	<!-- Navbar End -->
+
+
 	<!-- faetured start-->
 	<div class="container-fluid pt-5">
 		<div class="row px-xl-5 pb-3">
@@ -209,27 +190,74 @@
 	</div>
 	<!-- faetured end-->
 
-
-	<!-- categories start-->
+	<!-- categories start -->
 	<div class="container-fluid pt-5">
+		<div class="text-center mb-4">
+			<h2 class="section-title px-5">
+				<span class="px-2"> Products Categories </span>
+			</h2>
+		</div>
 		<div class="row px-xl-5 pb-3">
-			<c:forEach var="caterogyList" items="${countProductOfCate}">
-				<div class="col-lg-4 col-md-6 pb-1">
-					<div class="cat-item d-flex flex-column border mb-4"
-						style="padding: 30px;">
-						<p class="text-right">Quality:${caterogyList.countProduct}</p>
-						<a href="/shop/category/${caterogyList.idCate}"
-							class="cat-img position-relative overflow-hidden mb-3"> <img
-							class="img-fluid" src="/template/img/${caterogyList.image }"
-							alt="">
-						</a>
-						<h5 class="font-weight-semi-bold m-0">${caterogyList.nameCate}</h5>
-					</div>
-				</div>
+			<c:forEach var="caterogyList" items="${countProductOfCate}"
+				varStatus="status">
+				<c:choose>
+					<c:when test="${status.index < 3}">
+						<div class="col-lg-4 col-md-6 pb-1">
+							<div class="cat-item d-flex flex-column border mb-4"
+								style="padding: 30px;">
+								<p class="text-right">Quality: ${caterogyList.countProduct}</p>
+								<a href="/shop/category/${caterogyList.idCate}"
+									class="cat-img position-relative overflow-hidden mb-3"> <img
+									class="img-fluid" src="/user/img/${caterogyList.image}" alt="">
+								</a>
+								<h5 class="font-weight-semi-bold m-0">${caterogyList.nameCate}</h5>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="col-lg-4 col-md-6 pb-1 extra-item"
+							style="display: none;">
+							<div class="cat-item d-flex flex-column border mb-4"
+								style="padding: 30px;">
+								<p class="text-right">Quality: ${caterogyList.countProduct}</p>
+								<a href="/shop/category/${caterogyList.idCate}"
+									class="cat-img position-relative overflow-hidden mb-3"> <img
+									class="img-fluid" src="/user/img/${caterogyList.image}" alt="">
+								</a>
+								<h5 class="font-weight-semi-bold m-0">${caterogyList.nameCate}</h5>
+							</div>
+						</div>
+					</c:otherwise>
+				</c:choose>
+
 			</c:forEach>
+			<div class="col-12 pb-1">
+				<nav aria-label="Page navigation">
+					<ul class="pagination justify-content-center mb-3">
+						<li class="page-item active"><a class="page-link" href="#"
+							id="toggle-items">Xem thêm</a></li>
+					</ul>
+				</nav>
+			</div>
 		</div>
 	</div>
-	<!-- categories end-->
+	<!-- categories end -->
+
+	<!-- JavaScript -->
+	<script>
+		document.getElementById('toggle-items').addEventListener('click',
+				function(event) {
+					event.preventDefault();
+					var hiddenItems = document.querySelectorAll('.extra-item');
+					var isHidden = hiddenItems[0].style.display === 'none';
+
+					hiddenItems.forEach(function(item) {
+						item.style.display = isHidden ? 'block' : 'none';
+					});
+
+					this.textContent = isHidden ? 'Ẩn' : 'Xem thêm';
+				});
+	</script>
 
 	<!-- offer start-->
 
@@ -279,8 +307,10 @@
 					<div class="card product-item border-0 mb-4">
 						<div
 							class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+
 							<a href="/product/detail/${info[3]}/${info[4]}"><img
 								class="img-fluid w-100" src="/user/img/${info[0]}" alt=""></a>
+
 						</div>
 						<div
 							class="card-body border-left border-right text-center p-0 pt-4 pb-3">
@@ -347,9 +377,6 @@
 			</div>
 		</div>
 	</div>
-	<c:forEach var="p" items="${products}">
-	${p.name}
-	</c:forEach>
 	<!-- vendor end -->
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
