@@ -67,8 +67,8 @@
 							<c:when test="${sessionScope.roleSession eq 2 }">
 								<div class="navbar-nav mr-auto py-0">
 									<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
-									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
-									<a href="/shop" class="nav-item nav-link">Shop</a> <a
+									<a href="" class="nav-item nav-link active">Home</a>
+									<a href="" class="nav-item nav-link">Shop</a> <a
 										href="contact.html" class="nav-item nav-link">Contact</a>
 									<div class="nav-item dropdown">
 										<a href="#" class="nav-link dropdown-toggle"
@@ -83,7 +83,7 @@
 							<c:otherwise>
 								<div class="navbar-nav mr-auto py-0">
 									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
-									<a href="/shop" class="nav-item nav-link">Shop</a> <a
+									<a href="/shop/category" class="nav-item nav-link">Shop</a> <a
 										href="contact.html" class="nav-item nav-link">Contact</a>
 								</div>
 							</c:otherwise>
@@ -202,8 +202,8 @@
 			<c:forEach var="caterogyList" items="${countProductOfCate}"
 				varStatus="status">
 				<c:choose>
-					<c:when test="${status.index < 3}">
-						<div class="col-lg-4 col-md-6 pb-1">
+					<c:when test="${status.index < 4}">
+						<div class="col-lg-3 col-md-6 pb-1">
 							<div class="cat-item d-flex flex-column border mb-4"
 								style="padding: 30px;">
 								<p class="text-right">Quality: ${caterogyList.countProduct}</p>
@@ -216,7 +216,7 @@
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div class="col-lg-4 col-md-6 pb-1 extra-item"
+						<div class="col-lg-3 col-md-6 pb-1 extra-item"
 							style="display: none;">
 							<div class="cat-item d-flex flex-column border mb-4"
 								style="padding: 30px;">
