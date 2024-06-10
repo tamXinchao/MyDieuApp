@@ -131,7 +131,9 @@ public class HomePage {
 		model.addAttribute("dsSp", dsSp);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", dsSpPage.getTotalPages());
-		return "forward:/shop";
+		model.addAttribute("view", "shop.jsp");
+//		model.addAttribute("display", "more-product.jsp");
+		return "layout";
 	}
 
 	@RequestMapping("/product/detail/{productId}/{cateId}")
