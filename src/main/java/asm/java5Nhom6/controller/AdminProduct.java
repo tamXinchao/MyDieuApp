@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,28 +61,38 @@ public class AdminProduct {
 	Product_ImageDAO productImageDao;
 	@Autowired
 	ParamService paramService;
+	Direction direction = Direction.DESC;
 
 	@RequestMapping("/admin/tableEditProduct")
 	public String table(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value = "field", required = false) Optional<String> field,
 			@RequestParam("productName") Optional<String> productName,
 			@RequestParam(value = "ngayNhap", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayNhap) {
+
 		String productNameKeyword = productName.orElse("");
+		String sortField = field.orElse("ngayNhap"); // Default sorting field
+		Direction sortDirection = Direction.DESC; // Default sorting direction
 
 		model.addAttribute("page", page);
 		int pageSize = 5;
-		Pageable pageable = PageRequest.of(page - 1, pageSize);
+		Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by(sortDirection, sortField));
+
 		Page<Product> products = productNameKeyword.isEmpty() ? productDao.findAll(pageable)
 				: productDao.findAllByProductNameLikeOrNgayNhap("%" + productNameKeyword + "%", ngayNhap, pageable);
+
 		List<Category> categories = cateDao.findAll();
 		List<Size> sizes = sizeDao.findAll();
 		List<Product_Size_Color> productSCList = pscDao.findAll();
 		List<Color> colors = colorDao.findAll();
-		model.addAttribute("colors", colors);
 		List<Manufacturer> manu = manuDao.findAll();
+
+		model.addAttribute("colors", colors);
 		model.addAttribute("manu", manu);
+
 		// Create a map from product ID to Product_Size_Color
 		Map<Integer, Product_Size_Color> productSCMap = productSCList.stream().collect(Collectors
 				.toMap(psc -> psc.getProduct().getProductId(), psc -> psc, (existing, replacement) -> existing));
+
 		model.addAttribute("productSCMap", productSCMap);
 		model.addAttribute("sizes", sizes);
 		model.addAttribute("categories", categories);
@@ -89,6 +101,7 @@ public class AdminProduct {
 		model.addAttribute("pageSize", pageSize);
 		model.addAttribute("products", products);
 		model.addAttribute("view", "tableEditProduct.jsp");
+
 		return "admin/layout";
 	}
 
@@ -347,7 +360,5 @@ public class AdminProduct {
 			return "error-page";
 		}
 	}
-	
-	
 
 }

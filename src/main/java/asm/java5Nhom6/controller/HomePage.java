@@ -50,7 +50,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import asm.java5Nhom6.service.SessionKeyService;
 import asm.java5Nhom6.service.SessionService;
 
-
 @Controller
 public class HomePage {
 	@Autowired
@@ -67,22 +66,18 @@ public class HomePage {
 	@Autowired
 	SessionKeyService session;
 
-
 	@Autowired
 	CategoryDAO cateDAO;
 
 	@Autowired
 	ColorDAO colorDao;
 
-
-	
-	//số lượng sản phẩm trong giỏ hàng
+	// số lượng sản phẩm trong giỏ hàng
 	public void getCount(Model model) {
-			Sort sort = Sort.by(Direction.DESC, "date");
-			List<Cart> listProInCart = cartdao.findByUserId(3, sort);
-			model.addAttribute("Count", listProInCart.size());
+		Sort sort = Sort.by(Direction.DESC, "date");
+		List<Cart> listProInCart = cartdao.findByUserId(3, sort);
+		model.addAttribute("Count", listProInCart.size());
 	}
-	
 
 	@GetMapping
 	public String index(Model model) {
@@ -91,7 +86,6 @@ public class HomePage {
 		List<Object[]> top10Product = top10ProductPage.getContent();
 //		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("top10Product", top10Product);
-
 
 		List<Category> categories = categoryRepo.findAll();
 		model.addAttribute("categories", categories);
@@ -107,9 +101,6 @@ public class HomePage {
 
 		return "index";
 	}
-
-	@Autowired
-	CartDAO cartdao;
 
 	@RequestMapping("/trang-chu")
 	public String trangChu(Model model, @ModelAttribute("product") Product product) {
@@ -154,14 +145,12 @@ public class HomePage {
 		int pageSize = 6;
 		Page<Object[]> dsSpPage = productService.getProductPage(page - 1, pageSize);
 		List<Object[]> dsSp = dsSpPage.getContent();
-    getCount(model);
+		getCount(model);
 		List<Category> categories = categoryRepo.findAll();
 		model.addAttribute("categories", categories);
-
 		model.addAttribute("dsSp", dsSp);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", dsSpPage.getTotalPages());
-		List<Category> categories = categoryRepo.findAll();
 		model.addAttribute("categories", categories);
 		List<Product> products = productRepo.findAll();
 		model.addAttribute("products", products);
@@ -182,7 +171,10 @@ public class HomePage {
 
 		List<Category> categories = categoryRepo.findAll();
 		model.addAttribute("categories", categories);
-
+		List<Color> colors = colorDao.findAll();
+		model.addAttribute("colors", colors);
+		List<Size> sizes = sizeDao.findAll();
+		model.addAttribute("sizes", sizes);
 		model.addAttribute("dsSp", dsSp);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", dsSpPage.getTotalPages());
@@ -192,11 +184,11 @@ public class HomePage {
 
 	}
 
-	// Mỵ threm
+	// Mỵ threm lo
 	@Autowired
 	HttpServletRequest req;
 	@Autowired
-	SessionService session;
+	SessionService session1;
 
 	@RequestMapping("/product/detail/{productId}/{cateId}")
 	public String detail(Model model, @PathVariable("productId") Integer productId,
@@ -234,9 +226,9 @@ public class HomePage {
 		model.addAttribute("image", listImage);
 		model.addAttribute("detail", listDetail);
 		model.addAttribute("view", "detail.jsp");
-		// Mỵ thêm 
+		// Mỵ thêm
 		String contextPath = req.getRequestURI();
-		session.setAttribute("contextPath", contextPath);
+		session1.setAttribute("contextPath", contextPath);
 		getCount(model);
 
 		return "layout";

@@ -61,7 +61,7 @@
 							<div class="navbar-nav mr-auto py-0">
 								<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
 								<a href="/trang-chu" class="nav-item nav-link active">Home</a> <a
-									href="/shop" class="nav-item nav-link">Shop</a> <a
+									href="/shop/danh-sach-san-pham" class="nav-item nav-link">Shop</a> <a
 									href="contact.html" class="nav-item nav-link">Contact</a>
 								<div class="nav-item dropdown">
 									<a href="#" class="nav-link dropdown-toggle"
