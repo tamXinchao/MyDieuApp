@@ -297,6 +297,7 @@ public class UsersController {
 
 	// Post Đăng nhập
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
+
 	public String postLogin(@Valid @ModelAttribute("user") Users user, 
 	                        @RequestParam("username") String username,
 	                        @RequestParam("password") String password, 

@@ -6,6 +6,7 @@ import java.util.Date;
 
 import java.util.List;
 
+
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -29,6 +30,7 @@ import jakarta.persistence.TemporalType;
 @NoArgsConstructor	
 @Entity
 @Table(name = "Products")
+
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,17 +51,13 @@ public class Product {
 
 	private String material;
 
-
     @ManyToOne
     @JoinColumn(name = "Manu_id")
     private Manufacturer manufacturer;
 
-
 	@ManyToOne
 	@JoinColumn(name = "Cate_Id")
 	Category category;
-
-
 
     @OneToMany(mappedBy = "product")
     private List<Product_Size_Color> productSizeColors;
