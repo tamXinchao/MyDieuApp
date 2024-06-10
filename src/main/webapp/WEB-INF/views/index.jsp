@@ -82,7 +82,7 @@
 							<c:otherwise>
 								<div class="navbar-nav mr-auto py-0">
 									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
-									<a href="/shop/category" class="nav-item nav-link">Shop</a> <a
+									<a href="/shop/danh-sach-san-pham" class="nav-item nav-link">Shop</a> <a
 										href="contact.html" class="nav-item nav-link">Contact</a>
 								</div>
 							</c:otherwise>

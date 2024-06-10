@@ -39,14 +39,9 @@
 
 						</div>
 						<div class="table-data__tool-right">
+							<a href="/product/exportToExcel"><button
+									class="btn btn-secondary">Export Excel</button></a>
 
-							<div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-								<select class="js-select2" name="type">
-									<option selected="selected">Export</option>
-									<option value="">Excel</option>
-								</select>
-								<div class="dropDownSelect2"></div>
-							</div>
 						</div>
 					</div>
 					<div class="table-responsive table-responsive-data2">
@@ -59,9 +54,12 @@
 									<th>Chất Liệu</th>
 									<th>Thương Hiệu</th>
 									<th>Thể Loại</th>
-									<th>Ngày Nhập</th>
+									<th><a
+										href="/admin/tableEditProduct?field=ngayNhap&page=${currentPage}">Ngày
+											Nhập</a></th>
 									<th>Actions</th>
 								</tr>
+
 							</thead>
 							<tbody>
 								<c:forEach var="p" items="${products.content}" varStatus="loop">
