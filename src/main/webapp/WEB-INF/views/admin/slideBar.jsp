@@ -80,13 +80,10 @@
 						class="fas fa-table"></i>Quản Lý
 				</a>
 					<ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-
-						<li><a href="/admin/tableEditProduct"> Quản Lý Sản Phẩm</a></li>
-						<li><a href="/admin/edit-category">Quản Lý Thể Loại</a></li>
-						<li><a href="">Quản Lý Thương Hiệu</a></li>
-						<li><a href="">Quản Lý Người Dùng</a></li>
-
-
+						<li><a href="/admin/tableEditProduct"> Product</a></li>
+						<li><a href="/admin/edit-category">Category</a></li>
+						<li><a href="">Thương Hiệu</a></li>
+						<li><a href="/admin/users">User</a></li>
 					</ul></li>
 				<li class="has-sub"><a class="js-arrow" href="#"> <i
 						class="fas fa-table"></i>Quản Lý Hóa Đơn
