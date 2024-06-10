@@ -39,7 +39,7 @@
 				<a href="" class="btn border"> <i
 					class="fas fa-heart text-primary"></i> <span class="badge">0</span>
 				</a> <a href="/gio-hang" class="btn border"> <i
-					class="fas fa-shopping-cart text-primary"></i> <span class="badge">0</span>
+					class="fas fa-shopping-cart text-primary"></i> <span class="badge">${Count}</span>
 				</a>
 			</div>
 		</div>

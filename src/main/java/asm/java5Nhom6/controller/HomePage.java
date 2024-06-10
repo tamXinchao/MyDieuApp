@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,7 @@ import asm.java5Nhom6.model.dto.dtoCategory;
 
 import asm.java5Nhom6.model.dto.dtoProduct;
 import asm.java5Nhom6.dao.CartDAO;
+import asm.java5Nhom6.dao.CartDAOImp;
 import asm.java5Nhom6.dao.CategoryDAO;
 
 import asm.java5Nhom6.dao.ProductDAO;
@@ -42,8 +45,11 @@ import asm.java5Nhom6.dao.SizeDAO;
 import asm.java5Nhom6.entity.*;
 
 import asm.java5Nhom6.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
+
 import asm.java5Nhom6.service.SessionKeyService;
 import asm.java5Nhom6.service.SessionService;
+
 
 @Controller
 public class HomePage {
@@ -53,15 +59,28 @@ public class HomePage {
 	ProductDAO productRepo;
 	@Autowired
 	ProductService productService;
+
 	@Autowired
 	SizeDAO sizeDao;
+
 	@Autowired
 	SessionKeyService session;
 
 	@Autowired
 	CategoryDAO cateDAO;
+
 	@Autowired
 	ColorDAO colorDao;
+
+
+	
+	//số lượng sản phẩm trong giỏ hàng
+	public void getCount(Model model) {
+			Sort sort = Sort.by(Direction.DESC, "date");
+			List<Cart> listProInCart = cartdao.findByUserId(3, sort);
+			model.addAttribute("Count", listProInCart.size());
+	}
+	
 
 	@GetMapping
 	public String index(Model model) {
@@ -72,8 +91,13 @@ public class HomePage {
 		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("view", "index.jsp");
 
+		getCount(model);
+
 		return "index";
 	}
+
+	@Autowired
+	CartDAO cartdao;
 
 	@RequestMapping("/trang-chu")
 	public String trangChu(Model model, @ModelAttribute("product") Product product) {
@@ -89,6 +113,9 @@ public class HomePage {
 		model.addAttribute("products", products);
 		List<dtoCategory> countProductOfCate = categoryRepo.countProductofCate();
 		model.addAttribute("countProductOfCate", countProductOfCate);
+
+		getCount(model);
+
 		return "index";
 	}
 
@@ -114,13 +141,14 @@ public class HomePage {
 		int pageSize = 6;
 		Page<Object[]> dsSpPage = productService.getProductPage(page - 1, pageSize);
 		List<Object[]> dsSp = dsSpPage.getContent();
-
+    getCount(model);
 		List<Category> categories = categoryRepo.findAll();
 		model.addAttribute("categories", categories);
 
 		model.addAttribute("dsSp", dsSp);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", dsSpPage.getTotalPages());
+  
 		model.addAttribute("view", "shop.jsp");
 		model.addAttribute("display", "more-product.jsp");
 		return "layout";
@@ -141,7 +169,14 @@ public class HomePage {
 		model.addAttribute("view", "shop.jsp");
 		model.addAttribute("display", "more-product.jsp");
 		return "layout";
+
 	}
+
+	// Mỵ threm
+	@Autowired
+	HttpServletRequest req;
+	@Autowired
+	SessionService session;
 
 	@RequestMapping("/product/detail/{productId}/{cateId}")
 	public String detail(Model model, @PathVariable("productId") Integer productId,
@@ -179,6 +214,11 @@ public class HomePage {
 		model.addAttribute("image", listImage);
 		model.addAttribute("detail", listDetail);
 		model.addAttribute("view", "detail.jsp");
+		// Mỵ thêm
+		String contextPath = req.getRequestURI();
+		session.setAttribute("contextPath", contextPath);
+		getCount(model);
+
 		return "layout";
 	}
 
@@ -196,6 +236,7 @@ public class HomePage {
 		List<Size> sizes = sizeDao.findAll();
 		model.addAttribute("sizes", sizes);
 		model.addAttribute("view", "shop.jsp");
+
 		model.addAttribute("display", "productList.jsp");
 		return "layout";
 	}
