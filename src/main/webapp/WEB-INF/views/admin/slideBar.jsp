@@ -81,7 +81,7 @@
 						<li><a href="/admin/tableEditProduct"> Product</a></li>
 						<li><a href="/admin/edit-category">Category</a></li>
 						<li><a href="">Thương Hiệu</a></li>
-						<li><a href="">User</a></li>
+						<li><a href="/admin/users">User</a></li>
 
 					</ul></li>
 				<li class="has-sub"><a class="js-arrow" href="#"> <i

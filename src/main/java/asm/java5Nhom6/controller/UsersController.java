@@ -1,5 +1,6 @@
 package asm.java5Nhom6.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,7 @@ public class UsersController {
 	// Gọi biến toàn cục
 	Users user;
 	Address address;
+	List<Address> listAddress;
 	Address_User address_User;
 
 	int MaXacNhan = OTP();
@@ -260,18 +262,25 @@ public class UsersController {
 	@GetMapping("/updateInformation")
 	public String updateInformation(Model model) {
 		user = (Users) session.getAttribute("userSession");
+		listAddress = (List<Address>) session.getAttribute("addressSession");
 		String Fullname = req.getParameter("fullname");
-		String genDer = req.getParameter("gender");
+		String genDer = req.getParameter("gender");	
 		String PhoneNumber = req.getParameter("PhoneNumber");
 		String Email = req.getParameter("email");
+		String Address = req.getParameter("address");
+		String Provincial = req.getParameter("provincial");
 		if ("male".equals(genDer)) {
 			user.setGender(true);
 		} else {
 			user.setGender(false);
 		}
+		address = listAddress.get(0);
 		user.setFullname(Fullname);
 		address.setPhoneNumber(PhoneNumber);
 		address.setEmail(Email);
+		address.setAddress(Address);
+		address.setProvincial(Provincial);
+		System.out.println(address);
 		usersDao.save(user);
 		addressDao.save(address);
 		model.addAttribute("view", "account/information.jsp");
@@ -288,23 +297,32 @@ public class UsersController {
 
 	// Post Đăng nhập
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String postLogin(@Valid @ModelAttribute("user") Users user, @RequestParam("username") String username,
-			@RequestParam("password") String password, Model model) {
-		String message = "Vui lòng nhập chính xác tài khoản và mật khẩu!";
-		model.addAttribute("user", user);
-		user = usersDao.findByUsername(username);
-		String MatKhauMaHoa = passHashingService.MaHoa(password); // Mã hóa mật khẩu để so sánh
-		address = addressDao.findInformationByUserName(username);
-		if (user != null && user.getPassword().equals(MatKhauMaHoa)) {
-			SaveAccountByCookie(username, password, 1, resp);
-			session.setAttribute("userSession", user);
-			session.setAttribute("addressSession", address);
-			session.setAttribute("roleSession", user.getRoles().getRole_Id());
-			return "redirect:/trang-chu";
-		} else {
-			model.addAttribute("message", user);
-			model.addAttribute("view", "account/login.jsp"); 
-			return "layout";
-		}
+	public String postLogin(@Valid @ModelAttribute("user") Users user, 
+	                        @RequestParam("username") String username,
+	                        @RequestParam("password") String password, 
+	                        Model model, 
+	                        HttpServletResponse resp, 
+	                        HttpSession session) {
+
+	    String message = "Vui lòng nhập chính xác tài khoản và mật khẩu!";
+	    model.addAttribute("user", user);
+	    user = usersDao.findByUsername(username);
+	    String MatKhauMaHoa = passHashingService.MaHoa(password); // Mã hóa mật khẩu để so sánh
+	    
+	    listAddress = addressDao.findInformationByUserName(username);
+	    listAddress.forEach(a ->{
+	    	System.out.println(a.getAddress());
+	    });
+	    if (user != null && user.getPassword().equals(MatKhauMaHoa)) {
+	        SaveAccountByCookie(username, password, 1, resp);
+	        session.setAttribute("userSession", user);
+	        session.setAttribute("addressSession", listAddress);
+	        session.setAttribute("roleSession", user.getRoles().getRole_Id());
+	        return "redirect:/trang-chu";
+	    } else {
+	        model.addAttribute("message", message);
+	        model.addAttribute("view", "account/login.jsp"); 
+	        return "layout";
+	    }
 	}
 }
