@@ -3,6 +3,8 @@ package asm.java5Nhom6.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,6 +17,11 @@ import asm.java5Nhom6.model.dto.dtoProduct;
 
 @Repository
 public interface ProductDAO extends JpaRepository<Product, Integer> {
+
+
+	Page<Product> findAllByProductNameLikeOrNgayNhap(String keywords, Date ngayNhap, Pageable pageable);
+
+
 	@Query("SELECT new asm.java5Nhom6.model.dto.dtoProduct(p.image, p.productName, c.price, p.id,a.cateId ) "
 			+ "FROM Product p " + "LEFT JOIN p.productSizeColors c " + "LEFT JOIN p.category a "
 			+ "WHERE a.cateId = :cateId " + "GROUP BY p.image, p.productName, c.price, p.id,a.cateId ")
@@ -66,5 +73,6 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
 			+ "AND c.size.sizeId IN (:sizeIds) " + "GROUP BY p.image, p.productName, c.price, p.id, p.category.cateId")
 	List<dtoProduct> findByCategoryIdsAndColorIdsAndSizeIds(@Param("cateIds") List<Integer> cateIds,
 			@Param("colorIds") List<Integer> colorIds, @Param("sizeIds") List<Integer> sizeIds);
+
 
 }

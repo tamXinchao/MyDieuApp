@@ -2,7 +2,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +45,7 @@
 	</div>
 	<!-- Topbar End -->
 
-<!-- Navbar Start -->
+	<!-- Navbar Start -->
 	<div class="container-fluid mb-5">
 		<div class="row border-top px-xl-5">
 			<div class="col-lg-12">
@@ -154,7 +153,7 @@
 		</div>
 	</div>
 	<!-- Navbar End -->
-	
+
 
 	<!-- faetured start-->
 	<div class="container-fluid pt-5">
@@ -193,7 +192,7 @@
 
 	<!-- categories start -->
 	<div class="container-fluid pt-5">
-	<div class="text-center mb-4">
+		<div class="text-center mb-4">
 			<h2 class="section-title px-5">
 				<span class="px-2"> Products Categories </span>
 			</h2>

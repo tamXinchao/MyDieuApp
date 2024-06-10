@@ -43,7 +43,6 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
@@ -130,6 +129,13 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.2.0.Final</version> <!-- Sử dụng phiên bản hiện tại -->
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.9</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

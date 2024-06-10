@@ -55,6 +55,7 @@ import asm.java5Nhom6.service.SessionService;
 public class HomePage {
 	@Autowired
 	CategoryDAO categoryRepo;
+
 	@Autowired
 	ProductDAO productRepo;
 	@Autowired
@@ -65,6 +66,7 @@ public class HomePage {
 
 	@Autowired
 	SessionKeyService session;
+
 
 	@Autowired
 	CategoryDAO cateDAO;
@@ -87,7 +89,17 @@ public class HomePage {
 		// Lấy thông tin product
 		Page<Object[]> top10ProductPage = productService.getTop10Product();
 		List<Object[]> top10Product = top10ProductPage.getContent();
+//		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("top10Product", top10Product);
+
+
+		List<Category> categories = categoryRepo.findAll();
+		model.addAttribute("categories", categories);
+		List<Product> products = productRepo.findAll();
+		model.addAttribute("products", products);
+		List<dtoCategory> countProductOfCate = categoryRepo.countProductofCate();
+		model.addAttribute("countProductOfCate", countProductOfCate);
+
 		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("view", "index.jsp");
 
@@ -103,8 +115,9 @@ public class HomePage {
 	public String trangChu(Model model, @ModelAttribute("product") Product product) {
 		Page<Object[]> top10ProductPage = productService.getTop10Product();
 		List<Object[]> top10Product = top10ProductPage.getContent();
-		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
+//		top10Product.forEach(info -> System.out.println("Product Info: " + Arrays.toString(info)));
 		model.addAttribute("top10Product", top10Product);
+
 		model.addAttribute("view", "index.jsp");
 
 		List<Category> categories = categoryRepo.findAll();
@@ -148,9 +161,16 @@ public class HomePage {
 		model.addAttribute("dsSp", dsSp);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", dsSpPage.getTotalPages());
-  
+		List<Category> categories = categoryRepo.findAll();
+		model.addAttribute("categories", categories);
+		List<Product> products = productRepo.findAll();
+		model.addAttribute("products", products);
+		List<dtoCategory> countProductOfCate = categoryRepo.countProductofCate();
+		model.addAttribute("countProductOfCate", countProductOfCate);
+
 		model.addAttribute("view", "shop.jsp");
-		model.addAttribute("display", "more-product.jsp");
+//		model.addAttribute("display", "more-product.jsp");
+
 		return "layout";
 	}
 
@@ -214,7 +234,7 @@ public class HomePage {
 		model.addAttribute("image", listImage);
 		model.addAttribute("detail", listDetail);
 		model.addAttribute("view", "detail.jsp");
-		// Mỵ thêm
+		// Mỵ thêm 
 		String contextPath = req.getRequestURI();
 		session.setAttribute("contextPath", contextPath);
 		getCount(model);
@@ -231,6 +251,7 @@ public class HomePage {
 		List<dtoProduct> products = productRepo.selectProduct(id);
 		System.out.println("Products: " + products);
 		model.addAttribute("products", products);
+
 		List<Color> colors = colorDao.findAll();
 		model.addAttribute("colors", colors);
 		List<Size> sizes = sizeDao.findAll();

@@ -5,7 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+import org.springframework.stereotype.Component;
+
 import java.util.List;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,6 +26,7 @@ import jakarta.validation.constraints.NotNull;
 @NoArgsConstructor
 @Entity
 @Table(name = "Manufactures")
+@Component
 public class Manufacturer {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
