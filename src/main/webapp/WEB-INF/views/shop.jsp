@@ -1,4 +1,4 @@
-
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 
@@ -24,113 +24,50 @@
 		<!-- Shop Sidebar Start -->
 		<div class="col-lg-3 col-md-12">
 
-			<!-- Price Start -->
-			<div class="border-bottom mb-4 pb-4">
-				<h5 class="font-weight-semi-bold mb-4">Product</h5>
-				<form>
-					<c:forEach var="c" items="${categories}">
+			<form id="filter-form">
+				<!-- Danh mục -->
+				<div class="border-bottom mb-4 pb-4">
+					<h5 class="font-weight-semi-bold mb-4">Sản Phẩm</h5>
+					<c:forEach var="category" items="${categories}">
 						<div
-							class="custom-control custom-radio d-flex align-items-center justify-content-between mb-3">
+							class="custom-control custom-checkbox d-flex align-items-center mb-3">
 							<input type="checkbox" class="custom-control-input"
-								id="category-${c.cateId}" name="category-selection"> <label
-								class="custom-control-label" for="category-${c.cateId}">
-								<a href="/shop/category/${c.cateId}">${c.name}</a>
-							</label> <span class="badge border font-weight-normal">150</span>
+								id="category-${category.cateId}" name="category-selection"
+								value="${category.cateId}"> <label
+								class="custom-control-label" for="category-${category.cateId}">${category.name}</label>
 						</div>
 					</c:forEach>
-				</form>
-			</div>
-			<!-- Price End -->
+				</div>
 
-			<!-- Color Start -->
-			<div class="border-bottom mb-4 pb-4">
-				<h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
-				<form>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" checked
-							id="color-all"> <label class="custom-control-label"
-							for="price-all">All Color</label> <span
-							class="badge border font-weight-normal">1000</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="color-1">
-						<label class="custom-control-label" for="color-1">Black</label> <span
-							class="badge border font-weight-normal">150</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="color-2">
-						<label class="custom-control-label" for="color-2">White</label> <span
-							class="badge border font-weight-normal">295</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="color-3">
-						<label class="custom-control-label" for="color-3">Red</label> <span
-							class="badge border font-weight-normal">246</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="color-4">
-						<label class="custom-control-label" for="color-4">Blue</label> <span
-							class="badge border font-weight-normal">145</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-						<input type="checkbox" class="custom-control-input" id="color-5">
-						<label class="custom-control-label" for="color-5">Green</label> <span
-							class="badge border font-weight-normal">168</span>
-					</div>
-				</form>
-			</div>
-			<!-- Color End -->
+				<!-- Màu sắc -->
+				<div class="border-bottom mb-4 pb-4">
+					<h5 class="font-weight-semi-bold mb-4">Lọc theo màu sắc</h5>
+					<c:forEach var="color" items="${colors}">
+						<div
+							class="custom-control custom-checkbox d-flex align-items-center mb-3">
+							<input type="checkbox" class="custom-control-input"
+								id="color-${color.colorId}" name="color-selection"
+								value="${color.colorId}"> <label
+								class="custom-control-label" for="color-${color.colorId}">${color.name}</label>
+						</div>
+					</c:forEach>
+				</div>
 
-			<!-- Size Start -->
-			<div class="mb-5">
-				<h5 class="font-weight-semi-bold mb-4">Filter by size</h5>
-				<form>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" checked
-							id="size-all"> <label class="custom-control-label"
-							for="size-all">All Size</label> <span
-							class="badge border font-weight-normal">1000</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="size-1">
-						<label class="custom-control-label" for="size-1">XS</label> <span
-							class="badge border font-weight-normal">150</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="size-2">
-						<label class="custom-control-label" for="size-2">S</label> <span
-							class="badge border font-weight-normal">295</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="size-3">
-						<label class="custom-control-label" for="size-3">M</label> <span
-							class="badge border font-weight-normal">246</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="size-4">
-						<label class="custom-control-label" for="size-4">L</label> <span
-							class="badge border font-weight-normal">145</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-						<input type="checkbox" class="custom-control-input" id="size-5">
-						<label class="custom-control-label" for="size-5">XL</label> <span
-							class="badge border font-weight-normal">168</span>
-					</div>
-				</form>
-			</div>
-			<!-- Size End -->
+				<!-- Kích thước -->
+				<div class="border-bottom mb-4 pb-4">
+					<h5 class="font-weight-semi-bold mb-4">Lọc theo kích thước</h5>
+					<c:forEach var="size" items="${sizes}">
+						<div
+							class="custom-control custom-checkbox d-flex align-items-center mb-3">
+							<input type="checkbox" class="custom-control-input"
+								id="size-${size.sizeId}" name="size-selection"
+								value="${size.sizeId}"> <label
+								class="custom-control-label" for="size-${size.sizeId}">${size.name}</label>
+						</div>
+					</c:forEach>
+				</div>
+			</form>
+
 		</div>
 		<!-- Shop Sidebar End -->
 
@@ -140,14 +77,14 @@
 			<div class="row pb-3">
 				<div class="col-12 pb-1">
 					<div class="d-flex align-items-center justify-content-between mb-4">
-						<form action="">
+						<form action="/shop/product/search" method="post">
 							<div class="input-group">
-								<input type="text" class="form-control"
-									placeholder="Search by name">
+								<input type="text" name="keywords" value="${keywords}"
+									class="form-control" placeholder="Search by name">
 								<div class="input-group-append">
-									<span class="input-group-text bg-transparent text-primary">
+									<button class="input-group-text bg-transparent text-primary">
 										<i class="fa fa-search"></i>
-									</span>
+									</button>
 								</div>
 							</div>
 						</form>
@@ -157,74 +94,19 @@
 								aria-expanded="false">Sort by</button>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="triggerId">
-								<a class="dropdown-item" href="#">Latest</a> <a
-									class="dropdown-item" href="#">Popularity</a> <a
-									class="dropdown-item" href="#">Best Rating</a>
+								<a class="dropdown-item" href="/shop/sort?order=asc">Price:
+									Low to High</a> <a class="dropdown-item"
+									href="/shop/sort?order=desc">Price: High to Low</a>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<c:forEach var="dsSp" items="${dsSp }">
-					<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+				<div id="product-list" class="col-lg-12 col-md-12 col-sm-12 row">
+					<jsp:include page="${display}"></jsp:include>
+				</div>
 
-						<div class="card product-item border-0 mb-4">
-							<div
-								class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-								<a href="/product/detail/${dsSp[3]}/${dsSp[4]}"><img
-									class="img-fluid w-100" src="/user/img/${dsSp[0]}" alt=""></a>
-							</div>
-							<div
-								class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-								<h6 class="text-truncate mb-3">${dsSp[1]}</h6>
-								<div class="d-flex justify-content-center">
-									<h6>
-										<fmt:formatNumber value="${dsSp[2]}" type="currency"
-											currencyCode="VND" />
-									</h6>
-								</div>
-							</div>
-							<div
-								class="card-footer d-flex justify-content-between bg-light border">
-								<a href="/product/detail/${dsSp[3]}/${dsSp[4]}"
-									class="btn btn-sm text-dark p-0"><i
-									class="fas fa-eye text-primary mr-1"></i>View Detail</a> <a
-									href="/gio-hang" class="btn btn-sm text-dark p-0"><i
-									class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
 
-				<c:forEach var="p" items="${products}">
-					<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-						<div class="card product-item border-0 mb-4">
-							<div
-								class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-								<img class="img-fluid w-100" src="/user/img/${p.image}" alt="">
-							</div>
-							<div
-								class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-								<h6 class="text-truncate mb-3">${p.productName}</h6>
-								<div class="d-flex justify-content-center">
-									<h6>$ ${p.price}</h6>
-									<h6 class="text-muted ml-2">
-										<del>$123.00</del>
-
-									</h6>
-								</div>
-							</div>
-							<div
-								class="card-footer d-flex justify-content-between bg-light border">
-
-								<a href="" class="btn btn-sm text-dark p-0"><i
-									class="fas fa-eye text-primary mr-1"></i>View Detail</a> <a href=""
-									class="btn btn-sm text-dark p-0"><i
-									class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
 				<div class="col-12 pb-1">
 					<nav aria-label="Page navigation">
 						<ul class="pagination justify-content-center mb-3">
@@ -256,3 +138,117 @@
 	</div>
 </div>
 <!-- Shop End -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Thêm sự kiện change cho các checkbox lọc
+    $('input[name="category-selection"], input[name="color-selection"], input[name="size-selection"]').change(function() {
+        // Gọi hàm filterProducts để xử lý lọc sản phẩm và cập nhật URL
+        filterProducts();
+        updateURLWithFilters();
+        
+    });
+
+    // Đọc tham số URL và cập nhật các checkbox tương ứng
+    var urlParams = new URLSearchParams(window.location.search);
+
+    var categories = urlParams.get('categories') ? urlParams.get('categories').split(',') : [];
+    categories.forEach(function(category) {
+        $('#category-' + category).prop('checked', true);
+    });
+
+    var colors = urlParams.get('colors') ? urlParams.get('colors').split(',') : [];
+    colors.forEach(function(color) {
+        $('#color-' + color).prop('checked', true);
+    });
+
+    var sizes = urlParams.get('sizes') ? urlParams.get('sizes').split(',') : [];
+    sizes.forEach(function(size) {
+        $('#size-' + size).prop('checked', true);
+    });
+
+});
+
+function filterProducts() {
+    var selectedCategories = [];
+    $('input[name="category-selection"]:checked').each(function() {
+        selectedCategories.push($(this).val());
+    });
+
+    var selectedColors = [];
+    $('input[name="color-selection"]:checked').each(function() {
+        selectedColors.push($(this).val());
+    });
+
+    var selectedSizes = [];
+    $('input[name="size-selection"]:checked').each(function() {
+        selectedSizes.push($(this).val());
+    });
+
+    var filters = {
+        categories : selectedCategories,
+        colors : selectedColors,
+        sizes : selectedSizes
+    };
+
+    // Gửi yêu cầu AJAX để lọc sản phẩm và cập nhật nội dung trang
+    $.ajax({
+        type : 'POST',
+        contentType : 'application/json',
+        url : '/filterProducts',
+        data : JSON.stringify(filters),
+        success : function(data) {
+            $('#product-list').html(data);
+        },
+        error : function(xhr, status, error) {
+            console.error("Đã xảy ra lỗi: " + status + " " + error);
+        }
+    });
+}
+
+function updateURLWithFilters() {
+    var selectedCategories = [];
+    $('input[name="category-selection"]:checked').each(function() {
+        selectedCategories.push($(this).val());
+    });
+
+    var selectedColors = [];
+    $('input[name="color-selection"]:checked').each(function() {
+        selectedColors.push($(this).val());
+    });
+
+    var selectedSizes = [];
+    $('input[name="size-selection"]:checked').each(function() {
+        selectedSizes.push($(this).val());
+    });
+
+    var url = new URL(window.location.href);
+
+    // Chỉ thêm các tham số vào URL nếu có checkbox đang được chọn
+    if(selectedCategories.length > 0) {
+        url.searchParams.set('categories', selectedCategories.join(','));
+    } else {
+        url.searchParams.delete('categories');
+    }
+
+    if(selectedColors.length > 0) {
+        url.searchParams.set('colors', selectedColors.join(','));
+    } else {
+        url.searchParams.delete('colors');
+    }
+
+    if(selectedSizes.length > 0) {
+        url.searchParams.set('sizes', selectedSizes.join(','));
+    } else {
+        url.searchParams.delete('sizes');
+    }
+   
+    history.pushState(null, '', url);
+   
+}
+
+</script>
+
+
+

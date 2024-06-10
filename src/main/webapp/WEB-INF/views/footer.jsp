@@ -159,7 +159,7 @@
 		    contentType: "application/json",
 		    url: "/gio-hang",
 		    data: jsonData,
-		    success: function(response) {
+		    success: function(data) {
 		        console.log("Successfully sent checked IDs");
 		        // Xá»­ lÃ½ pháº£n há»i tá»« server náº¿u cáº§n
 		    },

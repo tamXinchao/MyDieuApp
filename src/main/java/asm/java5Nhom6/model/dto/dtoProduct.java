@@ -12,4 +12,6 @@ public class dtoProduct {
     String image;
     String productName;
     Double price;
+    Integer id;
+    Integer cateId;
 }

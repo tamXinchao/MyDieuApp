@@ -20,7 +20,7 @@ import jakarta.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "order_details")
+@Table(name = "Order_Detail")
 public class Order_Detail {
 	 @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class Order_Detail {
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "product_size_color_id", nullable = false)
+    @JoinColumn(name = "pro_size_color_id", nullable = false)
     private Product_Size_Color Product_Size_Color;
 	
 }

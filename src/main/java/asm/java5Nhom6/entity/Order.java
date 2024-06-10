@@ -27,7 +27,8 @@ public class Order {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
-    private int orderId;
+    private Integer orderId;
+
 
     @Column(name = "status", nullable = false)
     private String status;
@@ -35,6 +36,10 @@ public class Order {
     @Column(name = "date", nullable = false)
     private Date date;
 
+    @ManyToOne
+    @JoinColumn(name = "address")
+    private Address address;
+    
     @Column(name = "total_amount", nullable = false)
     private double totalAmount;
 

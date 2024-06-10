@@ -31,7 +31,7 @@
 			<a href="" class="btn border"> <i
 				class="fas fa-heart text-primary"></i> <span class="badge">0</span>
 			</a> <a href="/gio-hang" class="btn border"> <i
-				class="fas fa-shopping-cart text-primary"></i> <span class="badge">0</span>
+				class="fas fa-shopping-cart text-primary"></i> <span class="badge">${Count}</span>
 			</a>
 		</div>
 	</div>
@@ -42,26 +42,7 @@
 <!-- Navbar Start -->
 <div class="container-fluid">
 	<div class="row border-top px-xl-5">
-		<div class="col-lg-3 d-none d-lg-block">
-			<a
-				class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
-				data-toggle="collapse" href="#navbar-vertical"
-				style="height: 65px; margin-top: -1px; padding: 0 30px;">
-				<h6 class="m-0">Categories</h6> <i
-				class="fa fa-angle-down text-dark"></i>
-			</a>
-			<nav
-				class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light"
-				id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
-				<div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-					
-					<c:forEach var="c" items="${categories}">	
-						<a href="/shop/category/${c.cateId}" class="nav-item nav-link">${c.name}</a>
-						</c:forEach>
-				</div>
-			</nav>
-		</div>
-		<div class="col-lg-9">
+		<div class="col-lg-12">
 			<nav
 				class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
 				<a href="" class="text-decoration-none d-block d-lg-none">
