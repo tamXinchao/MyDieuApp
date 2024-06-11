@@ -11,7 +11,7 @@
 				<div class="page-body" id="main_content">
 					<div class="card">
 						<div class="card-header">
-							<h5>Form Add Product</h5>
+							<h5>Thêm Sản Phẩm</h5>
 						</div>
 						<div class="card-block">
 							<form method="post" class="form-material" id="productForm"
@@ -87,13 +87,10 @@
 											</div>
 											<div class="col-sm-6">
 												<c:forEach var="priceArr" items="${price}">
-													<div class="col-sm-6">
-														<div class="form-group form-primary">
-															<label>Giá</label> <input type="number" name="price"
-																value="${priceArr[1]}" class="form-control" /> <span
-																class="form-bar"></span>
-															<!-- Display the formatted price next to the input field -->
-														</div>
+													<div class="form-group form-primary">
+														<label>Giá</label> <input type="number" disabled
+															name="price"  value="${priceArr[1]}"
+															class="form-control" />
 													</div>
 												</c:forEach>
 											</div>
@@ -199,18 +196,18 @@
 									<div class="col-sm-3">
 										<button type="submit"
 											class="btn btn-primary w-100 font-weight-bold"
-											${isUpdate ? 'disabled' : ''}>Create</button>
+											${isUpdate ? 'disabled' : ''}>Thêm</button>
 									</div>
 
 									<div class="col-sm-3">
 										<button
 											formaction="/admin/update-product/${product.productId}"
 											${formIncomplete ? 'disabled' : ''}
-											class="btn btn-warning w-100 font-weight-bold">Update</button>
+											class="btn btn-warning w-100 font-weight-bold">Cập Nhật</button>
 									</div>
 									<div class="col-sm-3">
 										<a href="/admin/reset"
-											class="btn btn-primary w-100 font-weight-bold">Reset</a>
+											class="btn btn-primary w-100 font-weight-bold">Làm Mới</a>
 									</div>
 								</div>
 							</form>

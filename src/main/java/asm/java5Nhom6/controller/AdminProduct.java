@@ -66,19 +66,34 @@ public class AdminProduct {
 	@RequestMapping("/admin/tableEditProduct")
 	public String table(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "field", required = false) Optional<String> field,
-			@RequestParam("productName") Optional<String> productName,
+			@RequestParam(value = "sortDir", defaultValue = "desc") String sortDir,
+			@RequestParam(value = "productName", required = false) Optional<String> productName,
 			@RequestParam(value = "ngayNhap", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayNhap) {
 
 		String productNameKeyword = productName.orElse("");
 		String sortField = field.orElse("ngayNhap"); // Default sorting field
-		Direction sortDirection = Direction.DESC; // Default sorting direction
+		Direction sortDirection = sortDir.equalsIgnoreCase(Direction.ASC.name()) ? Direction.ASC : Direction.DESC; // Sort
+																													// direction
+																													// based
+																													// on
+																													// parameter
 
 		model.addAttribute("page", page);
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+
 		int pageSize = 5;
 		Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by(sortDirection, sortField));
 
-		Page<Product> products = productNameKeyword.isEmpty() ? productDao.findAll(pageable)
-				: productDao.findAllByProductNameLikeOrNgayNhap("%" + productNameKeyword + "%", ngayNhap, pageable);
+		Page<Product> products;
+		if (!productNameKeyword.isEmpty() && ngayNhap != null) {
+			products = productDao.findByProductNameContainingAndNgayNhapAfter("%" + productNameKeyword + "%", ngayNhap,
+					pageable);
+		} else if (!productNameKeyword.isEmpty()) {
+			products = productDao.findByProductNameContaining("%" + productNameKeyword + "%", pageable);
+		} else {
+			products = productDao.findAll(pageable);
+		}
 
 		List<Category> categories = cateDao.findAll();
 		List<Size> sizes = sizeDao.findAll();
