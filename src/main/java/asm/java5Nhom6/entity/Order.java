@@ -29,6 +29,7 @@ public class Order {
     @Column(name = "order_id")
     private Integer orderId;
 
+
     @Column(name = "status", nullable = false)
     private String status;
 

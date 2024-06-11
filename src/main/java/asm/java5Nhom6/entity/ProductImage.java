@@ -3,6 +3,8 @@ package asm.java5Nhom6.entity;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name="Product_Image")
+@Component
 public class ProductImage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

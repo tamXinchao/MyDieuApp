@@ -1,6 +1,5 @@
 package asm.java5Nhom6.controller;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -33,7 +32,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 @Controller
 public class CartController {
 
@@ -47,7 +45,7 @@ public class CartController {
 
 	@Autowired
 	UsersDao userDao;
-	
+
 	Users user;
 	
 	//số lượng sản phẩm trong giỏ hàng
@@ -58,6 +56,7 @@ public class CartController {
 				model.addAttribute("Count", listProInCart.size());
 		}
 	//Giỏ hàng
+
 	@RequestMapping("/gio-hang")
 	public String Cart(Model model) {
 		Sort sort = Sort.by(Direction.DESC, "date");
@@ -87,11 +86,11 @@ public class CartController {
 		return "layout";
 	}
 
-	
 	// Thêm vào giỏ
 	@PostMapping("/cart/add")
 	public String addToCart(Model model, @RequestParam(value = "color") String color, @RequestParam("size") String size,
 			@RequestParam("productId") Integer productId, @RequestParam("quality") Integer quality) {
+		getCount(model);
 //	    System.out.println(color);
 //	    System.out.println(size);
 //	    System.out.println(productId);
@@ -118,21 +117,21 @@ public class CartController {
 		boolean itemExists = false;
 
 		for (Cart cart : listProInCart) {
-		    if (cart.getProductSizeColor().equals(item.getProductSizeColor())) {
-		        // Increase quantity by 1
-		        cart.setQuality(cart.getQuality() + 1);
-		        cartdao.save(cart);  
-		        itemExists = true;
-		    }
+			if (cart.getProductSizeColor().equals(item.getProductSizeColor())) {
+				// Increase quantity by 1
+				cart.setQuality(cart.getQuality() + 1);
+				cartdao.save(cart);
+				itemExists = true;
+			}
 		}
 		if (!itemExists) {
-		    // Add new item to the cart
-		    cartdao.save(item);
+			// Add new item to the cart
+			cartdao.save(item);
 		}
 
 		String contextPath = session.getAttribute("contextPath");
 
-        return "redirect:" + contextPath;
+		return "redirect:" + contextPath;
 	}
 
 	// thay đổi số lượng trong giỏ
@@ -158,5 +157,4 @@ public class CartController {
 		return "redirect:/gio-hang";
 	}
 
-	
 }

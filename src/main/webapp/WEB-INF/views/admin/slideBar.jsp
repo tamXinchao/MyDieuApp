@@ -17,7 +17,8 @@
 	<nav class="navbar-mobile">
 		<div class="container-fluid">
 			<ul class="navbar-mobile__list list-unstyled">
-				<li><a href="/trang-chu"> <i class="fas fa-chart-bar"></i>Home
+				<li><a href="/admin/trang-chu"> <i class="fas fa-chart-bar"></i>Trang
+						Chủ
 				</a></li>
 				<li><a href="/admin/chart"> <i class="fas fa-chart-bar"></i>Biểu
 						Đồ
@@ -64,15 +65,16 @@
 	<div class="logo">
 		<a href="/trang-chu" class="text-decoration-none">
 			<h1 class="m-0 display-5 font-weight-semi-bold">
-				<span class="text-primary font-weight-bold border px-2 mr-1">M</span>Mỹ Diệu
+				<span class="text-primary font-weight-bold border px-2 mr-1">M</span>Mỹ
+				Diệu
 			</h1>
 		</a>
 	</div>
 	<div class="menu-sidebar__content js-scrollbar1">
 		<nav class="navbar-sidebar">
 			<ul class="list-unstyled navbar__list">
-				<li class=" has-sub"><a class="js-arrow"
-					href="/admin/trang-chu"> <i class="fas fa-tachometer-alt"></i>Home
+				<li class=" has-sub"><a href="/admin/trang-chu"> <i
+						class="fas fa-tachometer-alt"></i>Trang Chủ
 				</a></li>
 				<li class="has-sub"><a class="js-arrow" href="#"> <i
 						class="fas fa-table"></i>Quản Lý
@@ -81,8 +83,7 @@
 						<li><a href="/admin/tableEditProduct"> Product</a></li>
 						<li><a href="/admin/edit-category">Category</a></li>
 						<li><a href="">Thương Hiệu</a></li>
-						<li><a href="">User</a></li>
-
+						<li><a href="/admin/users">User</a></li>
 					</ul></li>
 				<li class="has-sub"><a class="js-arrow fw-bold" href="#"> <i
 						class="fas fa-table"></i>Quản lý hóa đơn
