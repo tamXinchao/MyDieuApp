@@ -52,7 +52,7 @@
 								</td>
 								
 								<td class="text-start">
-									<a href="/detail/${items.id}" class="link-detail">
+									<a href="/product/detail/${items.productSizeColor.product.productId}/${items.productSizeColor.product.category.cateId}" class="link-detail">
 										<img src="/template/Product_Images/${items.productSizeColor.product.image}" alt="" style="width: 50px;">
 										${items.productSizeColor.product.productName} <br>
 									</a>

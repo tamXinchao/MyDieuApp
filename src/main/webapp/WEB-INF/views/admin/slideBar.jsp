@@ -84,15 +84,16 @@
 						<li><a href="">User</a></li>
 
 					</ul></li>
-				<li class="has-sub"><a class="js-arrow" href="#"> <i
-						class="fas fa-table"></i>Quản Lý Hóa Đơn
+				<li class="has-sub"><a class="js-arrow fw-bold" href="#"> <i
+						class="fas fa-table"></i>Quản lý hóa đơn
 				</a>
 					<ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-						<li><a href="/admin/form-admin-checkout">Thanh Toán</a></li>
-						<li><a href="">Đang Giao</a></li>
-						<li><a href="">Giao Hàng Thành Công</a></li>
-						<li><a href="">Đơn Hàng Đã Hủy</a></li>
-
+						<li><a href="/admin/form-admin-order-confirm">Chờ xác nhận</a></li>
+						<li><a href="/admin/form-admin-order-pending">Đang chuẩn bị</a></li>
+						<li><a href="/admin/form-admin-order-delivering">Đang giao</a></li>
+						<li><a href="/admin/form-admin-order-delivered">Giao hàng thành công</a></li>
+						<li><a href="/admin/form-admin-order-returned">Trả hàng</a></li>
+						<li><a href="/admin/form-admin-order-canceled">Đã hủy</a></li>
 					</ul></li>
 
 				</a>

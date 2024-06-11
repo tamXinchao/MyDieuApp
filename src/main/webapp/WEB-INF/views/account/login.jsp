@@ -36,7 +36,7 @@
 									<div class="form-group">
 										<form:input type="password" path="password"
 											class="form-control form-control-user"
-											id="exampleInputPassword" placeholder="Mật khẩu" value="934715" />
+											id="exampleInputPassword" placeholder="Mật khẩu" value="443701" />
 										<form:errors path="password"
 											cssClass="error" />
 									</div>

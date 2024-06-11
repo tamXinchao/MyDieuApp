@@ -54,7 +54,7 @@ public class CartController {
 		public void getCount(Model model) {
 				Sort sort = Sort.by(Direction.DESC, "date");
 				user = userDao.getById(3);
-				List<Cart> listProInCart = cartdao.findByUserId(user.getUser_Id(), sort);
+				listProInCart = cartdao.findByUserId(user.getUser_Id(), sort);
 				model.addAttribute("Count", listProInCart.size());
 		}
 	//Giỏ hàng
@@ -90,14 +90,15 @@ public class CartController {
 	
 	// Thêm vào giỏ
 	@PostMapping("/cart/add")
-	public String addToCart(@RequestParam(value = "color") String color, @RequestParam("size") String size,
+	public String addToCart(Model model, @RequestParam(value = "color") String color, @RequestParam("size") String size,
 			@RequestParam("productId") Integer productId, @RequestParam("quality") Integer quality) {
 //	    System.out.println(color);
 //	    System.out.println(size);
 //	    System.out.println(productId);
+		getCount(model);
 		Product_Size_Color psc = cartdao.PSC(productId, color, size);
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 		String today = dateFormat.format(new Date());
 		Date date = null;
 		try {

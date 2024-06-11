@@ -56,7 +56,7 @@ public class Product_Size_Color {
 	private Product product;
 
 //Mỵ thêm
-	@OneToMany(mappedBy = "Product_Size_Color")
+	@OneToMany(mappedBy = "productSizeColor")
     private List<Order_Detail> orderDetail;;
 	
 	@OneToMany(mappedBy = "productSizeColor")
