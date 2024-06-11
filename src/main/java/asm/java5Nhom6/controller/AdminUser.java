@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ import asm.java5Nhom6.service.MailerService;
 import asm.java5Nhom6.service.PasswordHashingService;
 import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminUser {
@@ -40,6 +42,8 @@ public class AdminUser {
 	HttpServletRequest req;
 	@Autowired
 	PasswordHashingService passHashingService;
+	@Autowired
+	HttpSession session;
 	
 	Users users;
 	Address_User address_User;

@@ -7,7 +7,7 @@
                 <div class="page-body" id="main_content">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Form Edit User</h5>
+                            <h5>Quản lý thông tin người dùng</h5>
                         </div>
                         <div class="card-block">
                             <form action="/admin/edit-user" method="post" class="form-material" id="userForm" enctype="multipart/form-data">

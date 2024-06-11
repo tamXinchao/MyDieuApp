@@ -280,12 +280,52 @@ public class UsersController {
 		address.setEmail(Email);
 		address.setAddress(Address);
 		address.setProvincial(Provincial);
-		System.out.println(address);
 		usersDao.save(user);
 		addressDao.save(address);
 		model.addAttribute("view", "account/information.jsp");
 		return "layout";
 	}
+	/**
+	 * @param model
+	 * @param phoneNumber
+	 * @param email
+	 * @param addressStr
+	 * @param provincial
+	 * @return
+	 */
+	
+	//Thêm địa chỉ mới 
+	@GetMapping("/new-address")
+	public String newAddress(Model model,
+										@RequestParam("PhoneNumber") String phoneNumber,
+										@RequestParam("email") String email,
+										@RequestParam("address") String addressStr,
+										@RequestParam("provincial") String provincial) {
+		user = (Users) session.getAttribute("userSession");
+		address = new Address();
+		address.setPhoneNumber(phoneNumber);
+        address.setEmail(email);
+        address.setAddress(addressStr);
+        address.setProvincial(provincial);
+        addressDao.save(address);
+        AddAddress_User();
+        List<Address> updatedAddressList = addressDao.findInformationByUserName(user.getUsername());
+        session.setAttribute("addressSession", updatedAddressList);
+        model.addAttribute("view", "account/information.jsp");
+		return "layout";
+	}
+	//Xóa địa chỉ
+	 @PostMapping("/delete-address")
+	    public String deleteAddress(@RequestParam("addressId") int addressId, Model model) {
+	        user = (Users) session.getAttribute("userSession");
+	        Address_User address_UserDelete = address_UserDao.findAllByUserIdAndAddressId(user.getUser_Id(), addressId);
+	        address_UserDao.delete(address_UserDelete);
+	        addressDao.deleteById(addressId);
+	        List<Address> updatedAddressList = addressDao.findInformationByUserName(user.getUsername());
+	        session.setAttribute("addressSession", updatedAddressList);
+	        model.addAttribute("view", "account/information.jsp");
+	        return "layout";
+	    }
 
 	// Get đăng nhập
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -310,9 +350,6 @@ public class UsersController {
 	    String MatKhauMaHoa = passHashingService.MaHoa(password); // Mã hóa mật khẩu để so sánh
 	    
 	    listAddress = addressDao.findInformationByUserName(username);
-	    listAddress.forEach(a ->{
-	    	System.out.println(a.getAddress());
-	    });
 	    if (user != null && user.getPassword().equals(MatKhauMaHoa)) {
 	        SaveAccountByCookie(username, password, 1, resp);
 	        session.setAttribute("userSession", user);
