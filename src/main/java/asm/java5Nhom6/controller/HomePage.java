@@ -1,11 +1,13 @@
 package asm.java5Nhom6.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -71,14 +73,25 @@ public class HomePage {
 
 	@Autowired
 	ColorDAO colorDao;
-
+	
+	//My
+	@Autowired 
+	CartDAO cartdao;
+	
 	// số lượng sản phẩm trong giỏ hàng
 	public void getCount(Model model) {
 		Sort sort = Sort.by(Direction.DESC, "date");
-		List<Cart> listProInCart = cartdao.findByUserId(3, sort);
-		model.addAttribute("Count", listProInCart.size());
-	}
+		Users user = session1.getAttribute("userSession");
 
+		if (user==null) {
+			model.addAttribute("Count", 0);
+		}else {
+			List<Cart> listProInCart = cartdao.findByUserId(user.getUser_Id(), sort);
+			model.addAttribute("Count", listProInCart.size());
+		}
+	}
+	//my
+	
 	@GetMapping
 	public String index(Model model) {
 		// Lấy thông tin product
