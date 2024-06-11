@@ -89,8 +89,7 @@ public class OrderController {
 	@GetMapping("/checkout")
 	public String checkout(Model model, @RequestParam(value = "selectedItems") List<Integer> selectedItems,
 			@RequestParam(value = "address", required = false) String address) {
-	    // Ở đây bạn có thể thực hiện xử lý với giá trị đã chọn
-	    System.out.println("Địa chỉ đã chọn là: " + address);
+//	    System.out.println("Địa chỉ đã chọn là: " + address);
 	    
 		//Sản phẩm
 		List<Integer> ids = new ArrayList<>();
@@ -132,7 +131,7 @@ public class OrderController {
 		
 		Order orderNew = new Order();
 		//date
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 		String today = dateFormat.format(new Date());
 		Date date = null;
 		try {
@@ -156,7 +155,7 @@ public class OrderController {
 		for (Cart item : listCheckOut) {
 			Order_Detail orderDetail = new Order_Detail();
 			orderDetail.setOrder(orderNew);
-			orderDetail.setProduct_Size_Color(item.getProductSizeColor());
+			orderDetail.setProductSizeColor(item.getProductSizeColor());
 			orderDetail.setQuality(item.getQuality());
 //			orderDetailDao.save(orderDetail);
 //			System.out.println("Đã thêm OrderDetail Id: " + orderDetail.getOrderDetailId());

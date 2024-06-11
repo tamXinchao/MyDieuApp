@@ -10,7 +10,8 @@
 		color: #007bff;
 	}
 	
-</style>
+</style>	
+
 <div class="container w-75 m-auto my-5">
 	<h3 class="fw-bold mt-5">Cảm ơn bạn đã mua hàng ở <a href="/"> Mỹ Diệu</a> website! <br> <br>
 		Chúng tôi sẽ cố gắng giao hàng đến bạn sớm nhất. <br>
