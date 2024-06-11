@@ -35,7 +35,7 @@ public class Order_Detail {
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "pro_size_color_id", nullable = false)
-    private Product_Size_Color Product_Size_Color;
+    @JoinColumn(name = "pro_size_color_id")
+    private Product_Size_Color productSizeColor;
 	
 }

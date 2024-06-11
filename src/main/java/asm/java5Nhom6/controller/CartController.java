@@ -47,16 +47,16 @@ public class CartController {
 	UsersDao userDao;
 
 	Users user;
+	
+	//số lượng sản phẩm trong giỏ hàng
+		public void getCount(Model model) {
+				Sort sort = Sort.by(Direction.DESC, "date");
+				user = userDao.getById(3);
+				listProInCart = cartdao.findByUserId(user.getUser_Id(), sort);
+				model.addAttribute("Count", listProInCart.size());
+		}
+	//Giỏ hàng
 
-	// số lượng sản phẩm trong giỏ hàng
-	public void getCount(Model model) {
-		Sort sort = Sort.by(Direction.DESC, "date");
-		user = userDao.getById(3);
-		listProInCart = cartdao.findByUserId(user.getUser_Id(), sort);
-		model.addAttribute("Count", listProInCart.size());
-	}
-
-	// Giỏ hàng
 	@RequestMapping("/gio-hang")
 	public String Cart(Model model) {
 		Sort sort = Sort.by(Direction.DESC, "date");
@@ -94,9 +94,10 @@ public class CartController {
 //	    System.out.println(color);
 //	    System.out.println(size);
 //	    System.out.println(productId);
+		getCount(model);
 		Product_Size_Color psc = cartdao.PSC(productId, color, size);
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 		String today = dateFormat.format(new Date());
 		Date date = null;
 		try {
