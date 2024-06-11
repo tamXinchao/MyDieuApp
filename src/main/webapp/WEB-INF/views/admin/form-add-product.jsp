@@ -1,4 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <div class="main-content">
 	<div class="section__content section__content--p30">
 		<!-- Main-body start -->
@@ -9,143 +12,180 @@
 					<div class="card">
 						<div class="card-header">
 							<h5>Form Add Product</h5>
-							<!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
 						</div>
 						<div class="card-block">
-							<form action="/admin/add-product" method="post"
-								class="form-material" id="productForm"
-								enctype="multipart/form-data">
+							<form method="post" class="form-material" id="productForm"
+								action="/admin/add-product" enctype="multipart/form-data">
+								<input type="hidden" name="id" value="${product.productId}" />
 								<div class="row">
 									<div class="col-md-4 text-center">
-										<label for="thumbnail" class="border border-primary mt-2"
-											style="border-width: 4px !important; width: 200px; height: 250px;">
-											<img src="/manager/assets/images/no_image.jpg"
-											id="imagePreview" class="over " />
-										</label> <input type="file" class="custom-file-input"
-											style="height: 0;" id="thumbnail" name="thumbnail"
-											accept=".jpg,.png,.jpeg" onchange="readURL(this,event,'')">
-										<p class="mt-4 font-weight-bold" style="font-size: 20px;">
-											Choose Image</p>
+										<label for="image1_1" class="border border-primary mt-2"
+											style="border-width: 4px !important; width: 200px; height: 250px; display: inline-block; cursor: pointer;">
+											<img src="/user/img/${product.image}" id="imagePreview1_1"
+											class="over"
+											style="width: 100%; height: 100%; object-fit: cover;" />
+										</label> <input type="file" class="custom-file-input image"
+											style="display: none;" id="image1_1" name="imgProduct"
+											accept=".jpg,.png,.jpeg"
+											onchange="readURL(this, 'imagePreview1_1')">
+
+										<p class="mt-4 font-weight-bold" style="font-size: 20px;">Choose
+											Image</p>
 									</div>
+
 									<div class="col-md-8">
 										<div class="form-group form-primary">
-											<input type="text" name="name" class="form-control">
-											<span class="form-bar"></span> <label class="float-label">Tên
-												Sản Phẩm</label>
+											<label>Tên Sản Phẩm</label> <input type="text"
+												name="productName" value="${product.productName}"
+												class="form-control">
 										</div>
 										<div class="row">
 											<div class="col-sm-6">
 												<div class="form-group form-primary">
-													<select type="text" name="categoryId" id="category"
+													<label>Loại Sản Phẩm</label> <select name="categoryId"
 														class="form-control">
 														<option value=""></option>
 														<c:forEach items="${categories}" var="category">
-															<option value="${category.id}">${category.name}
-															</option>
+															<option value="${category.cateId}"
+																${category.cateId == product.category.cateId ? 'selected' : ''}>
+																${category.name}</option>
 														</c:forEach>
-													</select> <span class="form-bar"></span> <label class="float-label">Loại
-														Sản Phẩm</label>
+													</select>
 												</div>
 											</div>
 											<div class="col-sm-6">
 												<div class="form-group form-primary">
-													<input type="text" name="xuatXu" class="form-control">
-													<span class="form-bar"></span> <label class="float-label">Xuất
-														Xứ</label>
+													<label>Xuất Xứ</label> <input type="text" name="origin"
+														value="${product.origin}" class="form-control">
 												</div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-sm-6">
 												<div class="form-group form-primary">
-													<input type="number" name="quantity" class="form-control">
-													<span class="form-bar"></span> <label class="float-label">Số
-														Lượng</label>
+													<label>Size</label>
+													<div class="row">
+														<c:forEach var="size" items="${sizes}">
+															<c:set var="checked" value="false" />
+															<c:forEach var="psc" items="${psc}">
+																<c:if test="${size.sizeId == psc.size.sizeId}">
+																	<c:set var="checked" value="true" />
+																</c:if>
+															</c:forEach>
+															<div class="col-md-6">
+																<div class="form-check">
+																	<input class="form-check-input" type="checkbox"
+																		id="size${size.sizeId}" name="sizeIds"
+																		value="${size.sizeId}"
+																		<c:if test="${checked}">checked</c:if>> <label
+																		class="form-check-label" for="size${size.sizeId}">${size.name}</label>
+																</div>
+															</div>
+														</c:forEach>
+													</div>
 												</div>
 											</div>
 											<div class="col-sm-6">
-												<div class="form-group form-primary">
-													<input type="number" name="price" class="form-control">
-													<span class="form-bar"></span> <label class="float-label">Giá</label>
-												</div>
+												<c:forEach var="priceArr" items="${price}">
+													<div class="col-sm-6">
+														<div class="form-group form-primary">
+															<label>Giá</label> <input type="number" name="price"
+																value="${priceArr[1]}" class="form-control" /> <span
+																class="form-bar"></span>
+															<!-- Display the formatted price next to the input field -->
+														</div>
+													</div>
+												</c:forEach>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-sm-6">
 												<div class="form-group form-primary">
-													<input type="text" name="chatLieu" class="form-control">
-													<span class="form-bar"></span> <label class="float-label">Chất
-														Liệu</label>
+													<label>Giá</label> <input type="number" name="price"
+														value="" class="form-control">
+
 												</div>
 											</div>
 											<div class="col-sm-6">
 												<div class="form-group form-primary">
-													<input type="text" name="chatLieu" class="form-control">
-													<span class="form-bar"></span> <label class="float-label">Thương
-														Hiệu</label>
+													<label>Thương Hiệu</label> <select name="manuId" id="manu"
+														class="form-control">
+														<option value="">Chọn Thương Hiệu</option>
+														<c:forEach items="${manu}" var="manu">
+															<option value="${manu.manuId}"
+																${manu.manuId == product.manufacturer.manuId ? 'selected' : ''}>
+																${manu.manuName}</option>
+														</c:forEach>
+													</select>
 												</div>
 											</div>
+										</div>
+										<div class="row mb-3">
+											<div class="col-sm-6">
+												<label>Màu</label>
+												<div class="row">
+													<c:forEach var="color" items="${colors}">
+														<c:set var="checked" value="false" />
+														<c:forEach var="pscItem" items="${psc}">
+															<c:if test="${color.colorId == pscItem.color.colorId}">
+																<c:set var="checked" value="true" />
+															</c:if>
+														</c:forEach>
+														<div class="col-md-6">
+															<div class="form-check">
+																<input class="form-check-input" type="checkbox"
+																	id="color${color.colorId}" name="colorIds"
+																	value="${color.colorId}"
+																	<c:if test="${checked}">checked</c:if>> <label
+																	class="form-check-label" for="color${color.colorId}">
+																	${color.name} </label>
+															</div>
+														</div>
+													</c:forEach>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div class="form-group form-primary">
+													<label>Chất Liệu</label> <input type="text" name="material"
+														value="${product.material}" class="form-control">
+												</div>
+											</div>
+
 										</div>
 										<div class="form-group form-primary">
-											<textarea name="description" class="form-control w-100"
-												style="height: 100px;" rows="5"></textarea>
-											<span class="form-bar"></span> <label class="float-label">Description</label>
+											<label>Description</label>
+											<textarea name="describe" class="form-control w-100"
+												style="height: 100px;" rows="5">${product.describe}</textarea>
 										</div>
 									</div>
 								</div>
 								<div class="row text-center" id="color-block">
 									<div class="col-12" style="border-top: 2px solid #d7dce0;">
 										<div class="row">
-											<div class="col-12 row px-5 mt-3 mb-4 text-left">
-												<div class="col-sm-3 px-0">
-													<h3 class="my-0 mt-2">Color 1:</h3>
+											<c:if test="${not empty images}">
+												<div class="col-12 row px-5 mt-3 mb-4 text-left">
+													<div class="col-sm-3 px-0">
+														<h3 class="my-0 mt-2">Image</h3>
+													</div>
 												</div>
-												<div class="col-sm-3 px-0 mr-4">
-													<input type="text" name="color1" class="form-control color"
-														placeholder="Enter color name">
-												</div>
-											</div>
+												<!-- Display all images -->
+												<c:forEach var="img_color" items="${images}">
+													<div class="col-sm-6 col-md-4 col-xl-3">
+														<label for="image_${fn:escapeXml(img_color[2])}"
+															class="border border-primary mt-2"
+															style="border-width: 4px !important; width: 200px; height: 250px;">
+															<img src="/user/img/${img_color[1]}"
+															id="imagePreview_${fn:escapeXml(img_color[2])}"
+															class="over"
+															style="width: 100%; height: 100%; object-fit: cover;" />
+														</label> <input type="file" class="custom-file-input image"
+															style="height: 0;"
+															id="image_${fn:escapeXml(img_color[2])}" name="images"
+															onchange="readURL(this,'imagePreview_${fn:escapeXml(img_color[2])}')">
+													</div>
+												</c:forEach>
 
-											<div class="col-sm-6 col-md-4 col-xl-3 ">
-												<label for="image1_1" class="border border-primary mt-2"
-													style="border-width: 4px !important; width: 200px; height: 250px;">
-													<img src="/manager/assets/images/no_image.jpg"
-													id="imagePreview1_1" class="over " />
-												</label> <input type="file" class="custom-file-input image"
-													style="height: 0;" id="image1_1" name="image1_1"
-													accept=".jpg,.png,.jpeg"
-													onchange="readURL(this,event,'1_1')">
-											</div>
-											<div class="col-sm-6 col-md-4 col-xl-3">
-												<label for="image1_2" class="border border-primary mt-2"
-													style="border-width: 4px !important; width: 200px; height: 250px;">
-													<img src="/manager/assets/images/no_image.jpg"
-													id="imagePreview1_2" class="over " />
-												</label> <input type="file" class="custom-file-input image"
-													style="height: 0;" id="image1_2" name="image1_2"
-													accept=".jpg,.png,.jpeg"
-													onchange="readURL(this,event,'1_2')">
-											</div>
-											<div class="col-sm-6 col-md-4 col-xl-3">
-												<label for="image1_2" class="border border-primary mt-2"
-													style="border-width: 4px !important; width: 200px; height: 250px;">
-													<img src="/manager/assets/images/no_image.jpg"
-													id="imagePreview1_2" class="over " />
-												</label> <input type="file" class="custom-file-input image"
-													style="height: 0;" id="image1_2" name="image1_2"
-													accept=".jpg,.png,.jpeg"
-													onchange="readURL(this,event,'1_2')">
-											</div>
-											<div class="col-sm-6 col-md-4 col-xl-3">
-												<label for="image1_2" class="border border-primary mt-2"
-													style="border-width: 4px !important; width: 200px; height: 250px;">
-													<img src="/manager/assets/images/no_image.jpg"
-													id="imagePreview1_2" class="over " />
-												</label> <input type="file" class="custom-file-input image"
-													style="height: 0;" id="image1_2" name="image1_2"
-													accept=".jpg,.png,.jpeg"
-													onchange="readURL(this,event,'1_2')">
-											</div>
+											</c:if>
 										</div>
 									</div>
 								</div>
@@ -153,17 +193,24 @@
 									<div class="col-sm-3">
 										<button type="button" onclick="addcolor()"
 											class="btn btn-success w-100 font-weight-bold">
-											<i class="fa fa-plus"></i> Add Color
+											<i class="fa fa-plus"></i> Thêm Ảnh
 										</button>
 									</div>
 									<div class="col-sm-3">
-										<button class="btn btn-primary w-100 font-weight-bold">Create</button>
+										<button type="submit"
+											class="btn btn-primary w-100 font-weight-bold"
+											${isUpdate ? 'disabled' : ''}>Create</button>
+									</div>
+
+									<div class="col-sm-3">
+										<button
+											formaction="/admin/update-product/${product.productId}"
+											${formIncomplete ? 'disabled' : ''}
+											class="btn btn-warning w-100 font-weight-bold">Update</button>
 									</div>
 									<div class="col-sm-3">
-										<button class="btn btn-warning w-100 font-weight-bold">Update</button>
-									</div>
-									<div class="col-sm-3">
-										<button class="btn btn-primary w-100 font-weight-bold">Reset</button>
+										<a href="/admin/reset"
+											class="btn btn-primary w-100 font-weight-bold">Reset</a>
 									</div>
 								</div>
 							</form>
@@ -178,19 +225,22 @@
 	</div>
 </div>
 <script>
-	function readURL(input, event, number) {
+	function readURL(input, imagePreviewId) {
 		if (input.files && input.files[0]) {
-			var output = document.getElementById('imagePreview' + number);
-			output.src = URL.createObjectURL(event.target.files[0]);
-			output.onload = function() {
-				URL.revokeObjectURL(output.src) // free memory
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				var imgElement = document.getElementById(imagePreviewId);
+				if (imgElement) {
+					imgElement.src = e.target.result;
+				} else {
+					console.error("Element with ID '" + imagePreviewId
+							+ "' not found.");
+				}
 			}
+
+			reader.readAsDataURL(input.files[0]); // convert to base64 string
 		}
 	}
-
-	function clickHex(ele) {
-		ele.type = "color";
-		ele.value = "#ffffff";
-		ele.click();
-	}
 </script>
+

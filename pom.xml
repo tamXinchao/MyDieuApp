@@ -43,7 +43,6 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
@@ -130,6 +129,37 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.2.0.Final</version> <!-- Sử dụng phiên bản hiện tại -->
 		</dependency>
+		<!-- Apache POI Core -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.2.3</version> <!-- Use the latest version -->
+		</dependency>
+		<!-- Apache POI for OOXML (Excel) -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.2.3</version> <!-- Use the latest version -->
+		</dependency>
+		<!-- Apache POI OOXML Schemas -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>4.1.2</version> <!-- Use the latest version -->
+		</dependency>
+		<!-- Apache POI Commons -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>4.1.2</version> <!-- Use the latest version -->
+		</dependency>
+		<!-- Apache Commons Codec (required by POI) -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.15</version> <!-- Use the latest version -->
+		</dependency>
+
 	</dependencies>
 
 	<build>

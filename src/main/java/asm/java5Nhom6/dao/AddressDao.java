@@ -2,7 +2,10 @@
 	
 	import java.util.List;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+
 	import org.springframework.data.jpa.repository.Query;
 	import org.springframework.data.repository.query.Param;
 	
@@ -22,3 +25,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 		           "WHERE c.Username = :Username")
 		    List<Address> findInformationByUserName(@Param("Username") String username);
 	}
+
+	 
+	 @Query(value = "select a.* from address a join Address_User au on a.Address_Id = au.Address_Id\r\n"
+	 		+ "where au.User_Id = ?1", nativeQuery = true)
+	 List<Address> findALLAddressByUserId(Integer userId);
+}
+

@@ -18,4 +18,6 @@ public interface ManufacturesDAO extends JpaRepository<Manufacturer, Integer> {
            "WHERE p.productId = :productId " +
            "GROUP BY p.productId, m.manuName")
     List<Object[]> findManufacturerById(@Param("productId") Integer productId);
+    
+    
 }

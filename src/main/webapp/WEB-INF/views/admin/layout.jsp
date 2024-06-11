@@ -57,9 +57,10 @@
 <!-- Main CSS-->
 <link href="/adminTemplate/css/theme.css" rel="stylesheet" media="all">
 <jsp:include page="/WEB-INF/views/admin/common/css_admin.jsp"></jsp:include>
+
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/admin/components/loader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/admin/components/loader.jsp"></jsp:include>
 	<jsp:include page="slideBar.jsp"></jsp:include>
 	<jsp:include page="header.jsp"></jsp:include>
 

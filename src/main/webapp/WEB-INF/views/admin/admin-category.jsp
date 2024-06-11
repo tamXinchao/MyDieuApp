@@ -1,237 +1,166 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<div class="main-content">
-	<div class="section__content section__content--p30">
-		<!-- Main-body start -->
-		<div class="container-fluid">
-			<div class="page-wrapper">
-				<!-- Page-body start -->
-				<div class="page-body" id="main_content">
-					<div class="card">
-						<div class="card-header">
-							<h5>Form Add Product</h5>
-							<!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Form Add Product</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+.table img {
+	max-width: 100%;
+	max-height: 100px;
+	width: auto;
+	height: auto;
+}
+
+.image-preview {
+	width: 200px;
+	height: 250px;
+	border: 4px solid #007bff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	margin: auto;
+}
+
+.image-preview img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.custom-file-label::after {
+	content: "Browse";
+}
+</style>
+</head>
+<body>
+	<div class="container mt-5" style="padding-top: 10px" >
+		<h1 class="text-center mb-4 mt-5">Edit Category</h1>
+		<div class="card mt-5">
+			<div class="card-body">
+			<c:if test="${not empty alert}">
+                    <div class="alert alert-danger">
+                        ${alert}
+                    </div>
+                </c:if>
+				<form:form action="/admin/edit-category" method="post"
+					class="form-material" enctype="multipart/form-data"
+					modelAttribute="category">
+					<div class="row">
+						<div class="col-md-4 text-center">
+							<div class="image-preview mt-2">
+								<img src="/user/img/${category.image}"
+									id="imagePreview" />
+							</div>
+							<div class="custom-file mt-3">
+								<input type="file" name="file" class="custom-file-input"
+									id="fileInput"> <label class="custom-file-label"
+									for="fileInput">Choose file</label>
+							</div>
 						</div>
-						<div class="card-block">
-							<form action="/admin/add-product" method="post"
-								class="form-material" id="productForm"
-								enctype="multipart/form-data">
-								<div class="row">
-									<div class="col-md-4 text-center">
-										<label for="thumbnail" class="border border-primary mt-2"
-											style="border-width: 4px !important; width: 200px; height: 250px;">
-											<img src="/manager/assets/images/no_image.jpg"
-											id="imagePreview" class="over " />
-										</label> <input type="file" class="custom-file-input"
-											style="height: 0;" id="thumbnail" name="thumbnail"
-											accept=".jpg,.png,.jpeg" onchange="readURL(this,event,'')">
-										<p class="mt-4 font-weight-bold" style="font-size: 20px;">
-											Choose Image</p>
-									</div>
-									<div class="col-md-8">
-										<div class="form-group form-primary">
-											<input type="text" name="name" class="form-control">
-											<span class="form-bar"></span> <label class="float-label">Tên
-												Thể Loại</label>
-										</div>
-										<div class="row">
-											<div class="col-sm-8">
-												<div class="form-group form-primary">
-													<input type="text" name="xuatXu" class="form-control">
-													<span class="form-bar"></span> <label class="float-label">Name
-														Image</label>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="mt-3 row">
-									<div class="col-sm-4">
-										<button class="btn btn-primary w-100 font-weight-bold">Create</button>
-									</div>
-									<div class="col-sm-4">
-										<button class="btn btn-warning w-100 font-weight-bold">Update</button>
-									</div>
-									<div class="col-sm-4">
-										<button class="btn btn-primary w-100 font-weight-bold">Reset</button>
-									</div>
-								</div>
-							</form>
+						<div class="col-md-8">
+							<form:hidden path="cateId" />
+							<div class="form-group">
+								<form:label path="name" cssClass="form-label">CategoryName</form:label>
+								<form:input path="name" cssClass="form-control" />
+								<form:errors path="name" element="div" class="text-danger"></form:errors>	
+							</div>
+							<div class="form-group">
+								<form:label path="image" cssClass="form-label">ImageName</form:label>
+								<form:input path="image" cssClass="form-control" />
+								<form:errors path="image" element="div" class="text-danger"></form:errors>									
+							</div>
 						</div>
 					</div>
-					<!-- Page-body end -->
-				</div>
-				<div id="styleSelector"></div>
+					<div class="mt-3 row">
+						<div class="col-sm-4">
+							<form:button class="btn btn-primary w-100 font-weight-bold"
+								formaction="/admin/category/create">Create</form:button>
+						</div>
+						<div class="col-sm-4">
+							<form:button class="btn btn-warning w-100 font-weight-bold"
+								formaction="/admin/category/update">Update</form:button>
+						</div>
+						<div class="col-sm-4">
+							<form:button class="btn btn-secondary w-100 font-weight-bold"
+								formaction="/admin/edit-category">Reset</form:button>
+						</div>
+					</div>
+				</form:form>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="main-content" style="margin-top: -330px">
-	<div class="section__content section__content--p30">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<!-- DATA TABLE -->
-					<h3 class="title-5 m-b-35">data table</h3>
-					<div class="table-data__tool">
-						<div class="table-data__tool-left">
-							<div class="rs-select2--light rs-select2--md">
-								<select class="js-select2" name="property">
-									<option selected="selected">All Properties</option>
-									<option value="">Option 1</option>
-									<option value="">Option 2</option>
-								</select>
-								<div class="dropDownSelect2"></div>
-							</div>
-							<div class="rs-select2--light rs-select2--sm">
-								<select class="js-select2" name="time">
-									<option selected="selected">Today</option>
-									<option value="">3 Days</option>
-									<option value="">1 Week</option>
-								</select>
-								<div class="dropDownSelect2"></div>
-							</div>
-							<button class="au-btn-filter">
-								<i class="zmdi zmdi-filter-list"></i>filters
-							</button>
-						</div>
-						<div class="table-data__tool-right">
 
-							<div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-								<select class="js-select2" name="type">
-									<option selected="selected">Export</option>
-									<option value="">Option 1</option>
-									<option value="">Option 2</option>
-								</select>
-								<div class="dropDownSelect2"></div>
-							</div>
-						</div>
-					</div>
-					<div class="table-responsive table-responsive-data2">
-						<table class="table table-data2">
-							<thead>
-								<tr>
-									<th>STT</th>
-									<th>ID</th>
-									<th>Tên Thể Loại</th>
-									<th>Image</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="tr-shadow">
-									<td>1</td>
-									<td>1</td>
-									<td>Giày Cao gót abc</td>
-									<td>Việt nam</td>
-									<td>
-										<div class="table-data-feature">
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="Edit">
-												<i class="zmdi zmdi-edit"></i>
-											</button>
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="Delete">
-												<i class="zmdi zmdi-delete"></i>
-											</button>
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="More">
-												<i class="zmdi zmdi-more"></i>
-											</button>
-										</div>
-									</td>
-								</tr>
-								<tr class="spacer"></tr>
-								<tr class="tr-shadow">
-									<td>1</td>
-									<td>1</td>
-									<td>Giày Cao gót abc</td>
-									<td>Việt nam</td>
-									<td>
-										<div class="table-data-feature">
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="Edit">
-												<i class="zmdi zmdi-edit"></i>
-											</button>
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="Delete">
-												<i class="zmdi zmdi-delete"></i>
-											</button>
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="More">
-												<i class="zmdi zmdi-more"></i>
-											</button>
-										</div>
-									</td>
-								</tr>
-								<tr class="spacer"></tr>
-								<tr class="tr-shadow">
-									<td>1</td>
-									<td>1</td>
-									<td>Giày Cao gót abc</td>
-									<td>Việt nam</td>
-								
-									<td>
-										<div class="table-data-feature">
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="Edit">
-												<i class="zmdi zmdi-edit"></i>
-											</button>
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="Delete">
-												<i class="zmdi zmdi-delete"></i>
-											</button>
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="More">
-												<i class="zmdi zmdi-more"></i>
-											</button>
-										</div>
-									</td>
-								</tr>
-								<tr class="spacer"></tr>
-								<tr class="tr-shadow">
-									<td>1</td>
-									<td>1</td>
-									<td>Giày Cao gót abc</td>
-									<td>Việt nam</td>
-									<td>
-										<div class="table-data-feature">
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="Edit">
-												<i class="zmdi zmdi-edit"></i>
-											</button>
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="Delete">
-												<i class="zmdi zmdi-delete"></i>
-											</button>
-											<button class="item" data-toggle="tooltip"
-												data-placement="top" title="More">
-												<i class="zmdi zmdi-more"></i>
-											</button>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!-- END DATA TABLE -->
-				</div>
-			</div>
+	<div class="container mt-5">
+		<h3 class="title-5 mb-4">Data Table</h3>
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>STT</th>
+						<th>CategoryName</th>
+						<th>ID</th>
+						<th>Image</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="cate" items="${categories}" varStatus="index">
+						<tr>
+							<td>${index.index + 1}</td>
+							<td>${cate.name}</td>
+							<td>${cate.cateId}</td>
+							<td><img src="/user/img/${cate.image}" class="img-fluid" /></td>
+							<td>
+								<div class="table-data-feature">
+									<button class="item" data-toggle="tooltip" data-placement="top"
+										title="Edit">
+										<a href="/admin/category/edit/${cate.cateId}"> <i
+											class="zmdi zmdi-edit"></i>
+										</a>
+									</button>
+									<button class="item" data-toggle="tooltip" data-placement="top"
+										title="Delete">
+										<a href="/admin/category/delete/${cate.cateId}"> <i
+											class="zmdi zmdi-delete"></i>
+										</a>
+									</button>
+									<button class="item" data-toggle="tooltip" data-placement="top"
+										title="More">
+										<i class="zmdi zmdi-more"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
-</div>
-<script>
-	function readURL(input, event, number) {
-		if (input.files && input.files[0]) {
-			var output = document.getElementById('imagePreview' + number);
-			output.src = URL.createObjectURL(event.target.files[0]);
-			output.onload = function() {
-				URL.revokeObjectURL(output.src) // free memory
-			}
-		}
-	}
 
-	function clickHex(ele) {
-		ele.type = "color";
-		ele.value = "#ffffff";
-		ele.click();
-	}
-</script>
+	<script>
+		$(document).ready(function() {
+			$('#fileInput').on('change', function() {
+				var file = this.files[0];
+				if (file) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#imagePreview').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(file);
+				}
+				var fileName = $(this).val().split('\\').pop();
+				$(this).next('.custom-file-label').html(fileName);
+			});
+		});
+	</script>
+</body>
+</html>

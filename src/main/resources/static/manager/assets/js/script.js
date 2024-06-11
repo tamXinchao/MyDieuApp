@@ -234,59 +234,50 @@ function addcolor() {
 	color++;
 	$('#color-block').append(`
 <div class="col-12" style="border-top: 2px solid #d7dce0;">
-										<div class="row"">
-											<div class="col-12 row px-5 mt-3 mb-4 text-left">
-												<div class="col-sm-3 px-0">
-													<h3 class="my-0 mt-2">Color 1:</h3>
-												</div>
-												<div class="col-sm-3 px-0 mr-4">
-													<input type="text" name="color1" class="form-control color"
-														placeholder="Enter color name">
-												</div>
-											</div>
+    <div class="row">
+        <div class="col-12 row px-5 mt-3 mb-4 text-left">
+            <div class="col-sm-3 px-0">
+                <h3 class="my-0 mt-2">Image:</h3>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-3">
+            <label for="image1" class="border border-primary mt-2" style="border-width: 4px !important; width: 200px; height: 250px;">
+                <img src="/manager/assets/images/no_image.jpg" id="imagePreview1" class="over" />
+            </label>
+            <input type="file" class="custom-file-input image" style="height: 0;" id="image1" name="images" accept=".jpg,.png,.jpeg" onchange="readURL(this, event, 'imagePreview1')">
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-3">
+            <label for="image2" class="border border-primary mt-2" style="border-width: 4px !important; width: 200px; height: 250px;">
+                <img src="/manager/assets/images/no_image.jpg" id="imagePreview2" class="over" />
+            </label>
+            <input type="file" class="custom-file-input image" style="height: 0;" id="image2" name="images" accept=".jpg,.png,.jpeg" onchange="readURL(this, event, 'imagePreview2')">
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-3">
+            <label for="image3" class="border border-primary mt-2" style="border-width: 4px !important; width: 200px; height: 250px;">
+                <img src="/manager/assets/images/no_image.jpg" id="imagePreview3" class="over" />
+            </label>
+            <input type="file" class="custom-file-input image" style="height: 0;" id="image3" name="images" accept=".jpg,.png,.jpeg" onchange="readURL(this, event, 'imagePreview3')">
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-3">
+            <label for="image4" class="border border-primary mt-2" style="border-width: 4px !important; width: 200px; height: 250px;">
+                <img src="/manager/assets/images/no_image.jpg" id="imagePreview4" class="over" />
+            </label>
+            <input type="file" class="custom-file-input image" style="height: 0;" id="image4" name="images" accept=".jpg,.png,.jpeg" onchange="readURL(this, event, 'imagePreview4')">
+        </div>
+    </div>
+</div>
 
-											<div class="col-sm-6 col-md-4 col-xl-3 ">
-												<label for="image1_1" class="border border-primary mt-2"
-													style="border-width: 4px !important; width: 200px; height: 250px;">
-													<img src="/manager/assets/images/no_image.jpg"
-													id="imagePreview1_1" class="over " />
-												</label> <input type="file" class="custom-file-input image"
-													style="height: 0;" id="image1_1" name="image1_1"
-													accept=".jpg,.png,.jpeg"
-													onchange="readURL(this,event,'1_1')">
-											</div>
-											<div class="col-sm-6 col-md-4 col-xl-3">
-												<label for="image1_2" class="border border-primary mt-2"
-													style="border-width: 4px !important; width: 200px; height: 250px;">
-													<img src="/manager/assets/images/no_image.jpg"
-													id="imagePreview1_2" class="over " />
-												</label> <input type="file" class="custom-file-input image"
-													style="height: 0;" id="image1_2" name="image1_2"
-													accept=".jpg,.png,.jpeg"
-													onchange="readURL(this,event,'1_2')">
-											</div>
-											<div class="col-sm-6 col-md-4 col-xl-3">
-												<label for="image1_2" class="border border-primary mt-2"
-													style="border-width: 4px !important; width: 200px; height: 250px;">
-													<img src="/manager/assets/images/no_image.jpg"
-													id="imagePreview1_2" class="over " />
-												</label> <input type="file" class="custom-file-input image"
-													style="height: 0;" id="image1_2" name="image1_2"
-													accept=".jpg,.png,.jpeg"
-													onchange="readURL(this,event,'1_2')">
-											</div>
-											<div class="col-sm-6 col-md-4 col-xl-3">
-												<label for="image1_2" class="border border-primary mt-2"
-													style="border-width: 4px !important; width: 200px; height: 250px;">
-													<img src="/manager/assets/images/no_image.jpg"
-													id="imagePreview1_2" class="over " />
-												</label> <input type="file" class="custom-file-input image"
-													style="height: 0;" id="image1_2" name="image1_2"
-													accept=".jpg,.png,.jpeg"
-													onchange="readURL(this,event,'1_2')">
-											</div>
-										</div>
-									</div>
+<script>
+function readURL(input, event, previewId) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById(previewId).src = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
     `);
 	$("#productForm").validate();
 	$(".color").each(function() {

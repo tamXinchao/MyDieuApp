@@ -24,10 +24,10 @@
 		<!-- Shop Sidebar Start -->
 		<div class="col-lg-3 col-md-12">
 
-			<!-- Price Start -->
-			<div class="border-bottom mb-4 pb-4">
-				<h5 class="font-weight-semi-bold mb-4">Sản Phẩm</h5>
-				<form>
+			<form id="filter-form">
+				<!-- Danh mục -->
+				<div class="border-bottom mb-4 pb-4">
+					<h5 class="font-weight-semi-bold mb-4">Sản Phẩm</h5>
 					<c:forEach var="category" items="${categories}">
 						<div
 							class="custom-control custom-checkbox d-flex align-items-center mb-3">
@@ -37,98 +37,37 @@
 								class="custom-control-label" for="category-${category.cateId}">${category.name}</label>
 						</div>
 					</c:forEach>
-				</form>
-			</div>
-			<!-- Price End -->
-			<!-- Color Start -->
-			<div class="border-bottom mb-4 pb-4">
-				<h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
-				<form>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" checked
-							id="color-all"> <label class="custom-control-label"
-							for="price-all">All Color</label> <span
-							class="badge border font-weight-normal">1000</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="color-1">
-						<label class="custom-control-label" for="color-1">Black</label> <span
-							class="badge border font-weight-normal">150</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="color-2">
-						<label class="custom-control-label" for="color-2">White</label> <span
-							class="badge border font-weight-normal">295</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="color-3">
-						<label class="custom-control-label" for="color-3">Red</label> <span
-							class="badge border font-weight-normal">246</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="color-4">
-						<label class="custom-control-label" for="color-4">Blue</label> <span
-							class="badge border font-weight-normal">145</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-						<input type="checkbox" class="custom-control-input" id="color-5">
-						<label class="custom-control-label" for="color-5">Green</label> <span
-							class="badge border font-weight-normal">168</span>
-					</div>
-				</form>
-			</div>
-			<!-- Color End -->
+				</div>
 
-			<!-- Size Start -->
-			<div class="mb-5">
-				<h5 class="font-weight-semi-bold mb-4">Filter by size</h5>
-				<form>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" checked
-							id="size-all"> <label class="custom-control-label"
-							for="size-all">All Size</label> <span
-							class="badge border font-weight-normal">1000</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="size-1">
-						<label class="custom-control-label" for="size-1">XS</label> <span
-							class="badge border font-weight-normal">150</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="size-2">
-						<label class="custom-control-label" for="size-2">S</label> <span
-							class="badge border font-weight-normal">295</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="size-3">
-						<label class="custom-control-label" for="size-3">M</label> <span
-							class="badge border font-weight-normal">246</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="size-4">
-						<label class="custom-control-label" for="size-4">L</label> <span
-							class="badge border font-weight-normal">145</span>
-					</div>
-					<div
-						class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-						<input type="checkbox" class="custom-control-input" id="size-5">
-						<label class="custom-control-label" for="size-5">XL</label> <span
-							class="badge border font-weight-normal">168</span>
-					</div>
-				</form>
-			</div>
-			<!-- Size End -->
+				<!-- Màu sắc -->
+				<div class="border-bottom mb-4 pb-4">
+					<h5 class="font-weight-semi-bold mb-4">Lọc theo màu sắc</h5>
+					<c:forEach var="color" items="${colors}">
+						<div
+							class="custom-control custom-checkbox d-flex align-items-center mb-3">
+							<input type="checkbox" class="custom-control-input"
+								id="color-${color.colorId}" name="color-selection"
+								value="${color.colorId}"> <label
+								class="custom-control-label" for="color-${color.colorId}">${color.name}</label>
+						</div>
+					</c:forEach>
+				</div>
+
+				<!-- Kích thước -->
+				<div class="border-bottom mb-4 pb-4">
+					<h5 class="font-weight-semi-bold mb-4">Lọc theo kích thước</h5>
+					<c:forEach var="size" items="${sizes}">
+						<div
+							class="custom-control custom-checkbox d-flex align-items-center mb-3">
+							<input type="checkbox" class="custom-control-input"
+								id="size-${size.sizeId}" name="size-selection"
+								value="${size.sizeId}"> <label
+								class="custom-control-label" for="size-${size.sizeId}">${size.name}</label>
+						</div>
+					</c:forEach>
+				</div>
+			</form>
+
 		</div>
 		<!-- Shop Sidebar End -->
 
@@ -155,9 +94,9 @@
 								aria-expanded="false">Sort by</button>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="triggerId">
-								<a class="dropdown-item" href="#">Latest</a> <a
-									class="dropdown-item" href="#">Popularity</a> <a
-									class="dropdown-item" href="#">Best Rating</a>
+								<a class="dropdown-item" href="/shop/sort?order=asc">Price:
+									Low to High</a> <a class="dropdown-item"
+									href="/shop/sort?order=desc">Price: High to Low</a>
 							</div>
 						</div>
 					</div>
@@ -202,28 +141,114 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	$(document).ready(function() {
-		$('input[name="category-selection"]').change(filterProducts);
-	});
+$(document).ready(function() {
+    // Thêm sự kiện change cho các checkbox lọc
+    $('input[name="category-selection"], input[name="color-selection"], input[name="size-selection"]').change(function() {
+        // Gọi hàm filterProducts để xử lý lọc sản phẩm và cập nhật URL
+        filterProducts();
+        updateURLWithFilters();
+        
+    });
 
-	function filterProducts() {
-		var selectedCategories = [];
-		$('input[name="category-selection"]:checked').each(function() {
-			selectedCategories.push($(this).val());
-		});
+    // Đọc tham số URL và cập nhật các checkbox tương ứng
+    var urlParams = new URLSearchParams(window.location.search);
 
-		$.ajax({
-			type : 'POST',
-			contentType : 'application/json',
-			url : '${pageContext.request.contextPath}/filterProducts',
-			data : JSON.stringify(selectedCategories),
-			success : function(data) {
-				console.log(data); // Log the response data
-				$('#product-list').html(data);
-			},
-			error : function(xhr, status, error) {
-				console.error("Error occurred: " + status + " " + error);
-			}
-		});
-	}
+    var categories = urlParams.get('categories') ? urlParams.get('categories').split(',') : [];
+    categories.forEach(function(category) {
+        $('#category-' + category).prop('checked', true);
+    });
+
+    var colors = urlParams.get('colors') ? urlParams.get('colors').split(',') : [];
+    colors.forEach(function(color) {
+        $('#color-' + color).prop('checked', true);
+    });
+
+    var sizes = urlParams.get('sizes') ? urlParams.get('sizes').split(',') : [];
+    sizes.forEach(function(size) {
+        $('#size-' + size).prop('checked', true);
+    });
+
+});
+
+function filterProducts() {
+    var selectedCategories = [];
+    $('input[name="category-selection"]:checked').each(function() {
+        selectedCategories.push($(this).val());
+    });
+
+    var selectedColors = [];
+    $('input[name="color-selection"]:checked').each(function() {
+        selectedColors.push($(this).val());
+    });
+
+    var selectedSizes = [];
+    $('input[name="size-selection"]:checked').each(function() {
+        selectedSizes.push($(this).val());
+    });
+
+    var filters = {
+        categories : selectedCategories,
+        colors : selectedColors,
+        sizes : selectedSizes
+    };
+
+    // Gửi yêu cầu AJAX để lọc sản phẩm và cập nhật nội dung trang
+    $.ajax({
+        type : 'POST',
+        contentType : 'application/json',
+        url : '/filterProducts',
+        data : JSON.stringify(filters),
+        success : function(data) {
+            $('#product-list').html(data);
+        },
+        error : function(xhr, status, error) {
+            console.error("Đã xảy ra lỗi: " + status + " " + error);
+        }
+    });
+}
+
+function updateURLWithFilters() {
+    var selectedCategories = [];
+    $('input[name="category-selection"]:checked').each(function() {
+        selectedCategories.push($(this).val());
+    });
+
+    var selectedColors = [];
+    $('input[name="color-selection"]:checked').each(function() {
+        selectedColors.push($(this).val());
+    });
+
+    var selectedSizes = [];
+    $('input[name="size-selection"]:checked').each(function() {
+        selectedSizes.push($(this).val());
+    });
+
+    var url = new URL(window.location.href);
+
+    // Chỉ thêm các tham số vào URL nếu có checkbox đang được chọn
+    if(selectedCategories.length > 0) {
+        url.searchParams.set('categories', selectedCategories.join(','));
+    } else {
+        url.searchParams.delete('categories');
+    }
+
+    if(selectedColors.length > 0) {
+        url.searchParams.set('colors', selectedColors.join(','));
+    } else {
+        url.searchParams.delete('colors');
+    }
+
+    if(selectedSizes.length > 0) {
+        url.searchParams.set('sizes', selectedSizes.join(','));
+    } else {
+        url.searchParams.delete('sizes');
+    }
+   
+    history.pushState(null, '', url);
+   
+}
+
 </script>
+
+
+
