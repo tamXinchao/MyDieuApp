@@ -1,5 +1,6 @@
 package asm.java5Nhom6.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,7 @@ public class UsersController {
 	// Gọi biến toàn cục
 	Users user;
 	Address address;
+	List<Address> listAddress;
 	Address_User address_User;
 
 	int MaXacNhan = OTP();
@@ -263,20 +265,67 @@ public class UsersController {
 	@GetMapping("/updateInformation")
 	public String updateInformation(Model model) {
 		user = (Users) session.getAttribute("userSession");
+		listAddress = (List<Address>) session.getAttribute("addressSession");
 		String Fullname = req.getParameter("fullname");
 		String genDer = req.getParameter("gender");
 		String PhoneNumber = req.getParameter("PhoneNumber");
 		String Email = req.getParameter("email");
+		String Address = req.getParameter("address");
+		String Provincial = req.getParameter("provincial");
 		if ("male".equals(genDer)) {
 			user.setGender(true);
 		} else {
 			user.setGender(false);
 		}
+		address = listAddress.get(0);
 		user.setFullname(Fullname);
 		address.setPhoneNumber(PhoneNumber);
 		address.setEmail(Email);
+		address.setAddress(Address);
+		address.setProvincial(Provincial);
 		usersDao.save(user);
 		addressDao.save(address);
+		model.addAttribute("view", "account/information.jsp");
+		return "layout";
+	}
+
+	/**
+	 * @param model
+	 * @param phoneNumber
+	 * @param email
+	 * @param addressStr
+	 * @param provincial
+	 * @return
+	 */
+
+	// Thêm địa chỉ mới
+	@GetMapping("/new-address")
+	public String newAddress(Model model, @RequestParam("PhoneNumber") String phoneNumber,
+			@RequestParam("email") String email, @RequestParam("address") String addressStr,
+			@RequestParam("provincial") String provincial) {
+		user = (Users) session.getAttribute("userSession");
+		address = new Address();
+		address.setPhoneNumber(phoneNumber);
+		address.setEmail(email);
+		address.setAddress(addressStr);
+		address.setProvincial(provincial);
+		addressDao.save(address);
+		AddAddress_User();
+		List<Address> updatedAddressList = addressDao.findInformationByUserName(user.getUsername());
+		session.setAttribute("addressSession", updatedAddressList);
+		model.addAttribute("view", "account/information.jsp");
+		return "layout";
+	}
+
+	// Xóa địa chỉ
+	@PostMapping("/delete-address")
+	public String deleteAddress(@RequestParam("addressId") int addressId, Model model) {
+		user = (Users) session.getAttribute("userSession");
+		Address_User address_UserDelete = address_UserDao.findAllByUserIdAndAddressId(user.getUser_Id(), addressId);
+		address_UserDao.delete(address_UserDelete);
+		addressDao.deleteById(addressId);
+		List<Address> updatedAddressList = addressDao.findInformationByUserName(user.getUsername());
+		session.setAttribute("addressSession", updatedAddressList);
 		model.addAttribute("view", "account/information.jsp");
 		return "layout";
 	}
@@ -291,17 +340,20 @@ public class UsersController {
 
 	// Post Đăng nhập
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
+
 	public String postLogin(@Valid @ModelAttribute("user") Users user, @RequestParam("username") String username,
-			@RequestParam("password") String password, Model model) {
+			@RequestParam("password") String password, Model model, HttpServletResponse resp, HttpSession session) {
+
 		String message = "Vui lòng nhập chính xác tài khoản và mật khẩu!";
 		model.addAttribute("user", user);
 		user = usersDao.findByUsername(username);
 		String MatKhauMaHoa = passHashingService.MaHoa(password); // Mã hóa mật khẩu để so sánh
-		address = addressDao.findInformationByUserName(username);
+
+		listAddress = addressDao.findInformationByUserName(username);
 		if (user != null && user.getPassword().equals(MatKhauMaHoa)) {
 			SaveAccountByCookie(username, password, 1, resp);
 			session.setAttribute("userSession", user);
-			session.setAttribute("addressSession", address);
+			session.setAttribute("addressSession", listAddress);
 			session.setAttribute("roleSession", user.getRoles().getRole_Id());
 			logger.info(user.getUsername() + " " + "Đăng nhập thành công");
 			return "redirect:/trang-chu";

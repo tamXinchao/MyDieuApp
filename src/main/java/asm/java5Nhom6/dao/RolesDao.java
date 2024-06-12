@@ -9,5 +9,7 @@ public interface RolesDao extends JpaRepository<Roles, Integer> {
 	
 	Roles findById(int i);
 	
+
+	
 	
 }
