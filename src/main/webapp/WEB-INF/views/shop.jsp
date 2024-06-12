@@ -7,13 +7,13 @@
 	<div
 		class="d-flex flex-column align-items-center justify-content-center"
 		style="min-height: 150px">
-		<h1 class="font-weight-semi-bold text-uppercase mb-3">Our Shop</h1>
+		<h1 class="font-weight-semi-bold text-uppercase mb-3">Cửa hàng</h1>
 		<div class="d-inline-flex">
 			<p class="m-0">
-				<a href="/trang-chu">Home</a>
+				<a href="/trang-chu">Trang chủ</a>
 			</p>
 			<p class="m-0 px-2">-</p>
-			<p class="m-0">Shop</p>
+			<p class="m-0">Cửa hàng</p>
 		</div>
 	</div>
 </div>
@@ -94,9 +94,9 @@
 								aria-expanded="false">Sort by</button>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="triggerId">
-								<a class="dropdown-item" href="/shop/sort?order=asc">Price:
+								<a class="dropdown-item" href="/shop/sort?order=asc">Giá:
 									Low to High</a> <a class="dropdown-item"
-									href="/shop/sort?order=desc">Price: High to Low</a>
+									href="/shop/sort?order=desc">Giá: Từ cao đến thấp</a>
 							</div>
 						</div>
 					</div>
@@ -113,7 +113,7 @@
 							<li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
 								<a class="page-link" href="?page=${currentPage - 1}"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>
+									<span class="sr-only">Trước</span>
 							</a>
 							</li>
 							<c:forEach var="i" begin="1" end="${totalPages}">
@@ -125,7 +125,7 @@
 								class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
 								<a class="page-link" href="?page=${currentPage + 1}"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-									class="sr-only">Next</span>
+									class="sr-only">Sau</span>
 							</a>
 							</li>
 						</ul>
