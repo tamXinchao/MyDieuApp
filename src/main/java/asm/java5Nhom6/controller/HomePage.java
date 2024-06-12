@@ -71,6 +71,9 @@ public class HomePage {
 
 	@Autowired
 	ColorDAO colorDao;
+	
+	@Autowired
+	CartDAO cartdao;
 
 	// số lượng sản phẩm trong giỏ hàng
 	public void getCount(Model model) {

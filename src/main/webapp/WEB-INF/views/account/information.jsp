@@ -45,8 +45,8 @@
 							<div class="p-5" id="content-area">
 								<!-- Default Content -->
 								<div class="text-center">
-									<h1 class="h4 text-gray-900 mb-4">Welcome!</h1>
-									<p>Select an option from the sidebar.</p>
+									<h1 class="h4 text-gray-900 mb-4">Chào mừng!</h1>
+									<p>Vui lòng chọn chức năng bên trái của bạn.</p>
 								</div>
 							</div>
 						</div>
@@ -100,174 +100,211 @@
 
 <!-- Personal Info Template -->
 <template id="personal-info-template">
-    <div>
-        <div class="text-center">
-            <h1 class="h4 text-gray-900 mb-4">Thông tin khách hàng</h1>
-        </div>
-        <form action="/information" method="POST" class="user">
-            <div class="row">
-                <div class="col-2">Họ Tên:</div>
-                <div class="col-10">
-                    <div class="form-group">
-                        <input type="text" name="fullname"
-                            class="form-control rounded-input"
-                            placeholder="${userSession.fullname}" disabled>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2">Giới tính:</div>
-                <div class="col-10">
-                    <div class="form-group">
-                        <input type="text" name="gender"
-                            class="form-control rounded-input"
-                            placeholder="${userSession.gender ? 'Nam' : 'Nữ'}" disabled>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="form-group">
-                <label for="address-select">Chọn Địa chỉ:</label>
-                <select id="address-select" class="form-control" onchange="updateAddressInfo()">
-                    <c:forEach var="a" items="${addressSession}">
-                        <option 
-                            value="${a.address}" 
-                            data-phone="${a.phoneNumber}" 
-                            data-email="${a.email}" 
-                            data-address="${a.address}" 
-                            data-provincial="${a.provincial}">
-                            ${a.address}
-                        </option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div id="address-info">
-                <!-- Default Address Info -->
-                <c:if test="${not empty addressSession}">
-                    <div class="row">
-                        <div class="col-3">Số điện thoại:</div>
-                        <div class="col-9">
-                            <div class="form-group">
-                                <input type="number" id="phone-number"
-                                    class="form-control rounded-input"
-                                    placeholder="${addressSession[0].phoneNumber}" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">Email:</div>
-                        <div class="col-9">
-                            <div class="form-group">
-                                <input type="email" id="email"
-                                    class="form-control rounded-input"
-                                    placeholder="${addressSession[0].email}" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">Địa chỉ:</div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <input type="text" id="address"
-                                    class="form-control rounded-input"
-                                    placeholder="${addressSession[0].address}" disabled>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <input type="text" id="provincial"
-                                    class="form-control rounded-input"
-                                    placeholder="${addressSession[0].provincial}" disabled>
-                            </div>
-                        </div>
-                    </div>
-                </c:if>
-            </div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal"
-                data-target="#updateInformation">Cập nhật tài khoản</button>
-        </form>
-        <!-- Modal -->
-        <div class="modal fade" id="updateInformation" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-gray-900" id="exampleModalLabel">Cập
-                            nhật tài khoản</h5>
-                    </div>
-                    <form action="/updateInformation" method="GET" class="user">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input type="text" name="fullname"
-                                    class="form-control rounded-input"
-                                    value="${userSession.fullname}">
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="genderMale" name="gender"
-                                            class="custom-control-input" value="male"
-                                            ${userSession.gender ? 'checked' : ''}> <label
-                                            class="custom-control-label" for="genderMale">Nam</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="genderFemale" name="gender"
-                                            class="custom-control-input" value="female"
-                                            ${!userSession.gender ? 'checked' : ''}> <label
-                                            class="custom-control-label" for="genderFemale">Nữ</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <select id="modal-address-select" class="form-control" onchange="updateModalAddressInfo()">
-                                    <c:forEach var="a" items="${addressSession}">
-                                        <option 
-                                            value="${a.address}" 
-                                            data-phone="${a.phoneNumber}" 
-                                            data-email="${a.email}" 
-                                            data-address="${a.address}" 
-                                            data-provincial="${a.provincial}">
-                                            ${a.address}
-                                        </option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="number" name="PhoneNumber"
-                                    id="modal-phone-number"
-                                    class="form-control rounded-input">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" name="email"
-                                    id="modal-email"
-                                    class="form-control rounded-input">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="address"
-                                    id="modal-address"
-                                    class="form-control rounded-input">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="provincial"
-                                    id="modal-provincial"
-                                    class="form-control rounded-input">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                data-dismiss="modal">Đóng</button>
-                            <button type="submit" class="btn btn-primary">Lưu thay
-                                đổi</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- End Modal -->
-    </div>
+	<div>
+		<div class="text-center">
+			<h1 class="h4 text-gray-900 mb-4">Thông tin khách hàng</h1>
+		</div>
+		<form action="/information" method="POST" class="user">
+			<div class="row">
+				<div class="col-2">Họ Tên:</div>
+				<div class="col-10">
+					<div class="form-group">
+						<input type="text" name="fullname"
+							class="form-control rounded-input"
+							placeholder="${userSession.fullname}" disabled>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-2">Giới tính:</div>
+				<div class="col-10">
+					<div class="form-group">
+						<input type="text" name="gender"
+							class="form-control rounded-input"
+							placeholder="${userSession.gender ? 'Nam' : 'Nữ'}" disabled>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<form action="/delete-address" method="POST" id="delete-address-form">
+				<div class="form-group">
+					<label for="address-select">Chọn Địa chỉ:</label> <select
+						id="address-select" name="addressId" class="form-control"
+						onchange="updateAddressInfo()">
+						<c:forEach var="a" items="${addressSession}">
+							<option value="${a.addressId}" data-phone="${a.phoneNumber}"
+								data-email="${a.email}" data-address="${a.address}"
+								data-provincial="${a.provincial}">${a.address}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<button type="submit" class="btn btn-danger">Xóa Địa chỉ</button>
+			</form>
+
+			<div id="address-info">
+				<!-- Default Address Info -->
+				<c:if test="${not empty addressSession}">
+					<div class="row">
+						<div class="col-3">Số điện thoại:</div>
+						<div class="col-9">
+							<div class="form-group">
+								<input type="number" id="phone-number"
+									class="form-control rounded-input"
+									placeholder="${addressSession[0].phoneNumber}" disabled>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">Email:</div>
+						<div class="col-9">
+							<div class="form-group">
+								<input type="email" id="email"
+									class="form-control rounded-input"
+									placeholder="${addressSession[0].email}" disabled>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">Địa chỉ:</div>
+						<div class="col-6">
+							<div class="form-group">
+								<input type="text" id="address"
+									class="form-control rounded-input"
+									placeholder="${addressSession[0].address}" disabled>
+							</div>
+						</div>
+						<div class="col-3">
+							<div class="form-group">
+								<input type="text" id="provincial"
+									class="form-control rounded-input"
+									placeholder="${addressSession[0].provincial}" disabled>
+							</div>
+						</div>
+					</div>
+				</c:if>
+			</div>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#updateInformation">Cập nhật tài khoản</button>
+			<button type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#newAddress">Thêm địa chỉ mới</button>
+			<a type="button" href="/forgot-password" class="btn btn-primary">Quên mật khẩu</a>
+			<a href="/change-password" type="button"  class="btn btn-primary ">Đổi mật khẩu</a>
+		</form>
+		<!-- Modal cập nhật tài khoản -->
+		<div class="modal fade" id="updateInformation" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-gray-900" id="exampleModalLabel">Cập
+							nhật tài khoản</h5>
+					</div>
+					<form action="/updateInformation" method="GET" class="user">
+						<div class="modal-body">
+							<div class="form-group">
+								<input type="text" name="fullname"
+									class="form-control rounded-input"
+									value="${userSession.fullname}">
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<div class="custom-control custom-radio custom-control-inline">
+										<input type="radio" id="genderMale" name="gender"
+											class="custom-control-input" value="male"
+											${userSession.gender ? 'checked' : ''}> <label
+											class="custom-control-label" for="genderMale">Nam</label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="custom-control custom-radio custom-control-inline">
+										<input type="radio" id="genderFemale" name="gender"
+											class="custom-control-input" value="female"
+											${!userSession.gender ? 'checked' : ''}> <label
+											class="custom-control-label" for="genderFemale">Nữ</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<select id="modal-address-select" class="form-control"
+									onchange="updateModalAddressInfo()">
+									<c:forEach var="a" items="${addressSession}">
+										<option value="${a.address}" data-phone="${a.phoneNumber}"
+											data-email="${a.email}" data-address="${a.address}"
+											data-provincial="${a.provincial}">${a.address}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-group">
+								<input type="number" name="PhoneNumber" id="modal-phone-number"
+									class="form-control rounded-input">
+							</div>
+							<div class="form-group">
+								<input type="email" name="email" id="modal-email"
+									class="form-control rounded-input">
+							</div>
+							<div class="form-group">
+								<input type="text" name="address" id="modal-address"
+									class="form-control rounded-input">
+							</div>
+							<div class="form-group">
+								<input type="text" name="provincial" id="modal-provincial"
+									class="form-control rounded-input">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Đóng</button>
+							<button type="submit" class="btn btn-primary">Lưu thay
+								đổi</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- End Modal cập nhật tài khoản-->
+		<!-- Modal thêm địa chỉ mới -->
+		<div class="modal fade" id="newAddress" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-gray-900" id="exampleModalLabel">Thêm
+							địa chỉ mới</h5>
+					</div>
+					<form action="/new-address" method="GET" class="user">
+						<div class="modal-body">
+							<div class="form-group">
+								<input type="number" name="PhoneNumber" id="modal-phone-number"
+									class="form-control rounded-input"
+									placeholder="Số điện thoại...">
+							</div>
+							<div class="form-group">
+								<input type="email" name="email" id="modal-email"
+									class="form-control rounded-input" placeholder="Email...">
+							</div>
+							<div class="form-group">
+								<input type="text" name="address" id="modal-address"
+									class="form-control rounded-input"
+									placeholder="Địa chỉ của bạn...">
+							</div>
+							<div class="form-group">
+								<input type="text" name="provincial" id="modal-provincial"
+									class="form-control rounded-input" placeholder="Tỉnh...">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Đóng</button>
+							<button type="submit" class="btn btn-primary">Lưu thay
+								đổi</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- End Modal thêm địa chỉ mới-->
+	</div>
 </template>
 
 <script>
@@ -299,6 +336,8 @@
         const selectElement = document.getElementById('modal-address-select');
         const selectedOption = selectElement.options[selectElement.selectedIndex];
 
+        //document.getElementById('address-id').value = selectedOption.value;
+        
         document.getElementById('modal-phone-number').value = selectedOption.getAttribute('data-phone');
         document.getElementById('modal-email').value = selectedOption.getAttribute('data-email');
         document.getElementById('modal-address').value = selectedOption.getAttribute('data-address');

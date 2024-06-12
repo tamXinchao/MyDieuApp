@@ -66,24 +66,23 @@
 							<c:when test="${sessionScope.roleSession eq 2 }">
 								<div class="navbar-nav mr-auto py-0">
 									<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
-									<a href="" class="nav-item nav-link active">Home</a>
-									<a href="" class="nav-item nav-link">Shop</a> <a
+									<a href="" class="nav-item nav-link active">Trang chủ</a>
+									<a href="" class="nav-item nav-link">Cửa hàng</a> <a
 										href="contact.html" class="nav-item nav-link">Contact</a>
 									<div class="nav-item dropdown">
 										<a href="#" class="nav-link dropdown-toggle"
-											data-toggle="dropdown">Pages</a>
+											data-toggle="dropdown">Thêm</a>
 										<div class="dropdown-menu rounded-0 m-0">
-											<a href="/admin/trang-chu" class="dropdown-item">Admin
-												pages</a>
+											<a href="/admin/trang-chu" class="dropdown-item">Trang quản lý</a>
 										</div>
 									</div>
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div class="navbar-nav mr-auto py-0">
-									<a href="/trang-chu" class="nav-item nav-link active">Home</a>
-									<a href="/shop/danh-sach-san-pham" class="nav-item nav-link">Shop</a> <a
-										href="contact.html" class="nav-item nav-link">Contact</a>
+									<a href="/trang-chu" class="nav-item nav-link active">Trang chủ</a>
+									<a href="/shop/danh-sach-san-pham" class="nav-item nav-link">Cửa hàng</a> <a
+										href="contact.html" class="nav-item nav-link">Liên hệ</a>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -92,14 +91,14 @@
 								<!-- Hiển thị khi cho người dùng đã đăng nhập thành công -->
 								<div class="navbar-nav ml-auto py-0">
 									<a href="/information" class="nav-item nav-link">${sessionScope.userSession.fullname}</a>
-									<a href="/logout" class="nav-item nav-link">Logout</a>
+									<a href="/logout" class="nav-item nav-link">Đăng xuất</a>
 								</div>
 							</c:when>
 							<c:otherwise>
 								<!-- Hiển thị khi người dùng chưa đăng nhập -->
 								<div class="navbar-nav ml-auto py-0">
-									<a href="/login" class="nav-item nav-link">Login</a> <a
-										href="/register" class="nav-item nav-link">Register</a>
+									<a href="/login" class="nav-item nav-link">Đăng nhập</a> <a
+										href="/register" class="nav-item nav-link">Đăng ký</a>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -162,28 +161,28 @@
 				<div class="d-flex align-items-center border mb-4"
 					style="padding: 30px;">
 					<h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-					<h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+					<h5 class="font-weight-semi-bold m-0">Sản phẩm chất lượng</h5>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
 				<div class="d-flex align-items-center border mb-4"
 					style="padding: 30px;">
 					<h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-					<h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
+					<h5 class="font-weight-semi-bold m-0">Miễn phí giao hàng</h5>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
 				<div class="d-flex align-items-center border mb-4"
 					style="padding: 30px;">
 					<h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-					<h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+					<h5 class="font-weight-semi-bold m-0">Hoàn trả trong vòng - 14 ngày</h5>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
 				<div class="d-flex align-items-center border mb-4"
 					style="padding: 30px;">
 					<h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-					<h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+					<h5 class="font-weight-semi-bold m-0">Hỗ trợ 24/7</h5>
 				</div>
 			</div>
 		</div>
@@ -268,11 +267,9 @@
 					class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
 					<img src="/template/img/offer-1.png" alt="">
 					<div class="position-relative" style="z-index: 1;">
-						<h5 class="text-uppercase text-primary mb-3">20% off the all
-							order</h5>
-						<h1 class="mb-4 font-weight-semi-bold">Spring Collection</h1>
-						<a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop
-							Now</a>
+						<h5 class="text-uppercase text-primary mb-3">Giảm giá tận 20%</h5>
+						<h1 class="mb-4 font-weight-semi-bold">Bộ sưu tập mùa xuân</h1>
+						<a href="" class="btn btn-outline-primary py-md-2 px-md-3">Mua ngay</a>
 					</div>
 				</div>
 			</div>
@@ -281,11 +278,9 @@
 					class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
 					<img src="img/offer-2.png" alt="">
 					<div class="position-relative" style="z-index: 1;">
-						<h5 class="text-uppercase text-primary mb-3">20% off the all
-							order</h5>
-						<h1 class="mb-4 font-weight-semi-bold">Winter Collection</h1>
-						<a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop
-							Now</a>
+						<h5 class="text-uppercase text-primary mb-3">Giảm giá tận 20%</h5>
+						<h1 class="mb-4 font-weight-semi-bold">Bộ sưu tập mùa thu</h1>
+						<a href="" class="btn btn-outline-primary py-md-2 px-md-3">Mua ngay</a>
 					</div>
 				</div>
 			</div>

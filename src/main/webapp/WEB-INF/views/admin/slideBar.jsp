@@ -83,7 +83,7 @@
 						<li><a href="/admin/tableEditProduct"> Product</a></li>
 						<li><a href="/admin/edit-category">Category</a></li>
 						<li><a href="">Thương Hiệu</a></li>
-						<li><a href="/admin/users">User</a></li>
+						<li><a href="/admin/users">Người dùng</a></li>
 					</ul></li>
 				<li class="has-sub"><a class="js-arrow fw-bold" href="#"> <i
 						class="fas fa-table"></i>Quản lý hóa đơn
