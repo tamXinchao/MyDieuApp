@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -73,6 +75,7 @@ public class UsersController {
 	String sendOTP = "Đây là mã OTP của bạn: " + MaXacNhan + " Vui lòng không chia sẽ cho bất kì ai";
 	String sendMatKhauMoi = "Đây là mật khẩu mới của bạn: " + MatKhauMoi + " Vui lòng không chia sẽ cho bất kì ai";
 	String NameOfApp = "Mỹ Diệu App";
+	private static final Logger logger = LogManager.getLogger(UsersController.class);
 
 	// Lưu tài khoản và mật khẩu vào cookie
 	private void SaveAccountByCookie(String username, String password, int days, HttpServletResponse resp) {
@@ -138,7 +141,7 @@ public class UsersController {
 			System.out.println("Luu thanh cong 1");
 			addressDao.save(address);
 			usersDao.save(user);
-			if (addressDao.save(address) != null && usersDao.save(user) != null ) {
+			if (addressDao.save(address) != null && usersDao.save(user) != null) {
 				// lưu user thành công hay chưa
 				System.out.println("Luu thanh cong 2");
 				MailerService mailerService = new MailerService();
@@ -300,10 +303,12 @@ public class UsersController {
 			session.setAttribute("userSession", user);
 			session.setAttribute("addressSession", address);
 			session.setAttribute("roleSession", user.getRoles().getRole_Id());
+			logger.info(user.getUsername() + " " + "Đăng nhập thành công");
 			return "redirect:/trang-chu";
 		} else {
+			logger.warn("đăng nhập thất bại");
 			model.addAttribute("message", message);
-			model.addAttribute("view", "account/login.jsp"); 
+			model.addAttribute("view", "account/login.jsp");
 			return "layout";
 		}
 	}

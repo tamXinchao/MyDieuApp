@@ -71,30 +71,26 @@ public class AdminProduct {
 			@RequestParam(value = "ngayNhap", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayNhap) {
 
 		String productNameKeyword = productName.orElse("");
-		String sortField = field.orElse("ngayNhap"); // Default sorting field
-		Direction sortDirection = sortDir.equalsIgnoreCase(Direction.ASC.name()) ? Direction.ASC : Direction.DESC; // Sort
-																													// direction
-																													// based
-																													// on
-																													// parameter
-
-		model.addAttribute("page", page);
-		model.addAttribute("sortField", sortField);
-		model.addAttribute("sortDir", sortDir);
+		String sortField = field.orElse("ngayNhap");
+		Direction sortDirection = sortDir.equalsIgnoreCase(Direction.ASC.name()) ? Direction.ASC : Direction.DESC;
 
 		int pageSize = 5;
 		Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by(sortDirection, sortField));
 
 		Page<Product> products;
 		if (!productNameKeyword.isEmpty() && ngayNhap != null) {
-			products = productDao.findByProductNameContainingAndNgayNhapAfter("%" + productNameKeyword + "%", ngayNhap,
-					pageable);
+			products = productDao.findByProductNameContainingAndNgayNhapAfter(productNameKeyword, ngayNhap, pageable);
 		} else if (!productNameKeyword.isEmpty()) {
-			products = productDao.findByProductNameContaining("%" + productNameKeyword + "%", pageable);
+			products = productDao.findByProductNameContaining(productNameKeyword, pageable);
 		} else {
 			products = productDao.findAll(pageable);
 		}
 
+		// Log the size of the retrieved products for debugging
+		System.out.println("Products Size: " + products.getSize());
+
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
 		List<Category> categories = cateDao.findAll();
 		List<Size> sizes = sizeDao.findAll();
 		List<Product_Size_Color> productSCList = pscDao.findAll();
@@ -104,7 +100,6 @@ public class AdminProduct {
 		model.addAttribute("colors", colors);
 		model.addAttribute("manu", manu);
 
-		// Create a map from product ID to Product_Size_Color
 		Map<Integer, Product_Size_Color> productSCMap = productSCList.stream().collect(Collectors
 				.toMap(psc -> psc.getProduct().getProductId(), psc -> psc, (existing, replacement) -> existing));
 
