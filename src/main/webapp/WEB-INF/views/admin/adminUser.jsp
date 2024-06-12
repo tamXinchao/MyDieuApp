@@ -55,7 +55,6 @@
                                     <th>Số điện thoại</th>
                                     <th>Email</th>
                                     <th>Địa chỉ</th>
-                                    <th>Tỉnh</th>
                                     <th>Vai trò</th>
                                     <th></th>
                                 </tr>
@@ -79,7 +78,6 @@
                                         <td>${address_user.address.phoneNumber}</td>
                                         <td>${address_user.address.email}</td>
                                         <td>${address_user.address.address}</td>
-                                        <td>${address_user.address.provincial}</td>
                                         <td>${address_user.user.roles.name}</td>
                                         <td>
                                             <div class="table-data-feature">

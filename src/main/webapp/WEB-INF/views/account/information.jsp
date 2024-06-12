@@ -129,7 +129,8 @@
 			<form action="/delete-address" method="POST" id="delete-address-form">
 				<div class="form-group">
 					<label for="address-select">Chọn Địa chỉ:</label> <select
-						id="address-select" name="addressId" class="form-control">
+						id="address-select" name="addressId" class="form-control"
+						onchange="updateAddressInfo()">
 						<c:forEach var="a" items="${addressSession}">
 							<option value="${a.addressId}" data-phone="${a.phoneNumber}"
 								data-email="${a.email}" data-address="${a.address}"
@@ -187,6 +188,8 @@
 				data-target="#updateInformation">Cập nhật tài khoản</button>
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#newAddress">Thêm địa chỉ mới</button>
+			<a type="button" href="/forgot-password" class="btn btn-primary">Quên mật khẩu</a>
+			<a href="/change-password" type="button"  class="btn btn-primary ">Đổi mật khẩu</a>
 		</form>
 		<!-- Modal cập nhật tài khoản -->
 		<div class="modal fade" id="updateInformation" tabindex="-1"
@@ -226,7 +229,7 @@
 								<select id="modal-address-select" class="form-control"
 									onchange="updateModalAddressInfo()">
 									<c:forEach var="a" items="${addressSession}">
-										<option value="${a.addressId}" data-phone="${a.phoneNumber}"
+										<option value="${a.address}" data-phone="${a.phoneNumber}"
 											data-email="${a.email}" data-address="${a.address}"
 											data-provincial="${a.provincial}">${a.address}</option>
 									</c:forEach>
@@ -333,7 +336,7 @@
         const selectElement = document.getElementById('modal-address-select');
         const selectedOption = selectElement.options[selectElement.selectedIndex];
 
-        document.getElementById('address-id').value = selectedOption.value;
+        //document.getElementById('address-id').value = selectedOption.value;
         
         document.getElementById('modal-phone-number').value = selectedOption.getAttribute('data-phone');
         document.getElementById('modal-email').value = selectedOption.getAttribute('data-email');

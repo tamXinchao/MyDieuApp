@@ -24,11 +24,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 		           "INNER JOIN a.user c " +
 		           "WHERE c.Username = :Username")
 		    List<Address> findInformationByUserName(@Param("Username") String username);
+		 @Query(value = "select a.* from address a join Address_User au on a.Address_Id = au.Address_Id\r\n"
+			 		+ "where au.User_Id = ?1", nativeQuery = true)
+			 List<Address> findALLAddressByUserId(Integer userId);
 	}
 
 	 
-	 @Query(value = "select a.* from address a join Address_User au on a.Address_Id = au.Address_Id\r\n"
-	 		+ "where au.User_Id = ?1", nativeQuery = true)
-	 List<Address> findALLAddressByUserId(Integer userId);
-}
+	 
+
 

@@ -140,7 +140,7 @@ public class UsersController {
 			System.out.println("Luu thanh cong 1");
 			addressDao.save(address);
 			usersDao.save(user);
-			if (addressDao.save(address) != null && usersDao.save(user) != null ) {
+			if (addressDao.save(address) != null && usersDao.save(user) != null) {
 				// lưu user thành công hay chưa
 				System.out.println("Luu thanh cong 2");
 				MailerService mailerService = new MailerService();
@@ -264,7 +264,7 @@ public class UsersController {
 		user = (Users) session.getAttribute("userSession");
 		listAddress = (List<Address>) session.getAttribute("addressSession");
 		String Fullname = req.getParameter("fullname");
-		String genDer = req.getParameter("gender");	
+		String genDer = req.getParameter("gender");
 		String PhoneNumber = req.getParameter("PhoneNumber");
 		String Email = req.getParameter("email");
 		String Address = req.getParameter("address");
@@ -285,6 +285,7 @@ public class UsersController {
 		model.addAttribute("view", "account/information.jsp");
 		return "layout";
 	}
+
 	/**
 	 * @param model
 	 * @param phoneNumber
@@ -293,39 +294,38 @@ public class UsersController {
 	 * @param provincial
 	 * @return
 	 */
-	
-	//Thêm địa chỉ mới 
+
+	// Thêm địa chỉ mới
 	@GetMapping("/new-address")
-	public String newAddress(Model model,
-										@RequestParam("PhoneNumber") String phoneNumber,
-										@RequestParam("email") String email,
-										@RequestParam("address") String addressStr,
-										@RequestParam("provincial") String provincial) {
+	public String newAddress(Model model, @RequestParam("PhoneNumber") String phoneNumber,
+			@RequestParam("email") String email, @RequestParam("address") String addressStr,
+			@RequestParam("provincial") String provincial) {
 		user = (Users) session.getAttribute("userSession");
 		address = new Address();
 		address.setPhoneNumber(phoneNumber);
-        address.setEmail(email);
-        address.setAddress(addressStr);
-        address.setProvincial(provincial);
-        addressDao.save(address);
-        AddAddress_User();
-        List<Address> updatedAddressList = addressDao.findInformationByUserName(user.getUsername());
-        session.setAttribute("addressSession", updatedAddressList);
-        model.addAttribute("view", "account/information.jsp");
+		address.setEmail(email);
+		address.setAddress(addressStr);
+		address.setProvincial(provincial);
+		addressDao.save(address);
+		AddAddress_User();
+		List<Address> updatedAddressList = addressDao.findInformationByUserName(user.getUsername());
+		session.setAttribute("addressSession", updatedAddressList);
+		model.addAttribute("view", "account/information.jsp");
 		return "layout";
 	}
-	//Xóa địa chỉ
-	 @PostMapping("/delete-address")
-	    public String deleteAddress(@RequestParam("addressId") int addressId, Model model) {
-	        user = (Users) session.getAttribute("userSession");
-	        Address_User address_UserDelete = address_UserDao.findAllByUserIdAndAddressId(user.getUser_Id(), addressId);
-	        address_UserDao.delete(address_UserDelete);
-	        addressDao.deleteById(addressId);
-	        List<Address> updatedAddressList = addressDao.findInformationByUserName(user.getUsername());
-	        session.setAttribute("addressSession", updatedAddressList);
-	        model.addAttribute("view", "account/information.jsp");
-	        return "layout";
-	    }
+
+	// Xóa địa chỉ
+	@PostMapping("/delete-address")
+	public String deleteAddress(@RequestParam("addressId") int addressId, Model model) {
+		user = (Users) session.getAttribute("userSession");
+		Address_User address_UserDelete = address_UserDao.findAllByUserIdAndAddressId(user.getUser_Id(), addressId);
+		address_UserDao.delete(address_UserDelete);
+		addressDao.deleteById(addressId);
+		List<Address> updatedAddressList = addressDao.findInformationByUserName(user.getUsername());
+		session.setAttribute("addressSession", updatedAddressList);
+		model.addAttribute("view", "account/information.jsp");
+		return "layout";
+	}
 
 	// Get đăng nhập
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -338,29 +338,25 @@ public class UsersController {
 	// Post Đăng nhập
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 
-	public String postLogin(@Valid @ModelAttribute("user") Users user, 
-	                        @RequestParam("username") String username,
-	                        @RequestParam("password") String password, 
-	                        Model model, 
-	                        HttpServletResponse resp, 
-	                        HttpSession session) {
+	public String postLogin(@Valid @ModelAttribute("user") Users user, @RequestParam("username") String username,
+			@RequestParam("password") String password, Model model, HttpServletResponse resp, HttpSession session) {
 
-	    String message = "Vui lòng nhập chính xác tài khoản và mật khẩu!";
-	    model.addAttribute("user", user);
-	    user = usersDao.findByUsername(username);
-	    String MatKhauMaHoa = passHashingService.MaHoa(password); // Mã hóa mật khẩu để so sánh
-	    
-	    listAddress = addressDao.findInformationByUserName(username);
-	    if (user != null && user.getPassword().equals(MatKhauMaHoa)) {
-	        SaveAccountByCookie(username, password, 1, resp);
-	        session.setAttribute("userSession", user);
-	        session.setAttribute("addressSession", listAddress);
-	        session.setAttribute("roleSession", user.getRoles().getRole_Id());
-	        return "redirect:/trang-chu";
-	    } else {
-	        model.addAttribute("message", message);
-	        model.addAttribute("view", "account/login.jsp"); 
-	        return "layout";
-	    }
+		String message = "Vui lòng nhập chính xác tài khoản và mật khẩu!";
+		model.addAttribute("user", user);
+		user = usersDao.findByUsername(username);
+		String MatKhauMaHoa = passHashingService.MaHoa(password); // Mã hóa mật khẩu để so sánh
+
+		listAddress = addressDao.findInformationByUserName(username);
+		if (user != null && user.getPassword().equals(MatKhauMaHoa)) {
+			SaveAccountByCookie(username, password, 1, resp);
+			session.setAttribute("userSession", user);
+			session.setAttribute("addressSession", listAddress);
+			session.setAttribute("roleSession", user.getRoles().getRole_Id());
+			return "redirect:/trang-chu";
+		} else {
+			model.addAttribute("message", message);
+			model.addAttribute("view", "account/login.jsp");
+			return "layout";
+		}
 	}
 }
