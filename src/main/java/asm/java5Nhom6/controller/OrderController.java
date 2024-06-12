@@ -35,8 +35,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-
 @Controller
 public class OrderController {
 
@@ -44,7 +42,7 @@ public class OrderController {
 	CartDAO cartdao;
 
 	List<Cart> listProInCart;
-	List<Cart> listCheckOut = new ArrayList<Cart>();
+	
 	@Autowired
 	SessionService session;
 
@@ -52,69 +50,73 @@ public class OrderController {
 	UsersDao userDao;
 
 	double amount = 0;
-	
+
 	@Autowired
 	AddressDao addressDao;
-	
+
 	Users user;
 	List<Address> listAddress;
-	
+	List<Cart> listCheckOut ;
 	@Autowired
 	OrderDao orderDao;
-	
+
 	@Autowired
 	OrderDetailDao orderDetailDao;
-	
+
+	public Users getUser() {
+		user = session.getAttribute("userSession");
+		if (user!=null) {
+			return user;
+		}
+		return null;
+	}
+
 	// số lượng sản phẩm trong giỏ hàng
 	public void getCount(Model model) {
 		Sort sort = Sort.by(Direction.DESC, "date");
-		user = userDao.getById(3);
-		List<Cart> listProInCart = cartdao.findByUserId(user.getUser_Id(), sort);
-		model.addAttribute("Count", listProInCart.size());
+		Users user = session.getAttribute("userSession");
+		if (user == null) {
+			model.addAttribute("Count", 0);
+		} else {
+			List<Cart> listProInCart = cartdao.findByUserId(user.getUser_Id(), sort);
+			model.addAttribute("Count", listProInCart.size());
+		}
 	}
 
-	public void getUser() {
-//		user=session.getAttribute("userSession");
-		user = userDao.getById(5);
-	}
-
-	//List Address
-    public List<Address> getAddress() {
-		getUser();
-		listAddress = addressDao.findALLAddressByUserId(user.getUser_Id()) ;
+	// List Address
+	public List<Address> getAddress() {
 		
-        return listAddress;
-    }
+		listAddress = addressDao.findALLAddressByUserId(user.getUser_Id());
+		return listAddress;
+	}
+
 	// check out
 	@GetMapping("/checkout")
 	public String checkout(Model model, @RequestParam(value = "selectedItems") List<Integer> selectedItems,
 			@RequestParam(value = "address", required = false) String address) {
-//	    System.out.println("Địa chỉ đã chọn là: " + address);
-	    
-		//Sản phẩm
+		// Sản phẩm
 		List<Integer> ids = new ArrayList<>();
 		if (selectedItems != null) {
 			for (Integer l : selectedItems) {
 				ids.add(l);
 			}
 		}
-		
+		amount=0;
+		listCheckOut = new ArrayList<Cart>();
 		for (Integer id : ids) {
 			Cart item = cartdao.getById(id);
 			amount += cartdao.getAmount(item.getProductSizeColor().getProSizeColorId());
 			listCheckOut.add(item);
 		}
-
-		//địa chỉ
+		// địa chỉ
 		getUser();
-		if (user!=null) {
+		if (user != null) {
 			model.addAttribute("user", user);
 			model.addAttribute("diachi", getAddress().get(0));
 		} else {
 			return "redirect:/login";
 		}
-		
-		//attribute
+		// attribute
 		getCount(model);
 		model.addAttribute("listCheckOut", listCheckOut);
 		model.addAttribute("sp", listCheckOut.size());
@@ -122,16 +124,12 @@ public class OrderController {
 		model.addAttribute("view", "checkout.jsp");
 		return "layout";
 	}
-	
-	
-	
+
 	@PostMapping("/checkout")
-	public String checkoutPost(Model model,
-				@RequestParam(value = "address", required = false) String address) {
-		
+	public String checkoutPost(Model model, @RequestParam(value = "address", required = false) String address) {
 		Order orderNew = new Order();
-		//date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+		// date
+		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 		String today = dateFormat.format(new Date());
 		Date date = null;
 		try {
@@ -139,33 +137,28 @@ public class OrderController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		//insert ỏder
+		// insert ỏder
 		orderNew.setDate(date);
 		orderNew.setStatus("Chờ xác nhận");
 		orderNew.setTotalAmount(amount);
 		orderNew.setUser(user);
 		orderNew.setAddress(getAddress().get(0));
-		
-//		orderDao.save(orderNew);
+
+		orderDao.save(orderNew);
 //		int orderId = orderNew.getOrderId();
 //		System.out.println("Đã tạo hóa đơn mới ID: "+ orderId);
-		
-		//insert orderDetail
+
+		// insert orderDetail
 		for (Cart item : listCheckOut) {
 			Order_Detail orderDetail = new Order_Detail();
 			orderDetail.setOrder(orderNew);
 			orderDetail.setProductSizeColor(item.getProductSizeColor());
 			orderDetail.setQuality(item.getQuality());
-//			orderDetailDao.save(orderDetail);
+			orderDetailDao.save(orderDetail);
 //			System.out.println("Đã thêm OrderDetail Id: " + orderDetail.getOrderDetailId());
 		}
-		
-		
-		
-		
 		model.addAttribute("view", "thankyou.jsp");
 		return "layout";
 	}
-	
+
 }
