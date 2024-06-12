@@ -28,12 +28,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import asm.java5Nhom6.dao.AddressDao;
 import asm.java5Nhom6.dao.Address_UserDao;
+import asm.java5Nhom6.dao.OrderDao;
+import asm.java5Nhom6.dao.OrderDetailDao;
 import asm.java5Nhom6.dao.RolesDao;
 import asm.java5Nhom6.dao.UsersDao;
 import asm.java5Nhom6.entity.Address;
 import asm.java5Nhom6.entity.Address_User;
+import asm.java5Nhom6.entity.Order;
 import asm.java5Nhom6.entity.Roles;
 import asm.java5Nhom6.entity.Users;
+import asm.java5Nhom6.model.OrderDetailModel;
 import asm.java5Nhom6.service.CookieService;
 import asm.java5Nhom6.service.MailerService;
 import asm.java5Nhom6.service.PasswordHashingService;
@@ -63,6 +67,11 @@ public class UsersController {
 	CookieService cookie;
 	@Autowired
 	PasswordHashingService passHashingService;
+	//my.
+	@Autowired
+	OrderDao orderDao; 
+	@Autowired
+	OrderDetailDao orderDetailDao;//my
 
 	// Gọi biến toàn cục
 	Users user;
@@ -239,6 +248,14 @@ public class UsersController {
 	// Xem thông tin khách hàng
 	@GetMapping("/information")
 	public String getInformation(Model model) {
+		//mỵ thêm
+		user = (Users) session.getAttribute("userSession");
+		List<Order> listOrder = orderDao.findByUserId(user.getUser_Id());
+		List<OrderDetailModel> listCountOrderDetail = orderDetailDao.getListCountOrderDetail();
+		model.addAttribute("listOrder", listOrder);
+		model.addAttribute("listCountOrderDetail", listCountOrderDetail);
+		System.out.println(listOrder.size());
+		//my.
 		model.addAttribute("view", "account/information.jsp");
 		return "layout";
 	}

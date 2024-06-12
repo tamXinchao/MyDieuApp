@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFileChooser;
@@ -89,6 +90,17 @@ public class AdminOrderController {
 		return "admin/layout";
 	}
 	
+	@GetMapping("/admin/order-confirm-search-date")
+	public String searchDateComfirm(Model model, @RequestParam("date1") Date date1, 
+									@RequestParam("date2") Date date2) {
+		
+		List<Order> listOrder= orderDao.findByDateBetween(date1, date2);
+		model.addAttribute("listOrder", listOrder);
+		model.addAttribute("date1", date1);
+		model.addAttribute("date2", date2);
+		model.addAttribute("view", "admin-order.jsp");
+		return "admin/layout";
+	}
 //từ chối xác nhận
 	@GetMapping("/admin/order-refuse/{id}")
 	public String refuse(Model model, @PathVariable("id") Integer orderId) {

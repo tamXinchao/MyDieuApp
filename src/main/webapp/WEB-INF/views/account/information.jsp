@@ -67,32 +67,41 @@
 			<thead>
 				<tr>
 					<th scope="col">STT</th>
-					<th scope="col">Mã hàng</th>
+					<th scope="col">Mặt hàng</th>
 					<th scope="col">Ngày đặt</th>
-					<th scope="col">Giá</th>
+					<th scope="col">Tổng</th>
 					<th scope="col">Trạng thái</th>
-					<th scope="col">Hoạt động</th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
-				<!-- Example data, replace with dynamic data as needed -->
-				<tr>
-					<th scope="row">1</th>
-					<td>102</td>
-					<td>10/2/2024</td>
-					<td>100,000 VND</td>
-					<td>Chờ xử lý</td>
-					<td>Xác nhận</td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>102</td>
-					<td>10/2/2024</td>
-					<td>100,000 VND</td>
-					<td>Chờ xử lý</td>
-					<td>Xác nhận</td>
-				</tr>
-				<!-- Add more rows as needed -->
+				<c:forEach var="order" items="${listOrder}" varStatus="loop">
+					<tr>
+						<th>${loop.index+1}</th>
+						<td>
+							<c:forEach var="item" items="${listCountOrderDetail}">
+								<c:if test="${item.orderId == order.orderId}">
+									${item.countOrderDetail}
+								</c:if>
+							</c:forEach>
+						</td>
+						<td>
+							<fmt:formatDate value="${order.date}"
+								pattern="HH:mm:ss dd/MM/yyyy" />
+						</td>
+						<td class="text-success">
+							<fmt:formatNumber value="${order.totalAmount}" type="number" />
+							đ
+						</td>
+						<td>${order.status}</td>
+						<td>
+							<a href="#"
+								class="btn bg-warning py-1 px-3 rounded-pill">
+								Xem<i class="fa fa-arrow-right"></i>
+							</a>
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
