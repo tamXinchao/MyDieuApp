@@ -5,11 +5,8 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -17,10 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import asm.java5Nhom6.dao.CartDAO;
 import asm.java5Nhom6.dao.UsersDao;
@@ -28,13 +25,11 @@ import asm.java5Nhom6.entity.Cart;
 import asm.java5Nhom6.entity.Product_Size_Color;
 import asm.java5Nhom6.entity.Users;
 import asm.java5Nhom6.service.SessionService;
-import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CartController {
-
+	private static final Logger logger = LogManager.getLogger(CartController.class);
 	@Autowired
 	CartDAO cartdao;
 
@@ -47,10 +42,10 @@ public class CartController {
 	UsersDao userDao;
 
 	Users user;
-	
+	Sort sort = Sort.by(Direction.DESC, "date");
 	// số lượng sản phẩm trong giỏ hàng
 	public void getCount(Model model) {
-		Sort sort = Sort.by(Direction.DESC, "date");
+		
 		Users user = session.getAttribute("userSession");
 		if (user==null) {
 			model.addAttribute("Count", 0);
@@ -118,12 +113,14 @@ public class CartController {
 
 		boolean itemExists = false;
 		
+		 listProInCart = cartdao.findByUserId(user.getUser_Id(), sort);
 		if (listProInCart!=null) {
 			for (Cart cart : listProInCart) {
 				if (cart.getProductSizeColor().equals(item.getProductSizeColor())) {
 					// Increase quantity by 1
 					cart.setQuality(cart.getQuality() + 1);
 					cartdao.save(cart);
+			        logger.info("User: "+ user.getUsername()+" tăng số lượng +1 Product_Size_Color "+ psc.getProSizeColorId()+" vào giỏ hàng");
 					itemExists = true;
 				}
 			}
@@ -132,6 +129,8 @@ public class CartController {
 		if (!itemExists) {
 			// Add new item to the cart
 			cartdao.save(item);
+	        logger.info("User: "+ user.getUsername()+" thêm Product_Size_Color "+ psc.getProSizeColorId()+" vào giỏ hàng");
+
 		}
 
 		String contextPath = session.getAttribute("contextPath");
