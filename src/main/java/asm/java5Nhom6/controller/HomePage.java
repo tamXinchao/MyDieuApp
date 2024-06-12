@@ -77,9 +77,9 @@ public class HomePage {
 
 	// số lượng sản phẩm trong giỏ hàng
 	public void getCount(Model model) {
-		Sort sort = Sort.by(Direction.DESC, "date");
-		List<Cart> listProInCart = cartdao.findByUserId(3, sort);
-		model.addAttribute("Count", listProInCart.size());
+//		Sort sort = Sort.by(Direction.DESC, "date");
+//		List<Cart> listProInCart = cartdao.findByUserId(3, sort);
+//		model.addAttribute("Count", listProInCart.size());
 	}
 
 	@GetMapping
