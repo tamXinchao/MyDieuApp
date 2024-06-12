@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -24,11 +26,13 @@ import asm.java5Nhom6.dao.AddressDao;
 import asm.java5Nhom6.dao.CartDAO;
 import asm.java5Nhom6.dao.OrderDao;
 import asm.java5Nhom6.dao.OrderDetailDao;
+import asm.java5Nhom6.dao.Product_Size_ColorDAO;
 import asm.java5Nhom6.dao.UsersDao;
 import asm.java5Nhom6.entity.Address;
 import asm.java5Nhom6.entity.Cart;
 import asm.java5Nhom6.entity.Order;
 import asm.java5Nhom6.entity.Order_Detail;
+import asm.java5Nhom6.entity.Product_Size_Color;
 import asm.java5Nhom6.entity.Users;
 import asm.java5Nhom6.service.SessionService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +41,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class OrderController {
+	private static final Logger logger = LogManager.getLogger(OrderController.class);
 
 	@Autowired
 	CartDAO cartdao;
@@ -63,6 +68,9 @@ public class OrderController {
 	@Autowired
 	OrderDetailDao orderDetailDao;
 
+	@Autowired
+	Product_Size_ColorDAO pscDao;
+	
 	public Users getUser() {
 		user = session.getAttribute("userSession");
 		if (user!=null) {
@@ -145,6 +153,8 @@ public class OrderController {
 		orderNew.setAddress(getAddress().get(0));
 
 		orderDao.save(orderNew);
+        logger.info("User: "+ user.getUsername()+" đã đặt hàng, id hóa đơn: "+ orderNew.getOrderId());
+
 //		int orderId = orderNew.getOrderId();
 //		System.out.println("Đã tạo hóa đơn mới ID: "+ orderId);
 
@@ -155,6 +165,9 @@ public class OrderController {
 			orderDetail.setProductSizeColor(item.getProductSizeColor());
 			orderDetail.setQuality(item.getQuality());
 			orderDetailDao.save(orderDetail);
+			Product_Size_Color psc = pscDao.getById(item.getProductSizeColor().getProSizeColorId());
+			psc.setQuality(psc.getQuality()-item.getQuality());
+			pscDao.save(psc);
 //			System.out.println("Đã thêm OrderDetail Id: " + orderDetail.getOrderDetailId());
 		}
 		model.addAttribute("view", "thankyou.jsp");
