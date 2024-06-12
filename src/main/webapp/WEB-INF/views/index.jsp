@@ -68,12 +68,12 @@
 									<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
 									<a href="" class="nav-item nav-link active">Trang chủ</a>
 									<a href="" class="nav-item nav-link">Cửa hàng</a> <a
-										href="contact.html" class="nav-item nav-link">Contact</a>
+										href="#" class="nav-item nav-link">Liên hệ</a>
 									<div class="nav-item dropdown">
-										<a href="#" class="nav-link dropdown-toggle"
+										<a href="/shop/danh-sach-san-pham" class="nav-link dropdown-toggle"
 											data-toggle="dropdown">Thêm</a>
 										<div class="dropdown-menu rounded-0 m-0">
-											<a href="/admin/trang-chu" class="dropdown-item">Trang quản lý</a>
+											<a href="/admin/trang-chu" class="dropdown-item">Trang quản trị</a>
 										</div>
 									</div>
 								</div>
@@ -82,7 +82,7 @@
 								<div class="navbar-nav mr-auto py-0">
 									<a href="/trang-chu" class="nav-item nav-link active">Trang chủ</a>
 									<a href="/shop/danh-sach-san-pham" class="nav-item nav-link">Cửa hàng</a> <a
-										href="contact.html" class="nav-item nav-link">Liên hệ</a>
+										href="#" class="nav-item nav-link">Liên hệ</a>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -193,7 +193,7 @@
 	<div class="container-fluid pt-5">
 		<div class="text-center mb-4">
 			<h2 class="section-title px-5">
-				<span class="px-2"> Products Categories </span>
+				<span class="px-2"> Loại giày </span>
 			</h2>
 		</div>
 		<div class="row px-xl-5 pb-3">
@@ -204,7 +204,7 @@
 						<div class="col-lg-3 col-md-6 pb-1">
 							<div class="cat-item d-flex flex-column border mb-4"
 								style="padding: 30px;">
-								<p class="text-right">Quality: ${caterogyList.countProduct}</p>
+								<p class="text-right">Số lượng: ${caterogyList.countProduct}</p>
 								<a href="/shop/category/${caterogyList.idCate}"
 									class="cat-img position-relative overflow-hidden mb-3"> <img
 									class="img-fluid" src="/user/img/${caterogyList.image}" alt="">
@@ -218,7 +218,7 @@
 							style="display: none;">
 							<div class="cat-item d-flex flex-column border mb-4"
 								style="padding: 30px;">
-								<p class="text-right">Quality: ${caterogyList.countProduct}</p>
+								<p class="text-right">Số lượng: ${caterogyList.countProduct}</p>
 								<a href="/shop/category/${caterogyList.idCate}"
 									class="cat-img position-relative overflow-hidden mb-3"> <img
 									class="img-fluid" src="/user/img/${caterogyList.image}" alt="">
@@ -293,7 +293,7 @@
 	<div class="container-fluid pt-5">
 		<div class="text-center mb-4">
 			<h2 class="section-title px-5">
-				<span class="px-2">Trandy Products</span>
+				<span class="px-2">Sản phẩm</span>
 			</h2>
 		</div>
 		<div class="row px-xl-5 pb-3">
@@ -321,9 +321,9 @@
 							class="card-footer d-flex justify-content-between bg-light border">
 							<a href="/product/detail/${info[3]}/${info[4]}"
 								class="btn btn-sm text-dark p-0"><i
-								class="fas fa-eye text-primary mr-1"></i>View Detail</a> <a
+								class="fas fa-eye text-primary mr-1"></i>Chi tiết</a> <a
 								href="/gio-hang" class="btn btn-sm text-dark p-0"><i
-								class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+								class="fas fa-shopping-cart text-primary mr-1"></i>Thêm giỏ hàng</a>
 						</div>
 					</div>
 				</div>
