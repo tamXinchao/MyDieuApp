@@ -76,8 +76,7 @@
 	<div class="row border-top border-light mx-xl-5 py-4">
 		<div class="col-md-6 px-xl-0">
 			<p class="mb-md-0 text-center text-md-left text-dark">
-				&copy; <a class="text-dark font-weight-semi-bold" href="#">Your
-					Site Name</a>. All Rights Reserved. Designed by <a
+				&copy; <a class="text-dark font-weight-semi-bold" href="/trang-chu">Mỹ Diệu</a>. All Rights Reserved. Designed by <a
 					class="text-dark font-weight-semi-bold"
 					href="">HTML Codex</a>
 			</p>

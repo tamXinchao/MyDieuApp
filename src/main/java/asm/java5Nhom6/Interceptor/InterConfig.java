@@ -12,7 +12,7 @@ public class InterConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(authInterceptor).addPathPatterns("/updateInformation", "/information", "/admin/**",
+		registry.addInterceptor(authInterceptor).addPathPatterns("/updateInformation", "/admin/**",
 				"/change-password", "/product/exportToExcel")
 
 		;
