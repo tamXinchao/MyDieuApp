@@ -28,32 +28,29 @@
 					<h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
 					<div class="d-flex flex-column justify-content-start">
 						<a class="text-dark mb-2" href="index.html"><i
-							class="fa fa-angle-right mr-2"></i>Home</a> <a class="text-dark mb-2"
+							class="fa fa-angle-right mr-2"></i>Cửa hàng</a> <a class="text-dark mb-2"
 							href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our
 							Shop</a> <a class="text-dark mb-2" href="detail.html"><i
-							class="fa fa-angle-right mr-2"></i>Shop Detail</a> <a
+							class="fa fa-angle-right mr-2"></i>Chi tiết cửa hàng</a> <a
 							class="text-dark mb-2" href="cart.html"><i
 							class="fa fa-angle-right mr-2"></i>Shopping Cart</a> <a
 							class="text-dark mb-2" href="checkout.html"><i
 							class="fa fa-angle-right mr-2"></i>Checkout</a> <a class="text-dark"
-							href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact
-							Us</a>
+							href="contact.html"><i class="fa fa-angle-right mr-2"></i>Liên hệ chúng tôi</a>
 					</div>
 				</div>
 				<div class="col-md-4 mb-5">
 					<h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
 					<div class="d-flex flex-column justify-content-start">
 						<a class="text-dark mb-2" href="index.html"><i
-							class="fa fa-angle-right mr-2"></i>Home</a> <a class="text-dark mb-2"
-							href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our
-							Shop</a> <a class="text-dark mb-2" href="detail.html"><i
-							class="fa fa-angle-right mr-2"></i>Shop Detail</a> <a
+							class="fa fa-angle-right mr-2"></i>Trang chủ</a> <a class="text-dark mb-2"
+							href="shop.html"><i class="fa fa-angle-right mr-2"></i>Cửa hàng của chúng tôi</a> <a class="text-dark mb-2" href="detail.html"><i
+							class="fa fa-angle-right mr-2"></i>Chi tiết cửa hàng</a> <a
 							class="text-dark mb-2" href="cart.html"><i
 							class="fa fa-angle-right mr-2"></i>Shopping Cart</a> <a
 							class="text-dark mb-2" href="checkout.html"><i
 							class="fa fa-angle-right mr-2"></i>Checkout</a> <a class="text-dark"
-							href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact
-							Us</a>
+							href="contact.html"><i class="fa fa-angle-right mr-2"></i>Liên hệ chúng tôi</a>
 					</div>
 				</div>
 				<div class="col-md-4 mb-5">
@@ -69,7 +66,7 @@
 						</div>
 						<div>
 							<button class="btn btn-primary btn-block border-0 py-3"
-								type="submit">Subscribe Now</button>
+								type="submit">Đăng ký ngay bây giờ</button>
 						</div>
 					</form>
 				</div>
