@@ -55,8 +55,15 @@
 						<div class="card">
 							<div class="card-header">
 								<h2>Edit Manufacture</h2>
+
 							</div>
 							<div class="card-body">
+								<c:if test="${not empty Message}">
+									<div class="alert alert-warning">${Message}</div>
+								</c:if>
+								<c:if test="${not empty alert}">
+									<div class="alert alert-danger">${alert}</div>
+								</c:if>
 								<form:form action="/admin/edit-manufature" class="form-material"
 									method="post" enctype="multipart/form-data"
 									modelAttribute="manufacture">
@@ -76,8 +83,8 @@
 										<label for="info" class="col-sm-2 col-form-label">Thông
 											tin</label>
 										<div class="col-sm-10">
-											<form:textarea path="info" rows="10" class="border-bottom wide-textarea"
-												id="info" />
+											<form:textarea path="info" rows="10"
+												class="border-bottom wide-textarea" id="info" />
 											<br>
 											<form:errors path="info" element="div" class="text-danger"></form:errors>
 											<br>
@@ -148,11 +155,9 @@
 							</div>
 							<div class="table-data__tool-right">
 								<div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-									<select class="js-select2" name="type">
-										<option selected="selected">Export</option>
-										<option value="">Option 1</option>
-										<option value="">Option 2</option>
-									</select>
+									<button type="button"
+										onclick="window.location.href='/manufacture/exportToExcel'"
+										class="btn btn-dark">Export Excel</button>
 									<div class="dropDownSelect2"></div>
 								</div>
 							</div>
@@ -184,7 +189,7 @@
 													</button>
 													<button class="item" data-toggle="tooltip"
 														data-placement="top" title="Delete">
-														<a href="/admin/manufacture/delete/${manu.manuId}"> <i
+														<a href="/admin/manufacture/delete/${manu.manuId}" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?');"> <i
 															class="zmdi zmdi-delete"></i>
 														</a>
 													</button>
