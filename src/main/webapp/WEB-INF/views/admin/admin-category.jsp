@@ -42,28 +42,30 @@
 </style>
 </head>
 <body>
-	<div class="container mt-5" style="padding-top: 10px" >
+	<div class="container mt-5" style="padding-top: 10px">
 		<h1 class="text-center mb-4 mt-5">Edit Category</h1>
 		<div class="card mt-5">
 			<div class="card-body">
-			<c:if test="${not empty alert}">
-                    <div class="alert alert-danger">
-                        ${alert}
-                    </div>
-                </c:if>
+				<c:if test="${not empty Message}">
+					<div class="alert alert-warning">${Message}</div>
+				</c:if>
+				<c:if test="${not empty alert}">
+					<div class="alert alert-danger">${alert}</div>
+				</c:if>
+
 				<form:form action="/admin/edit-category" method="post"
 					class="form-material" enctype="multipart/form-data"
 					modelAttribute="category">
 					<div class="row">
 						<div class="col-md-4 text-center">
 							<div class="image-preview mt-2">
-								<img src="/user/img/${category.image}"
-									id="imagePreview" />
+								<img src="/user/img/${category.image}" id="imagePreview" />
 							</div>
 							<div class="custom-file mt-3">
 								<input type="file" name="file" class="custom-file-input"
 									id="fileInput"> <label class="custom-file-label"
 									for="fileInput">Choose file</label>
+								<div class="invalid-feedback">${Message}</div>
 							</div>
 						</div>
 						<div class="col-md-8">
@@ -71,12 +73,14 @@
 							<div class="form-group">
 								<form:label path="name" cssClass="form-label">CategoryName</form:label>
 								<form:input path="name" cssClass="form-control" />
-								<form:errors path="name" element="div" class="text-danger"></form:errors>	
+								<form:errors path="name" element="div" class="text-danger"></form:errors>
+								<div class="invalid-feedback">${Message}</div>
 							</div>
 							<div class="form-group">
 								<form:label path="image" cssClass="form-label">ImageName</form:label>
 								<form:input path="image" cssClass="form-control" />
-								<form:errors path="image" element="div" class="text-danger"></form:errors>									
+								<form:errors path="image" element="div" class="text-danger"></form:errors>
+								<div class="invalid-feedback">${Message}</div>
 							</div>
 						</div>
 					</div>
@@ -101,6 +105,37 @@
 
 	<div class="container mt-5">
 		<h3 class="title-5 mb-4">Data Table</h3>
+		<div class="table-data__tool">
+			<div class="table-data__tool-left">
+				<div class="rs-select2--light rs-select2--md">
+					<select class="js-select2" name="property">
+						<option selected="selected">All Properties</option>
+						<option value="">Option 1</option>
+						<option value="">Option 2</option>
+					</select>
+					<div class="dropDownSelect2"></div>
+				</div>
+				<div class="rs-select2--light rs-select2--sm">
+					<select class="js-select2" name="time">
+						<option selected="selected">Today</option>
+						<option value="">3 Days</option>
+						<option value="">1 Week</option>
+					</select>
+					<div class="dropDownSelect2"></div>
+				</div>
+				<button class="au-btn-filter">
+					<i class="zmdi zmdi-filter-list"></i>filters
+				</button>
+			</div>
+			<div class="table-data__tool-right">
+				<div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+					<button type="button"
+						onclick="window.location.href='/category/exportToExcel'"
+						class="btn btn-dark">Export Excel</button>
+					<div class="dropDownSelect2"></div>
+				</div>
+			</div>
+		</div>
 		<div class="table-responsive">
 			<table class="table table-bordered table-striped">
 				<thead>
@@ -129,7 +164,7 @@
 									</button>
 									<button class="item" data-toggle="tooltip" data-placement="top"
 										title="Delete">
-										<a href="/admin/category/delete/${cate.cateId}"> <i
+										<a href="/admin/category/delete/${cate.cateId}" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?');"> <i
 											class="zmdi zmdi-delete"></i>
 										</a>
 									</button>
@@ -161,6 +196,7 @@
 				$(this).next('.custom-file-label').html(fileName);
 			});
 		});
+		
 	</script>
 </body>
 </html>

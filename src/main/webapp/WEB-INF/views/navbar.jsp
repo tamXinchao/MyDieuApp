@@ -60,24 +60,23 @@
 						<c:when test="${sessionScope.roleSession eq 2 }">
 							<div class="navbar-nav mr-auto py-0">
 								<!-- Hiển thị khi cho người dùng đã đăng nhập thành công với tài khoản admin -->
-								<a href="/trang-chu" class="nav-item nav-link active">Home</a> <a
-									href="/shop/danh-sach-san-pham" class="nav-item nav-link">Shop</a> <a
-									href="contact.html" class="nav-item nav-link">Contact</a>
+								<a href="/trang-chu" class="nav-item nav-link active">Trang chủ</a> <a
+									href="/shop/danh-sach-san-pham" class="nav-item nav-link">Cửa hàng</a> <a
+									href="contact.html" class="nav-item nav-link">Liên hệ</a>
 								<div class="nav-item dropdown">
 									<a href="#" class="nav-link dropdown-toggle"
-										data-toggle="dropdown">Pages</a>
+										data-toggle="dropdown">Thêm</a>
 									<div class="dropdown-menu rounded-0 m-0">
-										<a href="/admin/trang-chu" class="dropdown-item">Admin
-											pages</a>
+										<a href="/admin/trang-chu" class="dropdown-item">Trang quản lý</a>
 									</div>
 								</div>
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div class="navbar-nav mr-auto py-0">
-								<a href="/trang-chu" class="nav-item nav-link active">Home</a> <a
-									href="/shop" class="nav-item nav-link">Shop</a> <a
-									href="contact.html" class="nav-item nav-link">Contact</a>
+								<a href="/trang-chu" class="nav-item nav-link active">Trang chủ</a> <a
+									href="/shop" class="nav-item nav-link">Cửa hàng</a> <a
+									href="contact.html" class="nav-item nav-link">Liên hệ</a>
 							</div>
 						</c:otherwise>
 					</c:choose>
@@ -86,14 +85,14 @@
 							<!-- Hiển thị khi cho người dùng đã đăng nhập thành công -->
 							<div class="navbar-nav ml-auto py-0">
 								<a href="/information" class="nav-item nav-link">${sessionScope.userSession.fullname}</a>
-								<a href="/logout" class="nav-item nav-link">Logout</a>
+								<a href="/logout" class="nav-item nav-link">Đăng xuất</a>
 							</div>
 						</c:when>
 						<c:otherwise>
 							<!-- Hiển thị khi người dùng chưa đăng nhập -->
 							<div class="navbar-nav ml-auto py-0">
-								<a href="/login" class="nav-item nav-link">Login</a> <a
-									href="/register" class="nav-item nav-link">Register</a>
+								<a href="/login" class="nav-item nav-link">Đăng nhập</a> <a
+									href="/register" class="nav-item nav-link">Đăng ký</a>
 							</div>
 						</c:otherwise>
 					</c:choose>

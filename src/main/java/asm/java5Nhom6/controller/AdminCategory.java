@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import asm.java5Nhom6.dao.CategoryDAO;
 import asm.java5Nhom6.entity.Category;
@@ -45,33 +46,37 @@ public class AdminCategory {
 	}
 
 	@RequestMapping("/admin/category/create")
-	public String create(@ModelAttribute("category")@Validated  Category category,BindingResult binding, Model model,
-			@RequestParam("file") MultipartFile image, @RequestParam("image") String nameImages)
-			throws IllegalStateException, IOException {
-		
-		if(category.getName().isEmpty()) {
-			model.addAttribute("Vui lòng không để trống ");
+	public String create(@ModelAttribute("category") @Validated Category category, BindingResult binding, Model model,
+			@RequestParam("file") MultipartFile image, @RequestParam("image") String nameImages,
+			RedirectAttributes redirectAttributes) throws IllegalStateException, IOException {
+
+		if (category.getName() == null || category.getName().isEmpty()) {
+			redirectAttributes.addFlashAttribute("Message", "Vui lòng không để trống tên danh mục");
+			return "redirect:/admin/edit-category";
+		} else if (category.getImage() == null || category.getImage().isEmpty()) {
+			redirectAttributes.addFlashAttribute("Message", "Vui lòng không để trống ảnh danh mục");
+			return "redirect:/admin/edit-category";
 		}
-		
-		
+
 		if (!image.isEmpty()) {
 			String filePath = app.getRealPath("/user/img/");
 			File file = new File(filePath + nameImages);
 			try {
 				image.transferTo(file);
-				if(binding.hasErrors()) {
-					model.addAttribute("alert", "Vui lòng không để trống thông tin!");
-				}else {
+				if (binding.hasErrors()) {
+					redirectAttributes.addFlashAttribute("alert", "Vui lòng không để trống thông tin!");
+					return "redirect:/admin/edit-category";
+				} else {
 					daoCate.save(category);
-					model.addAttribute("category", category);
+					redirectAttributes.addFlashAttribute("category", category);
+					return "redirect:/admin/edit-category";
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
-				model.addAttribute("alert", "Không thể tải ảnh từ hệ thống!"+e);
+				redirectAttributes.addFlashAttribute("alert", "Không thể tải ảnh từ hệ thống! " + e.getMessage());
+				return "redirect:/admin/edit-category";
 			}
-			
 		}
-		
+
 		return "redirect:/admin/edit-category";
 	}
 

@@ -21,20 +21,15 @@
 					<div class="table-data__tool">
 						<div class="table-data__tool-left d-flex">
 							<form action="/admin/tableEditProduct" method="get">
-								<div class="input-group">
-									<input type="text" name="productName" class="form-control"
-										placeholder="Search by product name"> <input
-										type="date" name="ngayNhap" class="form-control"> <input
-										type="hidden" name="field" value="${sortField}"> <input
-										type="hidden" name="sortDir" value="${sortDir}">
-
-									<div class="input-group-append">
-										<button type="submit"
-											class="input-group-text bg-transparent text-primary">
-											<i class="fa fa-search"></i>
-										</button>
-									</div>
-								</div>
+							    <div class="input-group">
+							        <input type="text" name="productName" class="form-control" placeholder="Search by product name">
+							        <input type="date" name="ngayNhap" class="form-control">
+							        <div class="input-group-append">
+							            <button type="submit" class="input-group-text bg-transparent text-primary">
+							                <i class="fa fa-search"></i>
+							            </button>
+							        </div>
+							    </div>
 							</form>
 
 

@@ -82,7 +82,6 @@ public class HomePage {
 	public void getCount(Model model) {
 		Sort sort = Sort.by(Direction.DESC, "date");
 		Users user = session1.getAttribute("userSession");
-
 		if (user==null) {
 			model.addAttribute("Count", 0);
 		}else {
