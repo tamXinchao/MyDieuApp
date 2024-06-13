@@ -127,6 +127,7 @@ public class AdminProduct {
 
 		List<Product_Size_Color> pscOptional = pscDao.findByProductId(productId);
 		model.addAttribute("psc", pscOptional);
+		
 		List<Color> colors = colorDao.findAll();
 		model.addAttribute("colors", colors);
 		List<Category> categories = cateDao.findAll();
@@ -163,9 +164,7 @@ public class AdminProduct {
 	public String addProduct(Model model, @RequestParam("categoryId") int categoryId,
 			@RequestParam("manuId") int manuId, @RequestParam("productName") String productName,
 			@RequestParam("origin") String origin, @RequestParam("material") String material,
-			@RequestParam("describe") String describe, @RequestParam("price") Double price,
-			@RequestParam("imgProduct") MultipartFile imgProduct, @RequestParam("images") List<MultipartFile> images,
-			@RequestParam("colorIds") List<Integer> colorIds, @RequestParam("sizeIds") List<Integer> sizeIds) {
+			@RequestParam("describe") String describe,@RequestParam("imgProduct") MultipartFile imgProduct, @RequestParam("images") List<MultipartFile> images) {
 
 		try {
 			// Lấy Category và Manufacturer từ ID của chúng
@@ -215,22 +214,22 @@ public class AdminProduct {
 				}
 			}
 
-			// Lấy Color và Size từ ID của chúng và lưu vào bảng Product_Size_Color
-			for (Integer colorId : colorIds) {
-				Optional<Color> colorOptional = colorDao.findById(colorId);
-				Color color = colorOptional.orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc"));
-				for (Integer sizeId : sizeIds) {
-					Optional<Size> sizeOptional = sizeDao.findById(sizeId);
-					Size size = sizeOptional.orElseThrow(() -> new RuntimeException("Không tìm thấy kích thước"));
-					Product_Size_Color productSizeColor = new Product_Size_Color();
-					productSizeColor.setStatus(true);
-					productSizeColor.setColor(color);
-					productSizeColor.setSize(size);
-					productSizeColor.setProduct(product);
-					productSizeColor.setPrice(price);
-					pscDao.save(productSizeColor);
-				}
-			}
+//			// Lấy Color và Size từ ID của chúng và lưu vào bảng Product_Size_Color
+//			for (Integer colorId : colorIds) {
+//				Optional<Color> colorOptional = colorDao.findById(colorId);
+//				Color color = colorOptional.orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc"));
+//				for (Integer sizeId : sizeIds) {
+//					Optional<Size> sizeOptional = sizeDao.findById(sizeId);
+//					Size size = sizeOptional.orElseThrow(() -> new RuntimeException("Không tìm thấy kích thước"));
+//					Product_Size_Color productSizeColor = new Product_Size_Color();
+//					productSizeColor.setStatus(true);
+//					productSizeColor.setColor(color);
+//					productSizeColor.setSize(size);
+//					productSizeColor.setProduct(product);
+//					productSizeColor.setPrice(price);
+//					pscDao.save(productSizeColor);
+//				}
+//			}
 
 			return "redirect:/admin/tableEditProduct";
 		} catch (NumberFormatException e) {

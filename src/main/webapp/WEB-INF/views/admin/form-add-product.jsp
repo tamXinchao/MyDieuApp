@@ -63,48 +63,6 @@
 										<div class="row">
 											<div class="col-sm-6">
 												<div class="form-group form-primary">
-													<label>Size</label>
-													<div class="row">
-														<c:forEach var="size" items="${sizes}">
-															<c:set var="checked" value="false" />
-															<c:forEach var="psc" items="${psc}">
-																<c:if test="${size.sizeId == psc.size.sizeId}">
-																	<c:set var="checked" value="true" />
-																</c:if>
-															</c:forEach>
-															<div class="col-md-6">
-																<div class="form-check">
-																	<input class="form-check-input" type="checkbox"
-																		id="size${size.sizeId}" name="sizeIds"
-																		value="${size.sizeId}"
-																		<c:if test="${checked}">checked</c:if>> <label
-																		class="form-check-label" for="size${size.sizeId}">${size.name}</label>
-																</div>
-															</div>
-														</c:forEach>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-6">
-												<c:forEach var="priceArr" items="${price}">
-													<div class="form-group form-primary">
-														<label>Giá</label> <input type="number" disabled
-															name="price"  value="${priceArr[1]}"
-															class="form-control" />
-													</div>
-												</c:forEach>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-sm-6">
-												<div class="form-group form-primary">
-													<label>Giá</label> <input type="number" name="price"
-														value="" class="form-control">
-
-												</div>
-											</div>
-											<div class="col-sm-6">
-												<div class="form-group form-primary">
 													<label>Thương Hiệu</label> <select name="manuId" id="manu"
 														class="form-control">
 														<option value="">Chọn Thương Hiệu</option>
@@ -116,38 +74,12 @@
 													</select>
 												</div>
 											</div>
-										</div>
-										<div class="row mb-3">
-											<div class="col-sm-6">
-												<label>Màu</label>
-												<div class="row">
-													<c:forEach var="color" items="${colors}">
-														<c:set var="checked" value="false" />
-														<c:forEach var="pscItem" items="${psc}">
-															<c:if test="${color.colorId == pscItem.color.colorId}">
-																<c:set var="checked" value="true" />
-															</c:if>
-														</c:forEach>
-														<div class="col-md-6">
-															<div class="form-check">
-																<input class="form-check-input" type="checkbox"
-																	id="color${color.colorId}" name="colorIds"
-																	value="${color.colorId}"
-																	<c:if test="${checked}">checked</c:if>> <label
-																	class="form-check-label" for="color${color.colorId}">
-																	${color.name} </label>
-															</div>
-														</div>
-													</c:forEach>
-												</div>
-											</div>
 											<div class="col-sm-6">
 												<div class="form-group form-primary">
 													<label>Chất Liệu</label> <input type="text" name="material"
 														value="${product.material}" class="form-control">
 												</div>
 											</div>
-
 										</div>
 										<div class="form-group form-primary">
 											<label>Description</label>
@@ -203,7 +135,8 @@
 										<button
 											formaction="/admin/update-product/${product.productId}"
 											${formIncomplete ? 'disabled' : ''}
-											class="btn btn-warning w-100 font-weight-bold">Cập Nhật</button>
+											class="btn btn-warning w-100 font-weight-bold">Cập
+											Nhật</button>
 									</div>
 									<div class="col-sm-3">
 										<a href="/admin/reset"

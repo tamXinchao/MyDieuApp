@@ -1,3 +1,4 @@
+
 package asm.java5Nhom6.Interceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,3 +19,4 @@ public class InterConfig implements WebMvcConfigurer {
 		;
 	}
 }
+

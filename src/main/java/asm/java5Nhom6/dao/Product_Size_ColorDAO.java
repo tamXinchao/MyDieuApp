@@ -71,11 +71,17 @@ public interface Product_Size_ColorDAO extends JpaRepository<Product_Size_Color,
 	@Query("SELECT psc FROM Product_Size_Color psc JOIN psc.product p WHERE psc.product.id = :productId")
 	List<Product_Size_Color> findByProductId(@Param("productId") Integer productId);
 
+	@Query("SELECT psc FROM Product_Size_Color psc JOIN psc.product p WHERE psc.product.id = :productId")
+	Product_Size_Color findByProductIdPrice(@Param("productId") Integer productId);
+
 	@Modifying
 	@Transactional
 	@Query("DELETE FROM Product_Size_Color psc WHERE psc.product.productId = :productId")
 	void deleteByProductId(@Param("productId") Integer productId);
 
 	List<Product_Size_Color> findByProduct_ProductId(Integer productId);
+	
+	 Optional<Product_Size_Color> findByProduct_ProductIdAndColor_ColorIdAndSize_SizeId(Integer productId, Integer colorId, Integer sizeId);
+
 
 }
