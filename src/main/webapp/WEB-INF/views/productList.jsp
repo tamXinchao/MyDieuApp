@@ -1,3 +1,4 @@
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
@@ -24,9 +25,9 @@
 				class="card-footer d-flex justify-content-between bg-light border">
 
 				<a href="/product/detail/${p.id}/${p.cateId}" class="btn btn-sm text-dark p-0"><i
-					class="fas fa-eye text-primary mr-1"></i>View Detail</a> <a href=""
+					class="fas fa-eye text-primary mr-1"></i>Chi tiết</a> <a href=""
 					class="btn btn-sm text-dark p-0"><i
-					class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+					class="fas fa-shopping-cart text-primary mr-1"></i>Thêm giỏ hàng</a>
 			</div>
 		</div>
 	</div>
