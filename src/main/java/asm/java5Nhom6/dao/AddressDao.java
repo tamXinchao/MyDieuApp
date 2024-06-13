@@ -30,16 +30,3 @@ import org.springframework.data.jpa.repository.JpaRepository;
 	}
 
 
-public interface AddressDao extends JpaRepository<Address, Integer> {
-	@Query("SELECT a.address FROM Address_User a " + "INNER JOIN a.address b " + "INNER JOIN a.user c "
-			+ "WHERE c.Username = :Username AND b.email = :email")
-	Address findEmailBy(@Param("Username") String username, @Param("email") String email);
-
-	@Query("SELECT b FROM Address_User a " + "INNER JOIN a.address b " + "INNER JOIN a.user c "
-			+ "WHERE c.Username = :Username")
-	List<Address> findInformationByUserName(@Param("Username") String username);
-
-	@Query(value = "select a.* from address a join Address_User au on a.Address_Id = au.Address_Id\r\n"
-			+ "where au.User_Id = ?1", nativeQuery = true)
-	List<Address> findALLAddressByUserId(Integer userId);
-}
