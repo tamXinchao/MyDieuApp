@@ -22,10 +22,11 @@ public interface CartDAO extends JpaRepository<Cart, Integer> {
 	* Lấy tổng số tiền các mặt hàng được chọn trong giỏ
 	* Id là Pro_Size_Color_Id
 	*/
-	@Query(value = "select SUM( c.Quality*psc.Price)  \r\n"
-			+ "from Cart c join Product_Size_Color psc on c.Pro_Size_Color_Id = psc.Pro_Size_Color_Id\r\n"
-			+ "where c.Pro_Size_Color_Id=?1", nativeQuery = true)
+	@Query(value = "select SUM(c.Quality * psc.Price) "
+	        + "from Cart c join Product_Size_Color psc on c.Pro_Size_Color_Id = psc.Pro_Size_Color_Id "
+	        + "where c.Pro_Size_Color_Id = ?1", nativeQuery = true)
 	double getAmount(Integer Id);
+
 
 //	@Query(value = "select psc.* from Product_Size_Color psc \r\n"
 //			+ "join Sizes s on psc.Size_Id = s.Size_Id\r\n"
